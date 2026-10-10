@@ -1,0 +1,68 @@
+# ===== Secrets & env =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+appsettings.*.local.json
+appsettings.Development.json
+secrets.json
+.vercel/
+.railway/
+
+# ===== OS / editors =====
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# ===== .NET (api/) =====
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userprefs
+.vs/
+*.rsuser
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+*.trx
+artifacts/
+publish/
+*.nupkg
+*.snupkg
+
+# ===== Node / web =====
+node_modules/
+dist/
+dist-ssr/
+build/
+.vite/
+*.local
+*.tsbuildinfo
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===== Logs =====
+logs/
+*.log
+
+# ===== Test data / privacy =====
+# Never commit real resumes. Fictional demo resumes go in demo/resumes/ only.
+*.pdf
+*.docx
+!demo/resumes/*.pdf
+!demo/resumes/*.docx
+uploads/
