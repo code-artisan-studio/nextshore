@@ -3,7 +3,7 @@
 Work top to bottom. One task per change. Tick when tests/lint pass.
 
 ## M0 · Setup
-- [ ] T01 Create monorepo: `api/` (.NET 10 sln with Domain, Application, Infrastructure, Api, Domain.Tests, Api.IntegrationTests), `web/` (Vite React TS), root `.gitignore`, `.editorconfig`.
+- [x] T01 Create monorepo: `api/` (.NET 10 sln with Domain, Application, Infrastructure, Api, Domain.Tests, Api.IntegrationTests), `web/` (Vite React TS), root `.gitignore`, `.editorconfig`.
 - [ ] T02 Web: Tailwind v4 + shadcn/ui init, `theme.css` tokens from `UI.md`, fonts, base layout (header, footer with disclaimer).
 - [ ] T03 API: Serilog, ProblemDetails, CORS from config, `/health`, OpenAPI document, rate limiter policies.
 - [ ] T04 GitHub Actions: api build+test, web build+lint on PR.
