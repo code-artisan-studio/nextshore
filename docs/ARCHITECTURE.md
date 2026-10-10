@@ -62,7 +62,7 @@ nextshore/
 │  │  ├─ NextShore.Domain/          Entities, ValueObjects, Engine/, Result<T>
 │  │  ├─ NextShore.Application/     Assessments/, Resumes/, Admin/, Abstractions/ (IResumeParser, IRuleRepository, ISummaryWriter, IClock)
 │  │  ├─ NextShore.Infrastructure/  Persistence/ (DbContext, configs, migrations), Ai/ (ClaudeResumeParser, ClaudeSummaryWriter), Seed/, Auth/
-│  │  └─ NextShore.Api/             Endpoints/, Middleware/, Program.cs
+│  │  └─ NextShore.Api/             Endpoints/, Middleware/, Setup/ (CORS, rate limiting), Program.cs
 │  ├─ tests/
 │  │  ├─ NextShore.Domain.Tests/
 │  │  └─ NextShore.Api.IntegrationTests/   (Testcontainers Postgres)
@@ -80,12 +80,12 @@ nextshore/
 ## Cross-cutting
 | Concern | Decision |
 |---|---|
-| Rate limiting | ASP.NET rate limiter: `/resumes/parse` 10/IP/day; `/evaluations` 60/IP/min |
+| Rate limiting | ASP.NET rate limiter, per client IP (via `X-Forwarded-For` from Railway's proxy): `/resumes/parse` 10/IP/day; `/evaluations` 60/IP/min. In-memory, single instance — counters reset on restart |
 | Errors | RFC 7807 ProblemDetails everywhere |
 | Logging | Serilog → console (Railway). Never log resume content or profile PII |
 | CORS | Allow web origin(s) from config only |
-| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` |
-| Health | `GET /health` (DB check) |
+| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated) |
+| Health | `GET /api/v1/health` (DB check) |
 | Cleanup | Hosted service deletes assessments past `expires_at` daily |
 | Types | OpenAPI → `openapi-typescript` → `web/src/api/schema.ts` |
 | CI | GitHub Actions: build + test on PR; deploy on main (Railway, Vercel) |

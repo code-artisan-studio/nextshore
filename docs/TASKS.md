@@ -5,12 +5,12 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 ## M0 · Setup
 - [x] T01 Create monorepo: `api/` (.NET 10 sln with Domain, Application, Infrastructure, Api, Domain.Tests, Api.IntegrationTests), `web/` (Vite React TS), root `.gitignore`, `.editorconfig`.
 - [x] T02 Web: Tailwind v4 + shadcn/ui init, `theme.css` tokens from `UI.md`, fonts, base layout (header, footer with disclaimer).
-- [ ] T03 API: Serilog, ProblemDetails, CORS from config, `/health`, OpenAPI document, rate limiter policies.
+- [x] T03 API: Serilog, ProblemDetails, CORS from config, `/health`, OpenAPI document, rate limiter policies.
 - [ ] T04 GitHub Actions: api build+test, web build+lint on PR.
 
 ## M1 · Data & rules
 - [ ] T05 Domain entities + enums per `DATA-MODEL.md`.
-- [ ] T06 EF Core DbContext, configurations (snake_case, jsonb), initial migration against Neon.
+- [ ] T06 EF Core DbContext, configurations (snake_case, jsonb), initial migration against Neon; add DB check to `/health`.
 - [ ] T07 Seed loader: reads `api/seed/*.json`, upserts by slug, loads drafts; publish blocked if `TODO_VERIFY` present.
 - [ ] T08 Seed files skeleton for 10 pathways (`VISA-RULES-SPEC.md` §8) with `TODO_VERIFY` placeholders + source URLs.
 - [ ] T09 **Manual:** verify and fill all seed values from official sources; set `verified_at`.
@@ -50,6 +50,6 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [ ] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
 
 ## M6 · Ship & demo
-- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch.
+- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch. Set the Railway health check path to `/api/v1/health` (consider moving it to root `/health`).
 - [ ] T37 Prepare 3 demo resumes (student, developer, senior developer) — fictional data.
 - [ ] T38 Run PRD success criteria checklist; fix gaps.
