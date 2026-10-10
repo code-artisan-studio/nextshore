@@ -1,0 +1,21 @@
+/* NextShore brand tokens — source of truth: docs/UI.md. No raw hex outside this file. */
+@theme {
+  --color-navy: #0B2545;      /* headings, nav, outline buttons */
+  --color-teal: #0E7C86;      /* primary buttons, links, score bars */
+  --color-teal-dark: #0A5F67; /* primary hover */
+  --color-coral: #FF7A59;     /* accents only: highlights, what-if markers */
+  --color-coral-soft: #FFE8E0;
+  --color-coral-ink: #9A3412;
+  --color-mist: #E6F4F5;      /* tinted panels, score bar track */
+  --color-sand: #FAF7F2;      /* page background */
+  --color-slate: #334155;     /* body text */
+  --color-line: #D6E4E6;      /* borders */
+
+  --color-eligible-bg: #DCFCE7;  --color-eligible-ink: #14532D;
+  --color-near-bg: #FEF3C7;      --color-near-ink: #78350F;
+  --color-not-bg: #FEE2E2;       --color-not-ink: #7F1D1D;
+
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --radius-card: 12px;
+}
