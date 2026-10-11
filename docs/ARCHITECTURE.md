@@ -14,7 +14,7 @@
 ### 1. Parse resume — `POST /api/v1/resumes/parse`
 1. Validate: ≤ 5 MB, PDF or DOCX by **magic bytes** (`%PDF` / `PK\x03\x04` + `word/document.xml`), consent flag = true.
 2. PDF → sent to Claude Haiku as a `document` content block. DOCX → text extracted with `DocumentFormat.OpenXml`, sent as text.
-3. Claude is forced to call tool `record_profile` whose input schema = `ExtractedProfile` (see `DATA-MODEL.md`). Each field has `confidence` (0–1).
+3. Claude returns structured output (`output_config.format`) whose JSON schema = `ExtractedProfile` (see `DATA-MODEL.md`). Each field has `confidence` (0–1).
 4. Suggested occupation codes are validated against `occupation_lists`; unknown codes dropped.
 5. Return `ExtractedProfile`. **The file and raw text are discarded** — never logged or stored.
 
@@ -61,7 +61,7 @@ nextshore/
 │  ├─ src/
 │  │  ├─ NextShore.Domain/          Entities, ValueObjects, Engine/, Result<T>
 │  │  ├─ NextShore.Application/     Assessments/, Resumes/, Admin/, Abstractions/ (IResumeParser, IRuleRepository, ISummaryWriter, IClock)
-│  │  ├─ NextShore.Infrastructure/  Persistence/ (DbContext, configs, migrations), Ai/ (ClaudeResumeParser, ClaudeSummaryWriter), Seed/, Auth/
+│  │  ├─ NextShore.Infrastructure/  Persistence/ (DbContext, configs, migrations), Ai/ (ClaudeClient, ClaudeResumeParser, ClaudeSummaryWriter), Seed/, Rules/, Assessments/, Auth/
 │  │  └─ NextShore.Api/             Endpoints/, Middleware/, Setup/ (CORS, rate limiting), Program.cs
 │  ├─ tests/
 │  │  ├─ NextShore.Domain.Tests/
@@ -84,7 +84,7 @@ nextshore/
 | Errors | RFC 7807 ProblemDetails everywhere |
 | Logging | Serilog → console (Railway). Never log resume content or profile PII |
 | CORS | Allow web origin(s) from config only |
-| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
+| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Anthropic__ParseTimeout`, `Anthropic__SummaryTimeout`, `Anthropic__MaxRetries`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
 | Health | `GET /api/v1/health` (DB check) |
 | Cleanup | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval |
 | Dev rules preview | `Rules__Source=seed-preview` (Development only; startup fails elsewhere) serves verified `api/seed` rows as if published, so the web app has data before admin publish (M5). Default `database` = published rows only |

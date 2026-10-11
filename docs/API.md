@@ -95,9 +95,10 @@ Body: `CandidateProfile` → 200 `{ results, chains }`. Not persisted, no AI. Ra
 All admin writes create `draft` rows and audit entries. 401 unauthenticated · 403 not admin.
 
 ## Claude integration (Infrastructure)
+All calls go through `ClaudeClient` (official `Anthropic` C# SDK). The API key is read only from `Anthropic__ApiKey`.
 | Use | Model config | Notes |
 |---|---|---|
-| Resume parse | `Anthropic:ParseModel` (Haiku) | forced tool call `record_profile`; temperature 0; max 2k output tokens |
-| Summary | `Anthropic:SummaryModel` (Sonnet) | input = profile + results JSON only; ≤ 200 words; must not mention probability or add rules |
+| Resume parse | `Anthropic:ParseModel` = `claude-haiku-5-5` | structured outputs (`output_config.format` with the `ExtractedProfile` JSON schema) — not a forced tool call (newer models reject forced `tool_choice`); no `temperature` (current models reject non-default sampling); thinking counts toward `max_tokens`, so size it with headroom or lower effort (T22) |
+| Summary | `Anthropic:SummaryModel` = `claude-sonnet-5-5` | input = profile + results JSON only; ≤ 200 words; must not mention probability or add rules |
 
-Timeouts: 30 s parse, 20 s summary. One retry on 429/5xx with backoff.
+Timeouts are the **total** per call, retries included: 30 s parse (`Anthropic:ParseTimeout`), 20 s summary (`Anthropic:SummaryTimeout`). The SDK retries once (`Anthropic:MaxRetries` = 1) on 429, 5xx, connection errors and timed-out attempts, with backoff that honours `retry-after`. Failures become `AiProviderException` (`NotConfigured` · `Timeout` · `RateLimited` · `Unavailable` · `Rejected`) → 502. Logs never contain prompt or response content.
