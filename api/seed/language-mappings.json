@@ -1,0 +1,279 @@
+{
+  "groups": [
+    {
+      "test": "ielts",
+      "testVariant": "general",
+      "targetScale": "CLB",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-test.html",
+      "verifiedAt": "2026-10-10",
+      "levels": [
+        {
+          "targetLevel": "4",
+          "minScores": {
+            "listening": 4.5,
+            "reading": 3.5,
+            "writing": 4.0,
+            "speaking": 4.0
+          }
+        },
+        {
+          "targetLevel": "5",
+          "minScores": {
+            "listening": 5.0,
+            "reading": 4.0,
+            "writing": 5.0,
+            "speaking": 5.0
+          }
+        },
+        {
+          "targetLevel": "6",
+          "minScores": {
+            "listening": 5.5,
+            "reading": 5.0,
+            "writing": 5.5,
+            "speaking": 5.5
+          }
+        },
+        {
+          "targetLevel": "7",
+          "minScores": {
+            "listening": 6.0,
+            "reading": 6.0,
+            "writing": 6.0,
+            "speaking": 6.0
+          }
+        },
+        {
+          "targetLevel": "8",
+          "minScores": {
+            "listening": 7.5,
+            "reading": 6.5,
+            "writing": 6.5,
+            "speaking": 6.5
+          }
+        },
+        {
+          "targetLevel": "9",
+          "minScores": {
+            "listening": 8.0,
+            "reading": 7.0,
+            "writing": 7.0,
+            "speaking": 7.0
+          }
+        },
+        {
+          "targetLevel": "10",
+          "minScores": {
+            "listening": 8.5,
+            "reading": 8.0,
+            "writing": 7.5,
+            "speaking": 7.5
+          }
+        }
+      ]
+    },
+    {
+      "test": "pte",
+      "testVariant": "general",
+      "targetScale": "CLB",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-test.html",
+      "verifiedAt": "2026-10-10",
+      "levels": [
+        {
+          "targetLevel": "7",
+          "minScores": {
+            "listening": 60,
+            "reading": 60,
+            "writing": 69,
+            "speaking": 68
+          }
+        },
+        {
+          "targetLevel": "9",
+          "minScores": {
+            "listening": 82,
+            "reading": 78,
+            "writing": 88,
+            "speaking": 84
+          }
+        },
+        {
+          "targetLevel": "10",
+          "minScores": {
+            "listening": 89,
+            "reading": 88,
+            "writing": 90,
+            "speaking": 89
+          }
+        }
+      ]
+    },
+    {
+      "test": "pte",
+      "testVariant": "general",
+      "targetScale": "CLB",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-test.html",
+      "verifiedAt": null,
+      "levels": [
+        {
+          "targetLevel": "4",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "5",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "6",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "8",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        }
+      ]
+    },
+    {
+      "test": "ielts",
+      "targetScale": "IELTS",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/english-language/competent-english",
+      "verifiedAt": "2026-10-10",
+      "levels": [
+        {
+          "targetLevel": "6",
+          "minScores": {
+            "listening": 6.0,
+            "reading": 6.0,
+            "writing": 6.0,
+            "speaking": 6.0
+          }
+        },
+        {
+          "targetLevel": "7",
+          "minScores": {
+            "listening": 7.0,
+            "reading": 7.0,
+            "writing": 7.0,
+            "speaking": 7.0
+          }
+        },
+        {
+          "targetLevel": "8",
+          "minScores": {
+            "listening": 8.0,
+            "reading": 8.0,
+            "writing": 8.0,
+            "speaking": 8.0
+          }
+        }
+      ]
+    },
+    {
+      "test": "pte",
+      "targetScale": "IELTS",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/english-language/competent-english",
+      "verifiedAt": "2026-10-10",
+      "levels": [
+        {
+          "targetLevel": "6",
+          "minScores": {
+            "listening": 47,
+            "reading": 48,
+            "writing": 51,
+            "speaking": 54
+          }
+        }
+      ]
+    },
+    {
+      "test": "pte",
+      "targetScale": "IELTS",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/english-language/competent-english",
+      "verifiedAt": null,
+      "levels": [
+        {
+          "targetLevel": "7",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "8",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        }
+      ]
+    },
+    {
+      "test": "ielts",
+      "targetScale": "CEFR",
+      "sourceUrl": "https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr",
+      "verifiedAt": null,
+      "levels": [
+        {
+          "targetLevel": "B1",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "B2",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "C1",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "C2",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        }
+      ]
+    }
+  ]
+}

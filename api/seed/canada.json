@@ -1,0 +1,1374 @@
+{
+  "country": {
+    "code": "CA",
+    "name": "Canada",
+    "occupationSystem": "NOC",
+    "languageScale": "CLB"
+  },
+  "pathways": [
+    {
+      "slug": "ca-study-permit",
+      "name": "Study permit",
+      "type": "study",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Study at a designated learning institution in Canada.",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit.html",
+      "verifiedAt": "2026-10-10",
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "ca-pgwp",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": 23448,
+          "unit": "CAD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more savings or add a financial sponsor",
+          "fixMonths": 6,
+          "label": "Proof of funds for one year of living costs (single applicant, excludes tuition and travel)",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents/financial-support.html",
+          "verifiedAt": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "slug": "ca-pgwp",
+      "name": "Post-graduation work permit (PGWP)",
+      "type": "post_study_work",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Open work permit for graduates of eligible Canadian programs.",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html",
+      "verifiedAt": "2026-10-10",
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "ca-express-entry",
+      "typicalDurationMonths": 36,
+      "requirements": [
+        {
+          "field": "english.level.CLB",
+          "operator": "gte",
+          "value": 7,
+          "unit": "CLB",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Take or retake an approved English test",
+          "fixMonths": 2,
+          "label": "English CLB 7 in all four skills (university programs; CLB 5 for college programs)",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html",
+          "verifiedAt": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "slug": "ca-express-entry",
+      "name": "Express Entry (Federal Skilled Worker)",
+      "type": "pr",
+      "audience": [
+        "developer",
+        "student"
+      ],
+      "isPointsBased": true,
+      "summary": "Points-ranked route to permanent residence for skilled workers.",
+      "sourceUrl": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
+      "verifiedAt": "2026-10-10",
+      "passMark": null,
+      "cutoff": 518,
+      "cutoffAsOf": "2026-09-29",
+      "nextPathwaySlug": null,
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "english.level.CLB",
+          "operator": "gte",
+          "value": 7,
+          "unit": "CLB",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Retake IELTS General Training or CELPIP",
+          "fixMonths": 2,
+          "label": "English CLB 7 in all four skills",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "field": "work.years_skilled",
+          "operator": "gte",
+          "value": 1,
+          "unit": "years",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Gain more skilled work experience",
+          "fixMonths": 12,
+          "label": "At least 1 year of continuous skilled work (TEER 0–3) in the last 10 years",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "field": "education.level",
+          "operator": "exists",
+          "value": null,
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Get an Educational Credential Assessment (ECA)",
+          "fixMonths": 3,
+          "label": "Education credential (foreign credentials need an ECA)",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": 15263,
+          "unit": "CAD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more settlement funds",
+          "fixMonths": 6,
+          "label": "Settlement funds (single applicant; not needed with a valid job offer)",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "field": "work.years_in_country.CA",
+          "operator": "gte",
+          "value": 1,
+          "unit": "years",
+          "isMandatory": false,
+          "fixability": "hard",
+          "fixHint": "Gain Canadian work experience, e.g. through study and a PGWP",
+          "fixMonths": 12,
+          "label": "Recent draws favour Canadian experience",
+          "sourceUrl": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
+          "verifiedAt": "2026-10-10"
+        }
+      ],
+      "pointsFactors": [
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 18,
+          "max": 18,
+          "points": 90,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 19,
+          "max": 19,
+          "points": 95,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 20,
+          "max": 29,
+          "points": 100,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 30,
+          "max": 30,
+          "points": 95,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 31,
+          "max": 31,
+          "points": 90,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 32,
+          "max": 32,
+          "points": 85,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 33,
+          "max": 33,
+          "points": 80,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 34,
+          "max": 34,
+          "points": 75,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 35,
+          "max": 35,
+          "points": 70,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 36,
+          "max": 36,
+          "points": 65,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 37,
+          "max": 37,
+          "points": 60,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 38,
+          "max": 38,
+          "points": 55,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 39,
+          "max": 39,
+          "points": 50,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 40,
+          "max": 40,
+          "points": 45,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 41,
+          "max": 41,
+          "points": 35,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 42,
+          "max": 42,
+          "points": 25,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 43,
+          "max": 43,
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": 44,
+          "max": 44,
+          "points": 5,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "secondary",
+          "points": 28,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "diploma",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "bachelors",
+          "points": 112,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "masters",
+          "points": 126,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "phd",
+          "points": 140,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 6,
+          "max": 6,
+          "points": 8,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 7,
+          "points": 16,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 8,
+          "max": 8,
+          "points": 22,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": 9,
+          "points": 29,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "with_spouse",
+          "min": 10,
+          "max": null,
+          "points": 32,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 6,
+          "max": 6,
+          "points": 8,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 7,
+          "points": 16,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 8,
+          "max": 8,
+          "points": 22,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": 9,
+          "points": 29,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "with_spouse",
+          "min": 10,
+          "max": null,
+          "points": 32,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 6,
+          "max": 6,
+          "points": 8,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 7,
+          "points": 16,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 8,
+          "max": 8,
+          "points": 22,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": 9,
+          "points": 29,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "with_spouse",
+          "min": 10,
+          "max": null,
+          "points": 32,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 6,
+          "max": 6,
+          "points": 8,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 7,
+          "points": 16,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 8,
+          "max": 8,
+          "points": 22,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": 9,
+          "points": 29,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "with_spouse",
+          "min": 10,
+          "max": null,
+          "points": 32,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": 1,
+          "max": 1,
+          "points": 35,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": 2,
+          "max": 2,
+          "points": 46,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": 3,
+          "max": 3,
+          "points": 56,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": 4,
+          "max": 4,
+          "points": 63,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": 5,
+          "max": null,
+          "points": 70,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "with_spouse",
+          "min": 5,
+          "max": 6,
+          "points": 4,
+          "maxPointsForFactor": 22,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 8,
+          "points": 12,
+          "maxPointsForFactor": 22,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": null,
+          "points": 24,
+          "maxPointsForFactor": 22,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "relative_in.CA",
+          "variant": "with_spouse",
+          "matchValue": "true",
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 18,
+          "max": 18,
+          "points": 99,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 19,
+          "max": 19,
+          "points": 105,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 20,
+          "max": 29,
+          "points": 110,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 30,
+          "max": 30,
+          "points": 105,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 31,
+          "max": 31,
+          "points": 99,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 32,
+          "max": 32,
+          "points": 94,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 33,
+          "max": 33,
+          "points": 88,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 34,
+          "max": 34,
+          "points": 83,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 35,
+          "max": 35,
+          "points": 77,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 36,
+          "max": 36,
+          "points": 72,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 37,
+          "max": 37,
+          "points": 66,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 38,
+          "max": 38,
+          "points": 61,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 39,
+          "max": 39,
+          "points": 55,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 40,
+          "max": 40,
+          "points": 50,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 41,
+          "max": 41,
+          "points": 39,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 42,
+          "max": 42,
+          "points": 28,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 43,
+          "max": 43,
+          "points": 17,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": 44,
+          "max": 44,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "secondary",
+          "points": 30,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "diploma",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "bachelors",
+          "points": 120,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "masters",
+          "points": 135,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "phd",
+          "points": 150,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 6,
+          "max": 6,
+          "points": 9,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 7,
+          "max": 7,
+          "points": 17,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 8,
+          "max": 8,
+          "points": 23,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 9,
+          "max": 9,
+          "points": 31,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.listening",
+          "variant": "single",
+          "min": 10,
+          "max": null,
+          "points": 34,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 6,
+          "max": 6,
+          "points": 9,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 7,
+          "max": 7,
+          "points": 17,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 8,
+          "max": 8,
+          "points": 23,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 9,
+          "max": 9,
+          "points": 31,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.reading",
+          "variant": "single",
+          "min": 10,
+          "max": null,
+          "points": 34,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 6,
+          "max": 6,
+          "points": 9,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 7,
+          "max": 7,
+          "points": 17,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 8,
+          "max": 8,
+          "points": 23,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 9,
+          "max": 9,
+          "points": 31,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.writing",
+          "variant": "single",
+          "min": 10,
+          "max": null,
+          "points": 34,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 4,
+          "max": 5,
+          "points": 6,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 6,
+          "max": 6,
+          "points": 9,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 7,
+          "max": 7,
+          "points": 17,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 8,
+          "max": 8,
+          "points": 23,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 9,
+          "max": 9,
+          "points": 31,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CLB.speaking",
+          "variant": "single",
+          "min": 10,
+          "max": null,
+          "points": 34,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": 1,
+          "max": 1,
+          "points": 40,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": 2,
+          "max": 2,
+          "points": 53,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": 3,
+          "max": 3,
+          "points": 64,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": 4,
+          "max": 4,
+          "points": 72,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": 5,
+          "max": null,
+          "points": 80,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "single",
+          "min": 5,
+          "max": 6,
+          "points": 4,
+          "maxPointsForFactor": 24,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "single",
+          "min": 7,
+          "max": 8,
+          "points": 12,
+          "maxPointsForFactor": 24,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "single",
+          "min": 9,
+          "max": null,
+          "points": 24,
+          "maxPointsForFactor": 24,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "relative_in.CA",
+          "variant": "single",
+          "matchValue": "true",
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "secondary",
+          "points": 2,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "diploma",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "bachelors",
+          "points": 8,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "masters",
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "phd",
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.english.level.CLB",
+          "variant": "with_spouse",
+          "min": 5,
+          "max": 6,
+          "points": 4,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.english.level.CLB",
+          "variant": "with_spouse",
+          "min": 7,
+          "max": 8,
+          "points": 12,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "spouse.english.level.CLB",
+          "variant": "with_spouse",
+          "min": 9,
+          "max": null,
+          "points": 20,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+          "verifiedAt": "2026-10-10"
+        }
+      ],
+      "occupations": [
+        {
+          "code": "21211",
+          "title": "Data scientists",
+          "isEligible": true,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "code": "21231",
+          "title": "Software engineers and designers",
+          "isEligible": true,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "code": "21232",
+          "title": "Software developers and programmers",
+          "isEligible": true,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "code": "21234",
+          "title": "Web developers and programmers",
+          "isEligible": true,
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+          "verifiedAt": "2026-10-10"
+        }
+      ]
+    }
+  ]
+}

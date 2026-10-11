@@ -7,9 +7,13 @@ How rules are expressed, evaluated, scored and graded. The engine is generic; al
 ## 1. Evaluation order (per pathway)
 1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience (students also see work/PR pathways at the end of their chain).
 2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy` (user can answer it).
+   - Money: a funds requirement's `unit` is the currency of the official threshold (`CAD`, `EUR`, `AUD`); the normaliser converts `funds.amount_usd` into that currency before comparing.
+   - Language: `english.level.{scale}` is the lowest level reached across the four skills, using the mappings for the profile's test **and** `english.test_variant`.
 3. **Points** (if `is_points_based`):
    - Pick `variant`: `with_spouse` if `marital_status = married` and the pathway has with-spouse rows, else `single`, else `default`.
    - For each factor, find the matching bracket (`min ≤ v ≤ max` or `match_value`), sum points, apply `max_points_for_factor` caps.
+   - Year-count factors (`age`, `work.*`) are floored to whole years before matching, so brackets are whole numbers (`1–1`, `5–null`).
+   - Per-skill factors use per-skill keys, e.g. CRS first language scores `english.level.CLB.listening` etc. separately. Where the profile holds a single level (French, spouse English), the seed stores 4 × the per-ability points.
    - Target = `cutoff` if present, else `pass_mark`.
 4. **Grade + score + gaps** (below).
 
@@ -61,18 +65,44 @@ Same engine with an overridden profile. Allowed slider fields: `english.scores` 
       "cutoffAsOf": "TODO_VERIFY",
       "nextPathwaySlug": null,
       "typicalDurationMonths": "TODO_VERIFY",
+      "summary": "Points-ranked route to permanent residence for skilled workers.",
       "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html",
+      "verifiedAt": null,
       "requirements": [
         { "field": "english.level.CLB", "operator": "gte", "value": "TODO_VERIFY", "unit": "CLB", "isMandatory": true, "fixability": "easy", "fixHint": "Retake IELTS/CELPIP", "fixMonths": 2, "label": "Minimum English level" },
         { "field": "work.years_skilled", "operator": "gte", "value": "TODO_VERIFY", "unit": "years", "isMandatory": true, "fixability": "medium", "fixHint": "Gain more skilled experience", "fixMonths": 12, "label": "Skilled work experience" }
       ],
       "pointsFactors": [
         { "factor": "age", "variant": "single", "min": 20, "max": 29, "points": "TODO_VERIFY" }
+      ],
+      "occupations": [
+        { "code": "21231", "title": "Software engineers and designers", "isEligible": "TODO_VERIFY" }
       ]
     }
   ]
 }
 ```
+
+**Field rules**
+- Visa values that may be `"TODO_VERIFY"`: pathway `passMark`, `cutoff`, `cutoffAsOf`, `typicalDurationMonths`; requirement `value` (also inside arrays); points-factor `min`, `max`, `matchValue`, `points`, `maxPointsForFactor`; occupation `isEligible`; language-mapping `minScores.*`. They load as null and are listed in the row's `unverified_fields`.
+- `sourceUrl` on a requirement, points factor or occupation is optional and defaults to the pathway's. `verifiedAt` (`yyyy-MM-dd`) is per row and **never inherited** — each row is verified on its own.
+- Unknown properties, unknown enum values, wrong types and missing required properties fail the whole load with the file and JSON path.
+
+**`language-mappings.json`**: one group per test → scale, with minimum score per skill for each level:
+```json
+{
+  "groups": [
+    {
+      "test": "ielts", "testVariant": "general", "targetScale": "CLB", "sourceUrl": "https://…", "verifiedAt": null,
+      "levels": [
+        { "targetLevel": "7", "minScores": { "listening": "TODO_VERIFY", "reading": "TODO_VERIFY", "writing": "TODO_VERIFY", "speaking": "TODO_VERIFY" } }
+      ]
+    }
+  ]
+}
+```
+
+**Loading**: `dotnet run --project src/NextShore.Api -- seed [dir]` (defaults to `api/seed/`). Runs in one transaction; everything lands as `draft`. Countries upsert by `code`, pathways by `slug`, mappings by (test, test variant, skill, scale, level). `testVariant` is optional (null = any variant). A draft pathway's requirements, points factors and occupations are replaced from the file; published rows are never touched. Publishing (admin, T34) is refused while any row of the pathway has `unverified_fields` or no `verified_at` (`PublishGuard` in Domain).
 
 ## 8. Pathways to seed (POC)
 | Slug | Type | Points? | Chain next | Official source (start here) |

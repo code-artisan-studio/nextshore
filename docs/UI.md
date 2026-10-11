@@ -57,7 +57,7 @@ Drag-and-drop zone (PDF/DOCX, 5 MB), consent checkbox, "Analyse resume" button. 
 - Step 1 **Goal**: Study · Work · Permanent residence (cards).
 - Step 2 **About you**: DOB, citizenship, marital status (+ spouse fields if married).
 - Step 3 **Education & work**: pre-filled from resume; low-confidence fields have a coral "Check this" tag; occupation type-ahead.
-- Step 4 **Languages**: English test + 4 scores or "Not taken yet"; optional German/French level.
+- Step 4 **Languages**: English test + variant (IELTS Academic / General Training, PTE Academic / Core) + 4 scores, or "Not taken yet"; optional German/French level. Hint: Canada accepts General Training only.
 - Step 5 **Extras**: funds, job offer, relatives; student-only GPA + tuition budget.
 - Progress bar, back/next, summary before submit. React Hook Form + Zod; state kept across steps.
 
