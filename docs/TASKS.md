@@ -17,13 +17,13 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T10 `RuleSnapshot` repository with in-memory cache + invalidation.
 
 ## M2 · Engine (Domain, TDD)
-- [ ] T11 `ProfileNormalizer` (age, language mappings by test + variant incl. per-skill levels, whole years, funds USD → requirement currency) + tests.
-- [ ] T12 `RequirementChecker` (all operators, missing fields) + tests.
-- [ ] T13 `PointsCalculator` (brackets, categorical, variants, caps) + tests.
-- [ ] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).
-- [ ] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
-- [ ] T16 `ChainBuilder` with projected profiles + tests.
-- [ ] T17 `EligibilityEngine` façade + 3 persona golden tests (student, mid dev, senior dev).
+- [x] T11 `ProfileNormalizer` (age, audience, language mappings by test + variant incl. per-skill levels) + tests.
+- [x] T12 `RequirementChecker` (all operators, missing fields, money in the rule's currency) + tests.
+- [x] T13 `PointsCalculator` (brackets on whole years, categorical, variants, caps) + tests.
+- [x] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).
+- [x] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
+- [x] T16 `ChainBuilder` with projected profiles + tests.
+- [x] T17 `EligibilityEngine` façade + 3 persona golden tests (student, mid dev, senior dev).
 
 ## M3 · API
 - [ ] T18 `GET /countries`, `GET /occupations`.

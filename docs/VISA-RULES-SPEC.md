@@ -5,14 +5,18 @@ How rules are expressed, evaluated, scored and graded. The engine is generic; al
 > ⚠️ **No visa value in this repo is trusted until verified.** Every numeric threshold, points value and cutoff in seed files starts as `"TODO_VERIFY"` and must be filled from the linked official source, with `verified_at` set to the date checked. The seed loader **refuses to publish** any row still containing `TODO_VERIFY`.
 
 ## 1. Evaluation order (per pathway)
-1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience (students also see work/PR pathways at the end of their chain).
-2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy` (user can answer it).
-   - Money: a funds requirement's `unit` is the currency of the official threshold (`CAD`, `EUR`, `AUD`); the normaliser converts `funds.amount_usd` into that currency before comparing.
+1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience. Students also see every pathway in their study chains; chains start only at study pathways the audience sees, so developers get no chains. Results are ranked by Readiness Score, then slug.
+2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy`, fix hint "Add this to your profile" (user can answer it).
+   - Value types: numbers, text, yes/no, money (amount + currency) and ordered levels (CEFR `A1`…`C2`, education `secondary`…`phd`, compared by rank). Ordering (`gte`, `lt`, …) a text or yes/no field, or naming an unknown level, is a rule error and fails loudly.
+   - A language score below a scale's lowest mapped level is "Below CLB 4": lower than every level, so `gte` is unmet and `lt` is met.
+   - Money: a funds requirement's `unit` is the currency of the official threshold (`CAD`, `EUR`, `AUD`); the profile amount is converted into that currency before comparing, using exchange rates (units per 1 USD) supplied from configuration. A missing rate is a configuration error. The UI shows both, e.g. `USD 20,000 (≈ CAD 27,400)`.
    - Language: `english.level.{scale}` is the lowest level reached across the four skills, using the mappings for the profile's test **and** `english.test_variant`.
 3. **Points** (if `is_points_based`):
    - Pick `variant`: `with_spouse` if `marital_status = married` and the pathway has with-spouse rows, else `single`, else `default`.
    - For each factor, find the matching bracket (`min ≤ v ≤ max` or `match_value`), sum points, apply `max_points_for_factor` caps.
    - Year-count factors (`age`, `work.*`) are floored to whole years before matching, so brackets are whole numbers (`1–1`, `5–null`).
+   - Per factor, the best matching row counts (brackets should not overlap; if they do, the higher points win). No match or a missing value → 0, shown as "Not provided" in the breakdown. A value below a language scale matches no bracket.
+   - `match_value` compares case-insensitively with text, level labels (`B2`, `masters`) and yes/no (`true`). A row with neither bracket nor `match_value` applies to any provided value. A numeric bracket on a text, level or yes/no factor is a rule error.
    - Per-skill factors use per-skill keys, e.g. CRS first language scores `english.level.CLB.listening` etc. separately. Where the profile holds a single level (French, spouse English), the seed stores 4 × the per-ability points.
    - Target = `cutoff` if present, else `pass_mark`.
 4. **Grade + score + gaps** (below).
@@ -24,6 +28,10 @@ pointsRatio = isPointsBased ? min(total / target, 1) : 1
 score       = round(60 * reqRatio + 40 * pointsRatio)
 if any unmet mandatory requirement has fixability = impossible → score = min(score, 20)
 ```
+- Only mandatory requirements count; advisory ones never affect score or grade. No mandatory requirements → `reqRatio = 1`.
+- Rounding is half away from zero (47.5 → 48).
+- A points-based pathway with no usable target (no cutoff or pass mark yet, or 0) gets `pointsRatio = 1` and points never block its grade.
+
 Score is 0–100, displayed as "Readiness 74 / 100". Never displayed as a percentage of success.
 
 ## 3. Grade
@@ -36,15 +44,22 @@ Score is 0–100, displayed as "Readiness 74 / 100". Never displayed as a percen
 Thresholds (2 gaps, 85%) live in config `Engine:NearEligibleMaxGaps` and `Engine:NearEligiblePointsRatio`.
 
 ## 4. Gaps
-- One gap per unmet mandatory requirement, plus a synthetic "points shortfall" gap when points < target.
-- For points gaps, the engine computes **impact**: re-run the points calc with the next achievable bracket for each factor (e.g. English +1 level, +1 yr experience) and report the best 3 improvements as gaps with `impactPoints`.
+- **Requirement gaps:** one per unmet mandatory requirement, with the outcome's current/target/fix. The fix is simulated by setting the field to a value that meets the rule (the target for `eq`/`gte`/`lte`, ±1 step for `gt`/`lt`, the first listed value for `in`, `true`, money in the rule's currency) and re-running the engine: `impactPoints` = points gained, `unlocksGrade` = grade after only that fix. `impossible` gaps and rules with no derivable value (`neq`, `not_in`, `exists`) are not simulated (`impactPoints` 0, `unlocksGrade` null).
+- **Points gaps** (only when points < target): for each factor except `age`, take the next bracket (lowest `min` above the current whole-year value) or next level (ordered `match_value`) that scores more; a missing factor starts at its lowest scoring bracket. Text and yes/no factors are not suggested. Simulate each and report the best 3 by `impactPoints` (`requirementId` null). If none adds points, report one `points` gap ("50 points" → "100 points").
+- Language fixes keep levels consistent: raising an overall level raises the skills below it; raising a skill recomputes the overall as the lowest skill.
+- Fix effort for points gaps: year-count factors need `(next − current) × 12` months; otherwise the fix of a requirement on the same field (or the overall language level) is used, else a generic hint per field family.
 - `unlocksGrade`: grade after applying that single fix (computed by re-running the engine).
-- Sort: `impactPoints / max(fix_months, 1)` desc; `impossible` last.
+- Sort: `impactPoints / max(fix_months, 1)` desc; `impossible` last; ties → easier fixability, fewer months, label.
 
 ## 5. Pathway chains
 - Built by following `next_pathway_id` from each study pathway.
 - Chain shows each step's grade and `typical_duration_months`; total years = sum.
-- Steps after the current one are evaluated on a **projected profile** (e.g. after study: `education.level` = degree studied, `work.years_in_country` += post-study work duration). Projections are labelled "projected" in the UI.
+- Steps after the current one are evaluated on a **projected profile**, labelled "projected" in the UI. Projections depend only on pathway type and country code:
+  - after a `study` step: `education.level` moves up one level (bachelors → masters; phd stays), and `degree.recognized_{country}` = true;
+  - after a `post_study_work` step: its duration in years is added to `work.years_in_country.{country}` and `work.years_skilled`;
+  - `age` = starting age + whole years elapsed before the step.
+- A step with unknown `typical_duration_months` makes the chain total unknown and stops the time-based projections (age, work) for later steps; education and degree projections still apply.
+- A chain ends at a pathway that is missing from the snapshot (unpublished) and never repeats a pathway.
 
 ## 6. What-if
 Same engine with an overridden profile. Allowed slider fields: `english.scores` (overall), `work.years_skilled`, `job_offer.*`, `german.level.CEFR`, `french.level.CLB`, `funds.amount_usd`.
