@@ -139,7 +139,7 @@ Fields with confidence < 0.7 are highlighted in the UI.
   "readinessScore": 74,
   "points": { "variant": "single", "total": 455, "target": 480, "targetKind": "cutoff", "breakdown": [{ "factor": "age", "points": 110 }] },
   "requirements": [{ "id": "…", "label": "English CLB 7 in all skills", "met": false, "current": "CLB 6", "target": "CLB 7" }],
-  "gaps": [{ "requirementId": "…", "label": "English", "current": "IELTS 6.5", "target": "IELTS 7.0", "fixability": "easy", "fixHint": "Retake IELTS", "fixMonths": 2, "impactPoints": 24, "unlocksGrade": "eligible" }],
+  "gaps": [{ "requirementId": "…", "field": "english.level.CLB", "label": "English", "current": "IELTS 6.5", "target": "IELTS 7.0", "fixability": "easy", "fixHint": "Retake IELTS", "fixMonths": 2, "impactPoints": 24, "unlocksGrade": "eligible" }],
   "chain": ["ca-study-permit", "ca-pgwp", "ca-express-entry"],
   "sources": [{ "label": "IRCC — Express Entry", "url": "https://www.canada.ca/…", "verifiedAt": "2026-10-01" }],
   "staleRules": 0

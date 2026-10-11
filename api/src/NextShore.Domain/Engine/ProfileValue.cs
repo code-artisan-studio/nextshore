@@ -43,6 +43,9 @@ public sealed record OrdinalScale(string Name, IReadOnlyList<string> Labels)
         return null;
     }
 
+    /// <summary>The known ordered scale that has this level label, e.g. <c>masters</c> → education.</summary>
+    public static OrdinalScale? FindByLabel(string label) => Array.Find(Known, s => s.RankOf(label) is not null);
+
     /// <summary>The ordered scale with this name, or null for numeric scales such as CLB.</summary>
     public static OrdinalScale? Find(string name) =>
         Array.Find(Known, s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase));

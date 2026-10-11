@@ -21,7 +21,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T12 `RequirementChecker` (all operators, missing fields, money in the rule's currency) + tests.
 - [x] T13 `PointsCalculator` (brackets on whole years, categorical, variants, caps) + tests.
 - [x] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).
-- [ ] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
+- [x] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
 - [ ] T16 `ChainBuilder` with projected profiles + tests.
 - [ ] T17 `EligibilityEngine` façade + 3 persona golden tests (student, mid dev, senior dev).
 

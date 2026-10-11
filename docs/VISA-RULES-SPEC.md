@@ -44,10 +44,12 @@ Score is 0–100, displayed as "Readiness 74 / 100". Never displayed as a percen
 Thresholds (2 gaps, 85%) live in config `Engine:NearEligibleMaxGaps` and `Engine:NearEligiblePointsRatio`.
 
 ## 4. Gaps
-- One gap per unmet mandatory requirement, plus a synthetic "points shortfall" gap when points < target.
-- For points gaps, the engine computes **impact**: re-run the points calc with the next achievable bracket for each factor (e.g. English +1 level, +1 yr experience) and report the best 3 improvements as gaps with `impactPoints`.
+- **Requirement gaps:** one per unmet mandatory requirement, with the outcome's current/target/fix. The fix is simulated by setting the field to a value that meets the rule (the target for `eq`/`gte`/`lte`, ±1 step for `gt`/`lt`, the first listed value for `in`, `true`, money in the rule's currency) and re-running the engine: `impactPoints` = points gained, `unlocksGrade` = grade after only that fix. `impossible` gaps and rules with no derivable value (`neq`, `not_in`, `exists`) are not simulated (`impactPoints` 0, `unlocksGrade` null).
+- **Points gaps** (only when points < target): for each factor except `age`, take the next bracket (lowest `min` above the current whole-year value) or next level (ordered `match_value`) that scores more; a missing factor starts at its lowest scoring bracket. Text and yes/no factors are not suggested. Simulate each and report the best 3 by `impactPoints` (`requirementId` null). If none adds points, report one `points` gap ("50 points" → "100 points").
+- Language fixes keep levels consistent: raising an overall level raises the skills below it; raising a skill recomputes the overall as the lowest skill.
+- Fix effort for points gaps: year-count factors need `(next − current) × 12` months; otherwise the fix of a requirement on the same field (or the overall language level) is used, else a generic hint per field family.
 - `unlocksGrade`: grade after applying that single fix (computed by re-running the engine).
-- Sort: `impactPoints / max(fix_months, 1)` desc; `impossible` last.
+- Sort: `impactPoints / max(fix_months, 1)` desc; `impossible` last; ties → easier fixability, fewer months, label.
 
 ## 5. Pathway chains
 - Built by following `next_pathway_id` from each study pathway.

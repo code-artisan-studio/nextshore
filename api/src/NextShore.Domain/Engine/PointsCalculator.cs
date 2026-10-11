@@ -92,7 +92,7 @@ public static class PointsCalculator
 
         var number = value switch
         {
-            ProfileValue.Number n => IsYearCount(factor) ? Math.Floor(n.Value) : n.Value,
+            ProfileValue.Number n => FactorHints.IsYearCount(factor) ? Math.Floor(n.Value) : n.Value,
             ProfileValue.Money m => m.Amount,
             ProfileValue.Below => (decimal?)null,
             _ => throw new InvalidOperationException(
@@ -101,8 +101,4 @@ public static class PointsCalculator
 
         return number is { } v && (row.Min is null || v >= row.Min) && (row.Max is null || v <= row.Max);
     }
-
-    /// <summary>Age and work experience count whole years only.</summary>
-    private static bool IsYearCount(string factor) =>
-        factor == "age" || factor.StartsWith("work.", StringComparison.Ordinal);
 }
