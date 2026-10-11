@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<EvaluateHandler>();
         services.AddScoped<CreateAssessmentHandler>();
         services.AddScoped<GetAssessmentHandler>();
+        services.AddScoped<GetSummaryHandler>();
         services.AddScoped<ParseResumeHandler>();
         return services;
     }

@@ -10,12 +10,15 @@ internal sealed class FakeClaude(params Func<CancellationToken, Task<HttpRespons
 {
     public List<(string Body, string? ApiKey)> Requests { get; } = [];
 
+    public List<string> BetaHeaders { get; } = [];
+
     public JsonElement LastBody => JsonDocument.Parse(Requests[^1].Body).RootElement;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         Requests.Add((await request.Content!.ReadAsStringAsync(cancellationToken),
             request.Headers.TryGetValues("x-api-key", out var key) ? key.Single() : null));
+        BetaHeaders.Add(request.Headers.TryGetValues("anthropic-beta", out var betas) ? string.Join(",", betas) : string.Empty);
         return await responses[Math.Min(Requests.Count, responses.Length) - 1](cancellationToken);
     }
 

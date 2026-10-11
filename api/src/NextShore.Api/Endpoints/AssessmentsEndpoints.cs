@@ -29,6 +29,17 @@ public static class AssessmentsEndpoints
             .Produces<AssessmentResponse>()
             .ProducesProblem(StatusCodes.Status404NotFound);
 
+        app.MapGet("/assessments/{id:guid}/summary", async (Guid id, GetSummaryHandler handler, CancellationToken ct) =>
+            {
+                var result = await handler.HandleAsync(id, ct);
+                return result.IsSuccess ? TypedResults.Ok(result.Value) : result.Error!.ToProblem();
+            })
+            .WithName("GetAssessmentSummary")
+            .WithSummary("AI summary of a stored assessment, generated once from engine output and cached")
+            .Produces<SummaryResponse>()
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status502BadGateway);
+
         return app;
     }
 }

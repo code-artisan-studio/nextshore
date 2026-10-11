@@ -69,7 +69,9 @@ Validation errors are keyed by camelCase JSON path, e.g. `english.scores.listeni
 200 → same as POST response, exactly as stored (not re-evaluated against newer rules) · 404 not found/expired (ProblemDetails)
 
 ### GET `/assessments/{id}/summary`
-200 → `{ summary: string, generatedAt }` (generated once, cached) · 404 · 502
+200 → `{ summary: string, generatedAt }` — generated on first request from the stored profile and results only, then cached on the assessment (concurrent first requests: first write wins) · 404 not found/expired (no AI call) · 502 provider failure, refusal, or two drafts that broke the guardrails
+
+Guardrails: the prompt forbids odds, probabilities, percentages, guarantees and anything not in the results; `SummaryGuard` then rejects banned phrases (chance, probability, odds, likelihood, guarantee, "you will get", `%`) and regenerates once with stricter instructions, and trims text over 200 words to the last whole sentence.
 
 ### POST `/evaluations`
 Body: `CandidateProfile` → 200 `{ results, chains }`. Not persisted, no AI. Rate limit 60/IP/min.
@@ -99,6 +101,6 @@ All calls go through `ClaudeClient` (official `Anthropic` C# SDK). The API key i
 | Use | Model config | Notes |
 |---|---|---|
 | Resume parse | `Anthropic:ParseModel` = `claude-haiku-5-5` | structured outputs (`output_config.format` with the `ExtractedProfile` JSON schema) — not a forced tool call (newer models reject forced `tool_choice`); no `temperature` (current models reject non-default sampling); thinking counts toward `max_tokens`, so size it with headroom or lower effort (T22) |
-| Summary | `Anthropic:SummaryModel` = `claude-sonnet-5-5` | input = profile + results JSON only; ≤ 200 words; must not mention probability or add rules |
+| Summary | `Anthropic:SummaryModel` = `claude-sonnet-5-5` | input = stored profile + compact results (grades, scores, points, unmet requirements, top 3 gaps, chains); ≤ 200 words; must not mention probability or add rules; low effort; server-side refusal fallback (`fallbacks: "default"`, beta `server-side-fallback-2026-07-01`) so a safety decline is re-served by another model |
 
 Timeouts are the **total** per call, retries included: 30 s parse (`Anthropic:ParseTimeout`), 20 s summary (`Anthropic:SummaryTimeout`). The SDK retries once (`Anthropic:MaxRetries` = 1) on 429, 5xx, connection errors and timed-out attempts, with backoff that honours `retry-after`. Failures become `AiProviderException` (`NotConfigured` · `Timeout` · `RateLimited` · `Unavailable` · `Rejected`) → 502. Logs never contain prompt or response content.

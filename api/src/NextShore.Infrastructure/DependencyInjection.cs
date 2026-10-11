@@ -38,6 +38,7 @@ public static class DependencyInjection
             .ValidateOnStart();
         services.AddSingleton<ClaudeClient>();
         services.AddScoped<IResumeParser, ClaudeResumeParser>();
+        services.AddScoped<ISummaryWriter, ClaudeSummaryWriter>();
         services.AddHostedService<AssessmentCleanupService>();
         if (string.Equals(config["Rules:Source"], SeedPreviewRules, StringComparison.OrdinalIgnoreCase))
         {

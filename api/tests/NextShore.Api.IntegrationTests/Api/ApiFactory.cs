@@ -28,6 +28,9 @@ public class ApiFactory : WebApplicationFactory<Program>
     /// <summary>Replaces the Claude resume parser when set.</summary>
     public IResumeParser? ResumeParser { get; init; }
 
+    /// <summary>Replaces the Claude summary writer when set.</summary>
+    public ISummaryWriter? SummaryWriter { get; init; }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseSetting("ConnectionStrings:Db", UnreachableDb);
@@ -42,6 +45,11 @@ public class ApiFactory : WebApplicationFactory<Program>
             if (ResumeParser is not null)
             {
                 services.AddSingleton(ResumeParser);
+            }
+
+            if (SummaryWriter is not null)
+            {
+                services.AddSingleton(SummaryWriter);
             }
 
             ConfigureServices(services);

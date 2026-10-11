@@ -19,6 +19,19 @@ public sealed class InMemoryAssessmentStore : IAssessmentStore
     public Task<Assessment?> FindAsync(Guid id, CancellationToken cancellationToken) =>
         Task.FromResult(Rows.GetValueOrDefault(id));
 
+    public Task<(string Summary, DateTimeOffset GeneratedAt)> SaveSummaryAsync(
+        Guid id, string summary, DateTimeOffset generatedAt, CancellationToken cancellationToken)
+    {
+        var row = Rows[id];
+        if (row.Summary is null)
+        {
+            row.Summary = summary;
+            row.SummaryGeneratedAt = generatedAt;
+        }
+
+        return Task.FromResult((row.Summary, row.SummaryGeneratedAt!.Value));
+    }
+
     public Task<int> DeleteExpiredAsync(DateTimeOffset now, CancellationToken cancellationToken)
     {
         var expired = Rows.Values.Where(a => a.ExpiresAt <= now).ToList();
