@@ -169,6 +169,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("test");
 
+                    b.Property<string>("TestVariant")
+                        .HasColumnType("text")
+                        .HasColumnName("test_variant");
+
                     b.PrimitiveCollection<List<string>>("UnverifiedFields")
                         .IsRequired()
                         .HasColumnType("text[]")
@@ -188,8 +192,8 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                     b.HasIndex("Status")
                         .HasDatabaseName("ix_language_score_mappings_status");
 
-                    b.HasIndex("Test", "Skill", "TargetScale")
-                        .HasDatabaseName("ix_language_score_mappings_test_skill_target_scale");
+                    b.HasIndex("Test", "TestVariant", "Skill", "TargetScale")
+                        .HasDatabaseName("ix_language_score_mappings_test_test_variant_skill_target_scale");
 
                     b.ToTable("language_score_mappings", (string)null);
                 });

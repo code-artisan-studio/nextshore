@@ -26,7 +26,7 @@ Body: `CandidateProfile`
   "education": { "level": "bachelors", "field": "Computer Science", "years": 4 },
   "work": { "yearsSkilled": 5, "yearsInCountry": { "CA": 0, "DE": 0, "AU": 0 } },
   "occupationCodes": { "NOC": "21231", "ISCO": "2512", "ANZSCO": "261313" },
-  "english": { "test": "ielts", "scores": { "listening": 7.5, "reading": 7, "writing": 6.5, "speaking": 7 } },
+  "english": { "test": "ielts", "testVariant": "general", "scores": { "listening": 7.5, "reading": 7, "writing": 6.5, "speaking": 7 } },
   "french": null,
   "german": { "level": "A2" },
   "fundsUsd": 20000,

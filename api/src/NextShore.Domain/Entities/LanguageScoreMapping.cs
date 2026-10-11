@@ -6,6 +6,9 @@ public class LanguageScoreMapping : SourcedRuleEntity
     /// <summary><c>ielts</c> · <c>pte</c> · <c>toefl</c>.</summary>
     public required string Test { get; set; }
 
+    /// <summary><c>academic</c> · <c>general</c>; null = applies to any variant of the test.</summary>
+    public string? TestVariant { get; set; }
+
     /// <summary><c>listening</c> · <c>reading</c> · <c>writing</c> · <c>speaking</c>.</summary>
     public required string Skill { get; set; }
     public decimal? MinScore { get; set; }

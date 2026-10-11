@@ -27,12 +27,14 @@
           "field": "funds.amount_usd",
           "operator": "gte",
           "value": "TODO_VERIFY",
-          "unit": "USD",
+          "unit": "AUD",
           "isMandatory": true,
           "fixability": "medium",
           "fixHint": "Show more savings or add a financial sponsor",
           "fixMonths": 6,
-          "label": "Evidence of funds"
+          "label": "Evidence of funds for living costs",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500",
+          "verifiedAt": null
         },
         {
           "field": "english.level.IELTS",
@@ -43,7 +45,9 @@
           "fixability": "easy",
           "fixHint": "Take or retake an approved English test",
           "fixMonths": 2,
-          "label": "Minimum English test score"
+          "label": "Minimum English test score",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500",
+          "verifiedAt": null
         }
       ]
     },
@@ -66,14 +70,16 @@
       "requirements": [
         {
           "field": "age",
-          "operator": "lte",
+          "operator": "lt",
           "value": "TODO_VERIFY",
           "unit": "years",
           "isMandatory": true,
           "fixability": "impossible",
           "fixHint": "Age limits cannot be changed",
           "fixMonths": null,
-          "label": "Maximum age at application"
+          "label": "Age limit at application",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485",
+          "verifiedAt": null
         },
         {
           "field": "english.level.IELTS",
@@ -84,7 +90,9 @@
           "fixability": "easy",
           "fixHint": "Take or retake an approved English test",
           "fixMonths": 2,
-          "label": "Minimum English test score"
+          "label": "Minimum English test score",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485",
+          "verifiedAt": null
         }
       ]
     },
@@ -98,9 +106,9 @@
       ],
       "isPointsBased": true,
       "summary": "Points-tested permanent visa for invited skilled workers.",
-      "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189",
-      "verifiedAt": null,
-      "passMark": "TODO_VERIFY",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+      "verifiedAt": "2026-10-10",
+      "passMark": 65,
       "cutoff": "TODO_VERIFY",
       "cutoffAsOf": "TODO_VERIFY",
       "nextPathwaySlug": null,
@@ -109,105 +117,242 @@
         {
           "field": "age",
           "operator": "lt",
-          "value": "TODO_VERIFY",
+          "value": 45,
           "unit": "years",
           "isMandatory": true,
           "fixability": "impossible",
           "fixHint": "Age limits cannot be changed",
           "fixMonths": null,
-          "label": "Age when invited to apply"
+          "label": "Under 45 when invited to apply",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "english.level.IELTS",
           "operator": "gte",
-          "value": "TODO_VERIFY",
+          "value": 6,
           "unit": "IELTS",
           "isMandatory": true,
           "fixability": "easy",
           "fixHint": "Retake IELTS or PTE",
           "fixMonths": 2,
-          "label": "Competent English"
+          "label": "Competent English (IELTS 6 in each skill)",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/english-language/competent-english",
+          "verifiedAt": "2026-10-10"
         }
       ],
       "pointsFactors": [
         {
           "factor": "age",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "min": 18,
+          "max": 24,
+          "points": 25,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "default",
+          "min": 25,
+          "max": 32,
+          "points": 30,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "default",
+          "min": 33,
+          "max": 39,
+          "points": 25,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "age",
+          "variant": "default",
+          "min": 40,
+          "max": 44,
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "english.level.IELTS",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "min": 7,
+          "max": 7,
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.IELTS",
+          "variant": "default",
+          "min": 8,
+          "max": null,
+          "points": 20,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "work.years_skilled",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "min": 3,
+          "max": 4,
+          "points": 5,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_skilled",
+          "variant": "default",
+          "min": 5,
+          "max": 7,
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_skilled",
+          "variant": "default",
+          "min": 8,
+          "max": null,
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "work.years_in_country.AU",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "min": 1,
+          "max": 2,
+          "points": 5,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.AU",
+          "variant": "default",
+          "min": 3,
+          "max": 4,
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.AU",
+          "variant": "default",
+          "min": 5,
+          "max": 7,
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "work.years_in_country.AU",
+          "variant": "default",
+          "min": 8,
+          "max": null,
+          "points": 20,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "education.level",
           "variant": "default",
-          "matchValue": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "matchValue": "phd",
+          "points": 20,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "default",
+          "matchValue": "masters",
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "default",
+          "matchValue": "bachelors",
+          "points": 15,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "education.level",
+          "variant": "default",
+          "matchValue": "diploma",
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "marital_status",
           "variant": "default",
-          "matchValue": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY",
-          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+          "matchValue": "single",
+          "points": 10,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.settleau.com.au/visas/pr-points-calculator",
+          "verifiedAt": "2026-10-10"
         }
       ],
       "occupations": [
         {
           "code": "261111",
           "title": "ICT Business Analyst",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": null
         },
         {
           "code": "261112",
           "title": "Systems Analyst",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": null
         },
         {
           "code": "261311",
           "title": "Analyst Programmer",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": null
         },
         {
           "code": "261312",
           "title": "Developer Programmer",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": null
         },
         {
           "code": "261313",
           "title": "Software Engineer",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-tested",
+          "verifiedAt": null
         }
       ]
     }

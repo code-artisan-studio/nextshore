@@ -33,7 +33,8 @@ public static class PublishGuard
     {
         var blockers = new List<PublishBlocker>();
         AddBlockers(blockers, "language_score_mapping",
-            $"{mapping.Test} {mapping.Skill} → {mapping.TargetScale} {mapping.TargetLevel}", mapping);
+            $"{mapping.Test}{(mapping.TestVariant is null ? "" : $" ({mapping.TestVariant})")} {mapping.Skill} → " +
+            $"{mapping.TargetScale} {mapping.TargetLevel}", mapping);
         return blockers;
     }
 

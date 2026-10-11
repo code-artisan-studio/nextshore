@@ -9,6 +9,6 @@ internal sealed class LanguageScoreMappingConfiguration : IEntityTypeConfigurati
     public void Configure(EntityTypeBuilder<LanguageScoreMapping> builder)
     {
         builder.ConfigureSourcedRule();
-        builder.HasIndex(m => new { m.Test, m.Skill, m.TargetScale });
+        builder.HasIndex(m => new { m.Test, m.TestVariant, m.Skill, m.TargetScale });
     }
 }

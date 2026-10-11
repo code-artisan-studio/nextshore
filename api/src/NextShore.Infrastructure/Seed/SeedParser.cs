@@ -59,7 +59,8 @@ public static class SeedParser
         {
             foreach (var (level, l) in group.Levels.Select((level, l) => (level, l)))
             {
-                var path = $"{source}: groups[{g}].levels[{l}] ({group.Test} → {group.TargetScale} {level.TargetLevel})";
+                var test = group.TestVariant is null ? group.Test : $"{group.Test} ({group.TestVariant})";
+                var path = $"{source}: groups[{g}].levels[{l}] ({test} → {group.TargetScale} {level.TargetLevel})";
                 var unknown = level.MinScores.Keys.Except(Skills).ToList();
                 var missing = Skills.Except(level.MinScores.Keys).ToList();
                 if (unknown.Count > 0 || missing.Count > 0)
@@ -74,6 +75,7 @@ public static class SeedParser
                     var mapping = new LanguageScoreMapping
                     {
                         Test = group.Test,
+                        TestVariant = group.TestVariant,
                         Skill = skill,
                         TargetScale = group.TargetScale,
                         TargetLevel = level.TargetLevel,
@@ -141,7 +143,7 @@ public static class SeedParser
             FixMonths = seed.FixMonths,
             Label = seed.Label,
             SourceUrl = seed.SourceUrl ?? pathway.SourceUrl,
-            VerifiedAt = seed.VerifiedAt ?? pathway.VerifiedAt,
+            VerifiedAt = seed.VerifiedAt,
         };
         requirement.Value = new VerifiableReader(path, requirement.UnverifiedFields).Json(seed.Value, "value");
         return requirement;
@@ -154,7 +156,7 @@ public static class SeedParser
             Factor = seed.Factor,
             Variant = ParseEnum<PointsVariant>(seed.Variant, $"{path}.variant"),
             SourceUrl = seed.SourceUrl ?? pathway.SourceUrl,
-            VerifiedAt = seed.VerifiedAt ?? pathway.VerifiedAt,
+            VerifiedAt = seed.VerifiedAt,
         };
 
         var values = new VerifiableReader(path, factor.UnverifiedFields);
@@ -173,7 +175,7 @@ public static class SeedParser
             Code = seed.Code,
             Title = seed.Title,
             SourceUrl = seed.SourceUrl ?? pathway.SourceUrl,
-            VerifiedAt = seed.VerifiedAt ?? pathway.VerifiedAt,
+            VerifiedAt = seed.VerifiedAt,
         };
         occupation.IsEligible =
             new VerifiableReader(path, occupation.UnverifiedFields).Bool(seed.IsEligible, "is_eligible") ?? false;

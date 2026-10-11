@@ -73,7 +73,7 @@ Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_l
 `id, pathway_id, code, title, is_eligible bool, source_url, verified_at, unverified_fields` — unique `(pathway_id, code)`
 
 ### language_score_mappings
-`id, test (ielts|pte|toefl), skill (listening|reading|writing|speaking), min_score numeric null, target_scale (CLB|CEFR|IELTS), target_level text, source_url, verified_at, unverified_fields`
+`id, test (ielts|pte|toefl), test_variant (academic|general) null, skill (listening|reading|writing|speaking), min_score numeric null, target_scale (CLB|CEFR|IELTS), target_level text, source_url, verified_at, unverified_fields` — `test_variant` null = any variant. Canada's CLB mappings are `general` only (IELTS General Training, PTE Core).
 
 ### rule_audit_log
 `id, entity text, entity_id uuid, action (create|update|delete|publish), old_value jsonb, new_value jsonb, actor text, at timestamptz`
@@ -97,8 +97,10 @@ No name, email or contact info is stored.
 | `work.years_in_country.{CA,DE,AU}` | number | form |
 | `occupation.code.{NOC,ISCO,ANZSCO}` | text | AI suggest + user confirm |
 | `english.test` | `ielts` · `pte` · `toefl` · `none` | form |
+| `english.test_variant` | `academic` · `general` | form (IELTS Academic / General Training; PTE Academic / Core) |
 | `english.scores` | `{listening,reading,writing,speaking}` | form |
-| `english.level.{CLB,CEFR,IELTS}` | normalised | computed |
+| `english.level.{CLB,CEFR,IELTS}` | lowest level reached across all four skills | computed |
+| `english.level.{CLB,CEFR,IELTS}.{listening,reading,writing,speaking}` | level per skill | computed |
 | `french.level.CLB` | int | form (optional) |
 | `german.level.CEFR` | `A1`…`C2` | form (optional) |
 | `funds.amount_usd` | number | form |

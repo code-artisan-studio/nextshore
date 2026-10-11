@@ -13,11 +13,11 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T06 EF Core DbContext, configurations (snake_case, jsonb), initial migration against Neon; add DB check to `/health`.
 - [x] T07 Seed loader: reads `api/seed/*.json`, upserts by slug, loads drafts; publish blocked if `TODO_VERIFY` present.
 - [x] T08 Seed files skeleton for 10 pathways (`VISA-RULES-SPEC.md` §8) with `TODO_VERIFY` placeholders + source URLs.
-- [ ] T09 **Manual:** verify and fill all seed values from official sources; set `verified_at`.
+- [ ] T09 **Manual:** verify and fill all seed values from official sources; set `verified_at`. ✅ values from `RULES-DATA.md` filled 2026-10-10; ⚠️ and missing values still `TODO_VERIFY`.
 - [ ] T10 `RuleSnapshot` repository with in-memory cache + invalidation.
 
 ## M2 · Engine (Domain, TDD)
-- [ ] T11 `ProfileNormalizer` (age, language mappings, years) + tests.
+- [ ] T11 `ProfileNormalizer` (age, language mappings by test + variant incl. per-skill levels, whole years, funds USD → requirement currency) + tests.
 - [ ] T12 `RequirementChecker` (all operators, missing fields) + tests.
 - [ ] T13 `PointsCalculator` (brackets, categorical, variants, caps) + tests.
 - [ ] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).

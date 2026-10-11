@@ -16,7 +16,7 @@
       "isPointsBased": false,
       "summary": "Study at a German university with an admission letter and proof of funds.",
       "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/studying",
-      "verifiedAt": null,
+      "verifiedAt": "2026-10-10",
       "passMark": null,
       "cutoff": null,
       "cutoffAsOf": null,
@@ -26,13 +26,15 @@
         {
           "field": "funds.amount_usd",
           "operator": "gte",
-          "value": "TODO_VERIFY",
-          "unit": "USD",
+          "value": 11904,
+          "unit": "EUR",
           "isMandatory": true,
           "fixability": "medium",
           "fixHint": "Fund a blocked account or find a sponsor",
           "fixMonths": 6,
-          "label": "Proof of funds (blocked account)"
+          "label": "Blocked account covering one year of living costs",
+          "sourceUrl": "https://india.diplo.de/in-en/service/2756350-2756350",
+          "verifiedAt": "2026-10-10"
         }
       ]
     },
@@ -45,13 +47,13 @@
       ],
       "isPointsBased": false,
       "summary": "Residence permit to look for work after graduating from a German university.",
-      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-after-graduation",
-      "verifiedAt": null,
+      "sourceUrl": "https://gesetze.legal/bund/aufenthg/20",
+      "verifiedAt": "2026-10-10",
       "passMark": null,
       "cutoff": null,
       "cutoffAsOf": null,
       "nextPathwaySlug": "de-blue-card",
-      "typicalDurationMonths": "TODO_VERIFY",
+      "typicalDurationMonths": 18,
       "requirements": [
         {
           "field": "degree.recognized_DE",
@@ -62,7 +64,9 @@
           "fixability": "hard",
           "fixHint": "Graduate from a German university",
           "fixMonths": 24,
-          "label": "Degree from a German university"
+          "label": "Degree from a German university",
+          "sourceUrl": "https://gesetze.legal/bund/aufenthg/20",
+          "verifiedAt": "2026-10-10"
         }
       ]
     },
@@ -77,7 +81,7 @@
       "isPointsBased": false,
       "summary": "Residence permit for university graduates with a qualifying job offer in Germany.",
       "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-      "verifiedAt": null,
+      "verifiedAt": "2026-10-10",
       "passMark": null,
       "cutoff": null,
       "cutoffAsOf": null,
@@ -93,7 +97,9 @@
           "fixability": "hard",
           "fixHint": "Check anabin or apply for degree recognition",
           "fixMonths": 6,
-          "label": "Recognised university degree"
+          "label": "German or comparable foreign university degree",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "job_offer.DE",
@@ -102,47 +108,61 @@
           "unit": null,
           "isMandatory": true,
           "fixability": "medium",
-          "fixHint": "Secure a job offer from a German employer",
+          "fixHint": "Secure a job offer of 6+ months matching your degree",
           "fixMonths": 6,
-          "label": "Job offer in Germany"
+          "label": "Job offer in Germany",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "job_offer.salary_eur",
           "operator": "gte",
-          "value": "TODO_VERIFY",
+          "value": 50700,
           "unit": "EUR",
           "isMandatory": true,
           "fixability": "medium",
           "fixHint": "Negotiate a salary at or above the threshold",
           "fixMonths": 3,
-          "label": "Minimum gross annual salary"
+          "label": "Minimum gross annual salary (general threshold; lower for shortage occupations and recent graduates)",
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-10-10"
         }
       ],
       "occupations": [
         {
           "code": "2511",
           "title": "Systems analysts",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": null
         },
         {
           "code": "2512",
           "title": "Software developers",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": null
         },
         {
           "code": "2513",
           "title": "Web and multimedia developers",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": null
         },
         {
           "code": "2514",
           "title": "Applications programmers",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": null
         },
         {
           "code": "2519",
           "title": "Software and applications developers and analysts not elsewhere classified",
-          "isEligible": "TODO_VERIFY"
+          "isEligible": "TODO_VERIFY",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "verifiedAt": null
         }
       ]
     },
@@ -156,104 +176,174 @@
       ],
       "isPointsBased": true,
       "summary": "Points-based permit to come to Germany and look for skilled work.",
-      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
-      "verifiedAt": null,
-      "passMark": "TODO_VERIFY",
+      "sourceUrl": "https://kairo.diplo.de/resource/blob/2664804/5e952d2720a91e83a475a3e02452f1cf/250122-deu-merkblatt-chancenkarte-data.pdf",
+      "verifiedAt": "2026-10-10",
+      "passMark": 6,
       "cutoff": null,
       "cutoffAsOf": null,
       "nextPathwaySlug": "de-blue-card",
-      "typicalDurationMonths": "TODO_VERIFY",
+      "typicalDurationMonths": 12,
       "requirements": [
         {
           "field": "education.level",
           "operator": "in",
-          "value": "TODO_VERIFY",
+          "value": [
+            "bachelors",
+            "masters",
+            "phd"
+          ],
           "unit": null,
           "isMandatory": true,
           "fixability": "hard",
           "fixHint": "Get a recognised degree or vocational qualification",
           "fixMonths": 24,
-          "label": "Degree or vocational qualification"
+          "label": "University degree or vocational qualification of 2+ years",
+          "sourceUrl": "https://kairo.diplo.de/resource/blob/2664804/5e952d2720a91e83a475a3e02452f1cf/250122-deu-merkblatt-chancenkarte-data.pdf",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "german.level.CEFR",
           "operator": "gte",
-          "value": "TODO_VERIFY",
+          "value": "A1",
           "unit": "CEFR",
           "isMandatory": false,
           "fixability": "medium",
           "fixHint": "Take a German course and certificate",
           "fixMonths": 6,
-          "label": "German language (either German or English qualifies)"
+          "label": "German A1 (either German A1 or English B2 qualifies)",
+          "sourceUrl": "https://kairo.diplo.de/resource/blob/2664804/5e952d2720a91e83a475a3e02452f1cf/250122-deu-merkblatt-chancenkarte-data.pdf",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "english.level.CEFR",
           "operator": "gte",
-          "value": "TODO_VERIFY",
+          "value": "B2",
           "unit": "CEFR",
           "isMandatory": false,
           "fixability": "easy",
           "fixHint": "Take or retake an approved English test",
           "fixMonths": 2,
-          "label": "English language (either English or German qualifies)"
+          "label": "English B2 (either English B2 or German A1 qualifies)",
+          "sourceUrl": "https://kairo.diplo.de/resource/blob/2664804/5e952d2720a91e83a475a3e02452f1cf/250122-deu-merkblatt-chancenkarte-data.pdf",
+          "verifiedAt": "2026-10-10"
         },
         {
           "field": "funds.amount_usd",
           "operator": "gte",
-          "value": "TODO_VERIFY",
-          "unit": "USD",
+          "value": 13092,
+          "unit": "EUR",
           "isMandatory": true,
           "fixability": "medium",
           "fixHint": "Show more savings or open a blocked account",
           "fixMonths": 6,
-          "label": "Proof of funds"
+          "label": "Proof of funds for 12 months",
+          "sourceUrl": "https://kairo.diplo.de/resource/blob/2664804/5e952d2720a91e83a475a3e02452f1cf/250122-deu-merkblatt-chancenkarte-data.pdf",
+          "verifiedAt": "2026-10-10"
         }
       ],
       "pointsFactors": [
         {
-          "factor": "degree.recognized_DE",
+          "factor": "work.years_skilled",
           "variant": "default",
-          "matchValue": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "min": 2,
+          "max": 4,
+          "points": 2,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "work.years_skilled",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "min": 5,
+          "max": null,
+          "points": 3,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "german.level.CEFR",
           "variant": "default",
-          "matchValue": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "matchValue": "A2",
+          "points": 1,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "german.level.CEFR",
+          "variant": "default",
+          "matchValue": "B1",
+          "points": 2,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "german.level.CEFR",
+          "variant": "default",
+          "matchValue": "B2",
+          "points": 3,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "german.level.CEFR",
+          "variant": "default",
+          "matchValue": "C1",
+          "points": 3,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "german.level.CEFR",
+          "variant": "default",
+          "matchValue": "C2",
+          "points": 3,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "english.level.CEFR",
           "variant": "default",
-          "matchValue": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "matchValue": "C1",
+          "points": 1,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
+        },
+        {
+          "factor": "english.level.CEFR",
+          "variant": "default",
+          "matchValue": "C2",
+          "points": 1,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         },
         {
           "factor": "age",
           "variant": "default",
           "min": "TODO_VERIFY",
           "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "points": 2,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         },
         {
-          "factor": "work.years_in_country.DE",
+          "factor": "age",
           "variant": "default",
           "min": "TODO_VERIFY",
           "max": "TODO_VERIFY",
-          "points": "TODO_VERIFY",
-          "maxPointsForFactor": "TODO_VERIFY"
+          "points": 1,
+          "maxPointsForFactor": null,
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+          "verifiedAt": "2026-10-10"
         }
       ]
     }

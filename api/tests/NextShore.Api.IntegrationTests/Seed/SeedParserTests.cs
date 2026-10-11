@@ -71,6 +71,19 @@ public class SeedParserTests
         Assert.Equal("https://example.gov/edu", pathway.Requirements[1].SourceUrl);
     }
 
+    [Fact]
+    public void Verified_at_is_never_inherited_from_the_pathway()
+    {
+        var json = CountryJson.Replace("\"sourceUrl\": \"https://example.gov/ee\",",
+            "\"sourceUrl\": \"https://example.gov/ee\", \"verifiedAt\": \"2026-10-10\",");
+
+        var pathway = SeedParser.ParseCountryFile(json, "ca.json").Pathways[0].Pathway;
+
+        Assert.Equal(new DateOnly(2026, 10, 10), pathway.VerifiedAt);
+        Assert.All(pathway.Requirements, r => Assert.Null(r.VerifiedAt));
+        Assert.All(pathway.PointsFactors, f => Assert.Null(f.VerifiedAt));
+    }
+
     [Theory]
     [InlineData("\"operator\": \"gte\"", "\"operator\": \"greater\"", "operator")]
     [InlineData("\"typicalDurationMonths\": 6", "\"typicalDurationMonths\": \"six\"", "typical_duration_months")]
@@ -92,7 +105,7 @@ public class SeedParserTests
             {
               "groups": [
                 {
-                  "test": "ielts", "targetScale": "CLB", "sourceUrl": "https://example.gov/clb",
+                  "test": "ielts", "testVariant": "general", "targetScale": "CLB", "sourceUrl": "https://example.gov/clb",
                   "levels": [
                     { "targetLevel": "7",
                       "minScores": { "listening": 6.0, "reading": "TODO_VERIFY", "writing": 6.0, "speaking": 6.0 } }
@@ -105,6 +118,7 @@ public class SeedParserTests
         var mappings = SeedParser.ParseLanguageMappings(json, "language-mappings.json");
 
         Assert.Equal(4, mappings.Count);
+        Assert.All(mappings, m => Assert.Equal("general", m.TestVariant));
         var reading = Assert.Single(mappings, m => m.Skill == "reading");
         Assert.Null(reading.MinScore);
         Assert.Equal(["min_score"], reading.UnverifiedFields);

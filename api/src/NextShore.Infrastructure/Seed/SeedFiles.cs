@@ -3,7 +3,7 @@ using System.Text.Json;
 namespace NextShore.Infrastructure.Seed;
 
 // Shapes of api/seed/*.json (VISA-RULES-SPEC.md §7). Any visa value typed JsonElement may be "TODO_VERIFY".
-// sourceUrl/verifiedAt on a child row default to the pathway's.
+// sourceUrl on a child row defaults to the pathway's; verifiedAt never inherits (each row is verified on its own).
 
 public sealed record CountrySeedFile(CountrySeed Country, List<PathwaySeed> Pathways);
 
@@ -66,6 +66,7 @@ public sealed record LanguageMappingGroupSeed(
     string TargetScale,
     string SourceUrl,
     List<LanguageLevelSeed> Levels,
+    string? TestVariant = null,
     DateOnly? VerifiedAt = null);
 
 public sealed record LanguageLevelSeed(string TargetLevel, Dictionary<string, JsonElement> MinScores);

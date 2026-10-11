@@ -32,7 +32,7 @@ public sealed record SeedReport(
 
 /// <summary>
 /// Loads <c>api/seed/*.json</c> as drafts in one transaction. Countries upsert by code, pathways by slug,
-/// language mappings by (test, skill, target scale, level). Draft pathways have their child rows replaced;
+/// language mappings by (test, test variant, skill, target scale, level). Draft pathways have their child rows replaced;
 /// anything already published is left alone, because the admin screen owns it from then on.
 /// </summary>
 public sealed class SeedLoader(NextShoreDbContext db, ILogger<SeedLoader> logger)
@@ -212,8 +212,8 @@ public sealed class SeedLoader(NextShoreDbContext db, ILogger<SeedLoader> logger
             Path.GetFileName(file), seeds.Count, created, updated, skipped, unverified);
         return (created, updated, skipped, unverified);
 
-        static (string, string, string, string) Key(LanguageScoreMapping m) =>
-            (m.Test, m.Skill, m.TargetScale, m.TargetLevel);
+        static (string, string?, string, string, string) Key(LanguageScoreMapping m) =>
+            (m.Test, m.TestVariant, m.Skill, m.TargetScale, m.TargetLevel);
     }
 
     private static PathwaySeedResult Summarise(Pathway pathway, SeedOutcome outcome) => new(
