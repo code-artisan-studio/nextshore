@@ -25,6 +25,12 @@ public class ApiFactory : WebApplicationFactory<Program>
 
     public InMemoryAssessmentStore Assessments { get; } = new();
 
+    /// <summary>
+    /// When set, the API uses this real database for rules (published rows) and assessments instead of the
+    /// fixed snapshot and in-memory store.
+    /// </summary>
+    public string? DatabaseConnectionString { get; init; }
+
     /// <summary>Replaces the Claude resume parser when set.</summary>
     public IResumeParser? ResumeParser { get; init; }
 
@@ -33,15 +39,19 @@ public class ApiFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseSetting("ConnectionStrings:Db", UnreachableDb);
+        builder.UseSetting("ConnectionStrings:Db", DatabaseConnectionString ?? UnreachableDb);
         builder.UseSetting("Engine:ExchangeRates:CAD", "1.37");
         builder.UseSetting("Engine:ExchangeRates:EUR", "0.92");
         builder.UseSetting("Engine:ExchangeRates:AUD", "1.52");
         builder.ConfigureTestServices(services =>
         {
-            services.AddSingleton<IRuleRepository>(new StaticRuleRepository(Snapshot));
             services.AddSingleton<TimeProvider>(Clock);
-            services.AddSingleton<IAssessmentStore>(Assessments);
+            if (DatabaseConnectionString is null)
+            {
+                services.AddSingleton<IRuleRepository>(new StaticRuleRepository(Snapshot));
+                services.AddSingleton<IAssessmentStore>(Assessments);
+            }
+
             if (ResumeParser is not null)
             {
                 services.AddSingleton(ResumeParser);
