@@ -15,6 +15,8 @@ How rules are expressed, evaluated, scored and graded. The engine is generic; al
    - Pick `variant`: `with_spouse` if `marital_status = married` and the pathway has with-spouse rows, else `single`, else `default`.
    - For each factor, find the matching bracket (`min ≤ v ≤ max` or `match_value`), sum points, apply `max_points_for_factor` caps.
    - Year-count factors (`age`, `work.*`) are floored to whole years before matching, so brackets are whole numbers (`1–1`, `5–null`).
+   - Per factor, the best matching row counts (brackets should not overlap; if they do, the higher points win). No match or a missing value → 0, shown as "Not provided" in the breakdown. A value below a language scale matches no bracket.
+   - `match_value` compares case-insensitively with text, level labels (`B2`, `masters`) and yes/no (`true`). A row with neither bracket nor `match_value` applies to any provided value. A numeric bracket on a text, level or yes/no factor is a rule error.
    - Per-skill factors use per-skill keys, e.g. CRS first language scores `english.level.CLB.listening` etc. separately. Where the profile holds a single level (French, spouse English), the seed stores 4 × the per-ability points.
    - Target = `cutoff` if present, else `pass_mark`.
 4. **Grade + score + gaps** (below).

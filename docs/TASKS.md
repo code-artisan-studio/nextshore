@@ -19,7 +19,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 ## M2 · Engine (Domain, TDD)
 - [x] T11 `ProfileNormalizer` (age, audience, language mappings by test + variant incl. per-skill levels) + tests.
 - [x] T12 `RequirementChecker` (all operators, missing fields, money in the rule's currency) + tests.
-- [ ] T13 `PointsCalculator` (brackets, categorical, variants, caps) + tests.
+- [x] T13 `PointsCalculator` (brackets on whole years, categorical, variants, caps) + tests.
 - [ ] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).
 - [ ] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
 - [ ] T16 `ChainBuilder` with projected profiles + tests.

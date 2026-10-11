@@ -57,6 +57,25 @@ internal static class TestRules
         return change is null ? profile : change(profile);
     }
 
+    public static PointsFactorRule Factor(
+        string factor,
+        decimal? min = null,
+        decimal? max = null,
+        string? match = null,
+        int points = 0,
+        PointsVariant variant = PointsVariant.Default,
+        int? cap = null) =>
+        new(factor, variant, min, max, match, points, cap, Source);
+
+    public static PathwayRule Pathway(
+        IReadOnlyList<PointsFactorRule>? factors = null,
+        int? passMark = null,
+        int? cutoff = null,
+        IReadOnlyList<RequirementRule>? requirements = null,
+        string slug = "xx-test") =>
+        new(slug, "XX", "Test pathway", PathwayType.Pr, [Audience.Developer], factors is { Count: > 0 }, passMark,
+            cutoff, null, null, null, "Test", 1, Source, requirements ?? [], factors ?? [], []);
+
     public static RequirementRule Requirement(
         string field,
         RequirementOperator op,
