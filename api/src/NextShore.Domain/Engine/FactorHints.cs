@@ -18,6 +18,7 @@ public static class FactorHints
             ["german", "level", var scale] => new("German", scale, Fixability.Medium, "Take a German course and certificate", 6),
             ["spouse", "english", "level", var scale] => new("Spouse's English", scale, Fixability.Easy, "Spouse retakes their English test", 2),
             ["spouse", "education", "level"] => new("Spouse's education", null, Fixability.Hard, "Spouse completes a higher qualification", 24),
+            ["age"] => new("Age", "years", Fixability.Impossible, "Age cannot be changed", null),
             ["education", "level"] => new("Education", null, Fixability.Hard, "Complete a higher qualification", 24),
             ["work", "years_skilled"] => new("Skilled work experience", "years", Fixability.Medium, "Gain more skilled work experience", 12),
             ["work", "years_in_country", var country] => new($"Work experience in {country}", "years", Fixability.Medium, $"Gain work experience in {country}", 12),

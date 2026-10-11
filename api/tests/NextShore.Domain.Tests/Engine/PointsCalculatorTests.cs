@@ -171,8 +171,21 @@ public class PointsCalculatorTests
         var points = PointsCalculator.Calculate(pathway, profile)!;
 
         Assert.Equal(
-            [new FactorPoints("age", "28", 30), new FactorPoints("education.level", "bachelors", 0)],
+            [new FactorPoints("age", "28 years", 30), new FactorPoints("education.level", "bachelors", 0)],
             points.Breakdown);
+    }
+
+    [Theory]
+    [InlineData("english.level.CLB.speaking", 10, "CLB 10")]
+    [InlineData("english.level.IELTS", 7, "IELTS 7")]
+    [InlineData("work.years_skilled", 5, "5 years")]
+    [InlineData("work.years_in_country.AU", 1, "1 year")]
+    [InlineData("french.level.CLB", 7, "CLB 7")]
+    public void Breakdown_shows_values_with_their_unit(string factor, int value, string expected)
+    {
+        var points = PointsCalculator.Calculate(Pathway([Factor(factor, 0, null, points: 1)]), Profile((factor, Num(value))))!;
+
+        Assert.Equal(expected, Assert.Single(points.Breakdown).Current);
     }
 
     [Theory]

@@ -68,7 +68,7 @@ public static class PointsCalculator
             .DefaultIfEmpty(0)
             .Max();
 
-        return new FactorPoints(factor, ValueText.Describe(value), points);
+        return new FactorPoints(factor, ValueText.Describe(value, FactorHints.For(factor).Unit), points);
     }
 
     private static bool Matches(PointsFactorRule row, string factor, ProfileValue value)

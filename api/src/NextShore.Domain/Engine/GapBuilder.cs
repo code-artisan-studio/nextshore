@@ -153,12 +153,19 @@ public static class GapBuilder
         return best.Rank is { } rank ? new ProfileValue.Ordinal(scale, rank) : null;
     }
 
-    /// <summary>A requirement on the same field, or on the overall level for a per-skill key.</summary>
+    /// <summary>
+    /// A "reach this level" requirement (<c>gte</c>/<c>gt</c>) on the same field, or on the overall level for a
+    /// per-skill key: its fix also raises the factor. Other requirements on the field (e.g. "has a credential")
+    /// say nothing about how to improve it.
+    /// </summary>
     private static RequirementRule? RelatedRequirement(PathwayRule pathway, string field)
     {
         var parent = field.LastIndexOf('.') is > 0 and var dot ? field[..dot] : null;
-        return pathway.Requirements.FirstOrDefault(r => r.Field == field)
-            ?? pathway.Requirements.FirstOrDefault(r => r.Field == parent && parent.Contains(".level.", StringComparison.Ordinal));
+        var raising = pathway.Requirements
+            .Where(r => r.Operator is RequirementOperator.Gte or RequirementOperator.Gt)
+            .ToList();
+        return raising.FirstOrDefault(r => r.Field == field)
+            ?? raising.FirstOrDefault(r => r.Field == parent && parent.Contains(".level.", StringComparison.Ordinal));
     }
 
     /// <summary>A value that meets the requirement, typed like the profile value; null when none can be derived.</summary>
