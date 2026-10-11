@@ -1,6 +1,12 @@
 # NextShore — Data Model
 
-Postgres (Neon). EF Core code-first. snake_case table/column names. All ids `uuid` unless noted. All rule tables carry `status` (`draft` | `published` | `archived`), `created_at`, `updated_at`.
+Postgres (Neon). EF Core code-first. snake_case table/column names. All ids `uuid` unless noted. All rule tables carry `status` (`draft` | `published` | `archived`), `created_at`, `updated_at`. Enums are stored as snake_case text.
+
+### Unverified values (`TODO_VERIFY`)
+Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_lists`, `language_score_mappings`) also carry:
+- `source_url text`, `verified_at date null` — null until checked against the source.
+- `unverified_fields text[]` — property names still `TODO_VERIFY` in the seed (e.g. `{cutoff,typical_duration_months}`). Those columns are stored as null, so verifiable values (`pass_mark`, `cutoff`, `cutoff_as_of`, `typical_duration_months`, requirement `value`, `points`, `min_score`, …) are nullable.
+- A row is **publishable** only when `unverified_fields` is empty and `verified_at` is set.
 
 ## Rule tables
 
@@ -30,7 +36,8 @@ Postgres (Neon). EF Core code-first. snake_case table/column names. All ids `uui
 | typical_duration_months | int null | for chain timeline |
 | summary | text | one-line description |
 | source_url | text | |
-| verified_at | date | |
+| verified_at | date null | see *Unverified values* |
+| unverified_fields | text[] | |
 | rule_version | int | bumped on publish |
 
 ### requirements
@@ -40,14 +47,14 @@ Postgres (Neon). EF Core code-first. snake_case table/column names. All ids `uui
 | pathway_id | uuid FK | |
 | field | text | profile field key (see below) |
 | operator | enum | `eq` `neq` `gte` `lte` `gt` `lt` `in` `not_in` `exists` `true` |
-| value | jsonb | scalar or array |
+| value | jsonb null | scalar or array; null while unverified |
 | unit | text null | `years`, `EUR`, `CAD`, `CLB`… |
 | is_mandatory | bool | false = advisory |
 | fixability | enum | `easy` · `medium` · `hard` · `impossible` |
 | fix_hint | text | "Retake IELTS" |
 | fix_months | int null | rough effort |
 | label | text | human-readable requirement |
-| source_url / verified_at | | |
+| source_url / verified_at / unverified_fields | | |
 
 ### points_factors
 | column | type | notes |
@@ -58,22 +65,22 @@ Postgres (Neon). EF Core code-first. snake_case table/column names. All ids `uui
 | variant | text | `default` · `single` · `with_spouse` |
 | min / max | numeric null | inclusive bracket; null = open |
 | match_value | text null | for categorical factors (`education.level = masters`) |
-| points | int | |
+| points | int null | null while unverified |
 | max_points_for_factor | int null | cap |
-| source_url / verified_at | | |
+| source_url / verified_at / unverified_fields | | |
 
 ### occupation_lists
-`id, pathway_id, code, title, is_eligible bool, source_url, verified_at`
+`id, pathway_id, code, title, is_eligible bool, source_url, verified_at, unverified_fields` — unique `(pathway_id, code)`
 
 ### language_score_mappings
-`id, test (ielts|pte|toefl), skill (listening|reading|writing|speaking), min_score numeric, target_scale (CLB|CEFR|IELTS), target_level text`
+`id, test (ielts|pte|toefl), skill (listening|reading|writing|speaking), min_score numeric null, target_scale (CLB|CEFR|IELTS), target_level text, source_url, verified_at, unverified_fields`
 
 ### rule_audit_log
 `id, entity text, entity_id uuid, action (create|update|delete|publish), old_value jsonb, new_value jsonb, actor text, at timestamptz`
 
 ## Assessment table
 ### assessments
-`id uuid, profile jsonb, results jsonb, rule_version int, summary text null, created_at, expires_at`
+`id uuid, profile jsonb, results jsonb, rule_version int, summary text null, summary_generated_at timestamptz null, created_at, expires_at` — index on `expires_at` for cleanup
 No name, email or contact info is stored.
 
 ## Profile field keys (shared vocabulary)
