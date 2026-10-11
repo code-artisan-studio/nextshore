@@ -202,6 +202,20 @@ public class GapBuilderTests
     }
 
     [Fact]
+    public void Points_gap_borrows_only_a_reach_this_level_requirement_fix()
+    {
+        // "Has an education credential" (exists) is met by any level; its ECA hint is not how to get a master's.
+        var pathway = Pathway(
+            [Factor("education.level", match: "bachelors", points: 120), Factor("education.level", match: "masters", points: 135)],
+            cutoff: 500,
+            requirements: [Requirement("education.level", Op.Exists, null, fixability: Fixability.Medium) with { FixHint = "Get an ECA", FixMonths = 3 }]);
+
+        var gap = Assert.Single(Gaps(pathway, Profile(("education.level", new ProfileValue.Ordinal(OrdinalScale.EducationLevel, 2)))));
+
+        Assert.Equal(("Complete a higher qualification", 24, Fixability.Hard), (gap.FixHint, gap.FixMonths, gap.Fixability));
+    }
+
+    [Fact]
     public void Shortfall_with_no_possible_improvement_is_a_single_points_gap()
     {
         var pathway = Pathway([Factor("work.years_skilled", 5, null, points: 50)], cutoff: 100);

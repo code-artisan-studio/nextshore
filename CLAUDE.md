@@ -42,9 +42,10 @@ Phase 1 = POC: 3 countries (Canada, Germany, Australia), 10 pathways, no user ac
 ## Commands
 ```bash
 # api
-cd api && dotnet build && dotnet test
+cd api && dotnet build && dotnet test   # integration tests start a Postgres container: needs Docker
 dotnet run --project src/NextShore.Api
 dotnet run --project src/NextShore.Api -- seed   # load api/seed/*.json as drafts
+Rules__Source=seed-preview dotnet run --project src/NextShore.Api   # dev: serve verified seed rules (nothing is published until M5)
 dotnet ef migrations add <Name> -p src/NextShore.Infrastructure -s src/NextShore.Api
 
 # web

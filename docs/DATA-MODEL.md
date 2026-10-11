@@ -116,7 +116,7 @@ No name, email or contact info is stored.
 
 ## JSON contracts
 
-### ExtractedProfile (Claude `record_profile` tool output)
+### ExtractedProfile (Claude structured output for resume parsing)
 ```json
 {
   "education": [{ "level": "bachelors", "field": "Computer Science", "institutionCountry": "IN", "graduationYear": 2019, "confidence": 0.95 }],

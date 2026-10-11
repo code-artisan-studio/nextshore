@@ -6,7 +6,7 @@ namespace NextShore.Api.IntegrationTests.Seed;
 /// <summary>Guards the real files in api/seed/.</summary>
 public class SeedFilesTests
 {
-    private static readonly string SeedDirectory = FindSeedDirectory();
+    private static readonly string SeedDirectory = SeedPaths.Directory;
 
     private static IReadOnlyList<SeededPathway> AllPathways() =>
         Directory.GetFiles(SeedDirectory, "*.json")
@@ -80,18 +80,5 @@ public class SeedFilesTests
             .Concat(p.Pathway.Occupations));
 
         Assert.All(rows, row => Assert.StartsWith("https://", row.SourceUrl));
-    }
-
-    private static string FindSeedDirectory()
-    {
-        for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
-        {
-            if (File.Exists(Path.Combine(dir.FullName, "NextShore.sln")))
-            {
-                return Path.Combine(dir.FullName, "seed");
-            }
-        }
-
-        throw new DirectoryNotFoundException("api/seed not found above the test output directory.");
     }
 }
