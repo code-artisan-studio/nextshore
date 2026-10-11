@@ -28,6 +28,10 @@ pointsRatio = isPointsBased ? min(total / target, 1) : 1
 score       = round(60 * reqRatio + 40 * pointsRatio)
 if any unmet mandatory requirement has fixability = impossible → score = min(score, 20)
 ```
+- Only mandatory requirements count; advisory ones never affect score or grade. No mandatory requirements → `reqRatio = 1`.
+- Rounding is half away from zero (47.5 → 48).
+- A points-based pathway with no usable target (no cutoff or pass mark yet, or 0) gets `pointsRatio = 1` and points never block its grade.
+
 Score is 0–100, displayed as "Readiness 74 / 100". Never displayed as a percentage of success.
 
 ## 3. Grade
