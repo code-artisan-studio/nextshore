@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
 using NextShore.Application;
+using NextShore.Application.Engine;
 using NextShore.Infrastructure;
 using NextShore.Infrastructure.Seed;
 using Serilog;
@@ -25,6 +26,11 @@ builder.Services.AddOpenApi(options => options.AddDocumentTransformer((document,
 }));
 builder.Services.AddHealthChecks();
 builder.Services.AddApplication();
+builder.Services.AddOptions<EngineSettings>()
+    .Bind(builder.Configuration.GetSection(EngineSettings.Section))
+    .Validate(s => s.ExchangeRates.Count > 0 && s.ExchangeRates.Values.All(r => r > 0),
+        "Engine:ExchangeRates needs a positive rate (units per 1 USD) for each currency the rules use.")
+    .ValidateOnStart();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
@@ -72,5 +78,6 @@ if (app.Environment.IsDevelopment())
 var api = app.MapGroup("/api/v1");
 api.MapHealthEndpoints();
 api.MapRulesEndpoints();
+api.MapEvaluationsEndpoints();
 
 app.Run();

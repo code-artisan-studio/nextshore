@@ -27,7 +27,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 
 ## M3 · API
 - [x] T18 `GET /countries`, `GET /occupations`.
-- [ ] T19 `POST /evaluations` + validator.
+- [x] T19 `POST /evaluations` + validator.
 - [ ] T20 `POST /assessments`, `GET /assessments/{id}`; expiry cleanup hosted service.
 - [ ] T21 Claude client (Infrastructure): typed options, retry, timeouts.
 - [ ] T22 `POST /resumes/parse`: magic-byte validation, DOCX text extraction, forced tool call, occupation code validation. No persistence/logging of content.

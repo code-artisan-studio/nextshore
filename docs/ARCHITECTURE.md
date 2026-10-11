@@ -84,7 +84,7 @@ nextshore/
 | Errors | RFC 7807 ProblemDetails everywhere |
 | Logging | Serilog → console (Railway). Never log resume content or profile PII |
 | CORS | Allow web origin(s) from config only |
-| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated) |
+| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
 | Health | `GET /api/v1/health` (DB check) |
 | Cleanup | Hosted service deletes assessments past `expires_at` daily |
 | Types | OpenAPI → `openapi-typescript` → `web/src/api/schema.ts` |

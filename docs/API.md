@@ -41,6 +41,30 @@ Body: `CandidateProfile`
 - 201 → `{ id, ruleVersion, results: PathwayResult[], chains: PathwayChain[] }`
 - 400 validation errors
 
+**CandidateProfile fields** (enum-like values are lowercase strings; countries are ISO alpha-2 keys)
+| Field | Rules |
+|---|---|
+| `goal` | required: `study` · `work` · `pr` |
+| `dateOfBirth` | required, age 15–100 |
+| `citizenship` | required, e.g. `IN` |
+| `education` | required: `{ level: secondary·diploma·bachelors·masters·phd, field?, years? 0–15 }` |
+| `work` | required: `{ yearsSkilled 0–60, yearsInCountry?: { CA: 0–60, … } }` |
+| `occupationCodes` | optional `{ NOC?, ISCO?, ANZSCO? }` |
+| `english` | optional `{ test: ielts·pte·toefl·none, testVariant: academic·general (required for ielts and pte; PTE general = PTE Core), scores: { listening, reading, writing, speaking } }` — IELTS 0–9 in 0.5 steps, PTE 10–90, TOEFL 0–30; no scores when `none` |
+| `french` | optional `{ clb: 1–12 }` |
+| `german` | optional `{ level: A1…C2 }` |
+| `fundsUsd` | optional, ≥ 0 |
+| `maritalStatus` | required: `single` · `married`; `spouse` only when married: `{ educationLevel?, englishClb? 1–12 }` |
+| `jobOffer` | optional `{ CA: bool, DE: bool, …, salaryEur? ≥ 0 }` |
+| `relativeIn` | optional `{ CA: bool, AU: bool }` |
+| `student` | optional `{ gpaPercent? 0–100, tuitionBudgetUsd? ≥ 0 }` |
+| `degreeRecognizedDE` | optional bool |
+
+Validation errors are keyed by camelCase JSON path, e.g. `english.scores.listening`, `jobOffer.DE`.
+
+**PathwayResult** (as in `DATA-MODEL.md`, plus `pathwayName`): `{ pathwaySlug, pathwayName, countryCode, grade, readinessScore, points: { variant, total, target, targetKind: cutoff·pass_mark, breakdown: [{ factor, current, points }] } | null, requirements: [{ id, label, met, current, target, isMandatory, fixability }], gaps: [{ requirementId, field, label, current, target, fixability, fixHint, fixMonths, impactPoints, unlocksGrade }], chain: [slug], sources: [{ label, url, verifiedAt }], staleRules }`
+**PathwayChain**: `{ countryCode, totalMonths | null, steps: [{ pathwaySlug, type, grade, readinessScore, durationMonths, isProjected }] }`
+
 ### GET `/assessments/{id}`
 200 → same as POST response · 404 not found/expired
 
