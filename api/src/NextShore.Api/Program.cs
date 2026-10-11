@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
+using NextShore.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,8 @@ builder.Services.AddOpenApi(options => options.AddDocumentTransformer((document,
     document.Info.Version = "v1";
     return Task.CompletedTask;
 }));
-builder.Services.AddHealthChecks(); // DB check added with the DbContext (T06).
+builder.Services.AddHealthChecks();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
 

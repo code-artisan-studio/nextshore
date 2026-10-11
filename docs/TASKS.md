@@ -10,7 +10,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 
 ## M1 · Data & rules
 - [x] T05 Domain entities + enums per `DATA-MODEL.md`.
-- [ ] T06 EF Core DbContext, configurations (snake_case, jsonb), initial migration against Neon; add DB check to `/health`.
+- [x] T06 EF Core DbContext, configurations (snake_case, jsonb), initial migration against Neon; add DB check to `/health`.
 - [ ] T07 Seed loader: reads `api/seed/*.json`, upserts by slug, loads drafts; publish blocked if `TODO_VERIFY` present.
 - [ ] T08 Seed files skeleton for 10 pathways (`VISA-RULES-SPEC.md` §8) with `TODO_VERIFY` placeholders + source URLs.
 - [ ] T09 **Manual:** verify and fill all seed values from official sources; set `verified_at`.
