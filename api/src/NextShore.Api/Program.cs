@@ -36,7 +36,7 @@ builder.Services.AddOptions<AssessmentSettings>()
     .Bind(builder.Configuration.GetSection(AssessmentSettings.Section))
     .Validate(s => s.LifetimeDays > 0 && s.CleanupInterval > TimeSpan.Zero, "Assessments:LifetimeDays and CleanupInterval must be positive.")
     .ValidateOnStart();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
 

@@ -45,6 +45,7 @@ Phase 1 = POC: 3 countries (Canada, Germany, Australia), 10 pathways, no user ac
 cd api && dotnet build && dotnet test
 dotnet run --project src/NextShore.Api
 dotnet run --project src/NextShore.Api -- seed   # load api/seed/*.json as drafts
+Rules__Source=seed-preview dotnet run --project src/NextShore.Api   # dev: serve verified seed rules (nothing is published until M5)
 dotnet ef migrations add <Name> -p src/NextShore.Infrastructure -s src/NextShore.Api
 
 # web

@@ -87,5 +87,6 @@ nextshore/
 | Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
 | Health | `GET /api/v1/health` (DB check) |
 | Cleanup | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval |
+| Dev rules preview | `Rules__Source=seed-preview` (Development only; startup fails elsewhere) serves verified `api/seed` rows as if published, so the web app has data before admin publish (M5). Default `database` = published rows only |
 | Types | OpenAPI → `openapi-typescript` → `web/src/api/schema.ts` |
 | CI | GitHub Actions: build + test on PR; deploy on main (Railway, Vercel) |
