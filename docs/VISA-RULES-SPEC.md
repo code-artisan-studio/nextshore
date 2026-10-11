@@ -5,7 +5,7 @@ How rules are expressed, evaluated, scored and graded. The engine is generic; al
 > ⚠️ **No visa value in this repo is trusted until verified.** Every numeric threshold, points value and cutoff in seed files starts as `"TODO_VERIFY"` and must be filled from the linked official source, with `verified_at` set to the date checked. The seed loader **refuses to publish** any row still containing `TODO_VERIFY`.
 
 ## 1. Evaluation order (per pathway)
-1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience (students also see work/PR pathways at the end of their chain).
+1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience. Students also see every pathway in their study chains; chains start only at study pathways the audience sees, so developers get no chains. Results are ranked by Readiness Score, then slug.
 2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy`, fix hint "Add this to your profile" (user can answer it).
    - Value types: numbers, text, yes/no, money (amount + currency) and ordered levels (CEFR `A1`…`C2`, education `secondary`…`phd`, compared by rank). Ordering (`gte`, `lt`, …) a text or yes/no field, or naming an unknown level, is a rule error and fails loudly.
    - A language score below a scale's lowest mapped level is "Below CLB 4": lower than every level, so `gte` is unmet and `lt` is met.

@@ -23,7 +23,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T14 `Grader` + Readiness Score formula + tests (boundaries: 85%, 2 gaps, impossible cap).
 - [x] T15 `GapBuilder` (impact via re-run, unlocksGrade, sorting) + tests.
 - [x] T16 `ChainBuilder` with projected profiles + tests.
-- [ ] T17 `EligibilityEngine` façade + 3 persona golden tests (student, mid dev, senior dev).
+- [x] T17 `EligibilityEngine` façade + 3 persona golden tests (student, mid dev, senior dev).
 
 ## M3 · API
 - [ ] T18 `GET /countries`, `GET /occupations`.

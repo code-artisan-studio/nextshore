@@ -76,8 +76,9 @@ internal static class TestRules
         PathwayType type = PathwayType.Pr,
         string country = "XX",
         string? next = null,
-        int? durationMonths = null) =>
-        new(slug, country, "Test pathway", type, [Audience.Developer], factors is { Count: > 0 }, passMark,
+        int? durationMonths = null,
+        IReadOnlyList<Audience>? audience = null) =>
+        new(slug, country, "Test pathway", type, audience ?? [Audience.Developer], factors is { Count: > 0 }, passMark,
             cutoff, null, next, durationMonths, "Test", 1, Source, requirements ?? [], factors ?? [], []);
 
     public static RequirementRule Requirement(
