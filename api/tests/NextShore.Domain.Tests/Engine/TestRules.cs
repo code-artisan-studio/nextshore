@@ -56,4 +56,14 @@ internal static class TestRules
         };
         return change is null ? profile : change(profile);
     }
+
+    public static RequirementRule Requirement(
+        string field,
+        RequirementOperator op,
+        string? value,
+        string? unit = null,
+        Fixability fixability = Fixability.Medium,
+        bool mandatory = true,
+        string label = "Test requirement") =>
+        new(Guid.NewGuid(), field, op, value, unit, mandatory, fixability, "Fix it", 3, label, Source);
 }

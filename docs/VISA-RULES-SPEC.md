@@ -6,8 +6,10 @@ How rules are expressed, evaluated, scored and graded. The engine is generic; al
 
 ## 1. Evaluation order (per pathway)
 1. **Audience filter** — skip pathways whose `audience` doesn't include the profile's audience (students also see work/PR pathways at the end of their chain).
-2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy` (user can answer it).
-   - Money: a funds requirement's `unit` is the currency of the official threshold (`CAD`, `EUR`, `AUD`); the normaliser converts `funds.amount_usd` into that currency before comparing.
+2. **Requirements** — evaluate each `requirements` row: `profile[field] <operator> value`. Missing profile field → `unmet`, `current = "Not provided"`, fixability `easy`, fix hint "Add this to your profile" (user can answer it).
+   - Value types: numbers, text, yes/no, money (amount + currency) and ordered levels (CEFR `A1`…`C2`, education `secondary`…`phd`, compared by rank). Ordering (`gte`, `lt`, …) a text or yes/no field, or naming an unknown level, is a rule error and fails loudly.
+   - A language score below a scale's lowest mapped level is "Below CLB 4": lower than every level, so `gte` is unmet and `lt` is met.
+   - Money: a funds requirement's `unit` is the currency of the official threshold (`CAD`, `EUR`, `AUD`); the profile amount is converted into that currency before comparing, using exchange rates (units per 1 USD) supplied from configuration. A missing rate is a configuration error. The UI shows both, e.g. `USD 20,000 (≈ CAD 27,400)`.
    - Language: `english.level.{scale}` is the lowest level reached across the four skills, using the mappings for the profile's test **and** `english.test_variant`.
 3. **Points** (if `is_points_based`):
    - Pick `variant`: `with_spouse` if `marital_status = married` and the pathway has with-spouse rows, else `single`, else `default`.
