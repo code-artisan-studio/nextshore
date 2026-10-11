@@ -114,6 +114,7 @@ public sealed class SeedLoader(NextShoreDbContext db, ILogger<SeedLoader> logger
             .Include(p => p.Requirements)
             .Include(p => p.PointsFactors)
             .Include(p => p.Occupations)
+            .AsSplitQuery()
             .SingleOrDefaultAsync(p => p.Slug == seed.Slug, ct);
 
         if (existing is null)

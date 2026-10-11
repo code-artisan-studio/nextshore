@@ -1,0 +1,261 @@
+{
+  "country": {
+    "code": "DE",
+    "name": "Germany",
+    "occupationSystem": "ISCO",
+    "languageScale": "CEFR"
+  },
+  "pathways": [
+    {
+      "slug": "de-student-visa",
+      "name": "Student visa",
+      "type": "study",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Study at a German university with an admission letter and proof of funds.",
+      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/studying",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "de-post-study",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "USD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Fund a blocked account or find a sponsor",
+          "fixMonths": 6,
+          "label": "Proof of funds (blocked account)"
+        }
+      ]
+    },
+    {
+      "slug": "de-post-study",
+      "name": "Job search after graduation",
+      "type": "post_study_work",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Residence permit to look for work after graduating from a German university.",
+      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-after-graduation",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "de-blue-card",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "degree.recognized_DE",
+          "operator": "true",
+          "value": null,
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "hard",
+          "fixHint": "Graduate from a German university",
+          "fixMonths": 24,
+          "label": "Degree from a German university"
+        }
+      ]
+    },
+    {
+      "slug": "de-blue-card",
+      "name": "EU Blue Card",
+      "type": "work",
+      "audience": [
+        "developer",
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Residence permit for university graduates with a qualifying job offer in Germany.",
+      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": null,
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "degree.recognized_DE",
+          "operator": "true",
+          "value": null,
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "hard",
+          "fixHint": "Check anabin or apply for degree recognition",
+          "fixMonths": 6,
+          "label": "Recognised university degree"
+        },
+        {
+          "field": "job_offer.DE",
+          "operator": "true",
+          "value": null,
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Secure a job offer from a German employer",
+          "fixMonths": 6,
+          "label": "Job offer in Germany"
+        },
+        {
+          "field": "job_offer.salary_eur",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "EUR",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Negotiate a salary at or above the threshold",
+          "fixMonths": 3,
+          "label": "Minimum gross annual salary"
+        }
+      ],
+      "occupations": [
+        {
+          "code": "2511",
+          "title": "Systems analysts",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "2512",
+          "title": "Software developers",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "2513",
+          "title": "Web and multimedia developers",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "2514",
+          "title": "Applications programmers",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "2519",
+          "title": "Software and applications developers and analysts not elsewhere classified",
+          "isEligible": "TODO_VERIFY"
+        }
+      ]
+    },
+    {
+      "slug": "de-opportunity-card",
+      "name": "Opportunity Card (Chancenkarte)",
+      "type": "work",
+      "audience": [
+        "developer",
+        "student"
+      ],
+      "isPointsBased": true,
+      "summary": "Points-based permit to come to Germany and look for skilled work.",
+      "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
+      "verifiedAt": null,
+      "passMark": "TODO_VERIFY",
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "de-blue-card",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "education.level",
+          "operator": "in",
+          "value": "TODO_VERIFY",
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "hard",
+          "fixHint": "Get a recognised degree or vocational qualification",
+          "fixMonths": 24,
+          "label": "Degree or vocational qualification"
+        },
+        {
+          "field": "german.level.CEFR",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "CEFR",
+          "isMandatory": false,
+          "fixability": "medium",
+          "fixHint": "Take a German course and certificate",
+          "fixMonths": 6,
+          "label": "German language (either German or English qualifies)"
+        },
+        {
+          "field": "english.level.CEFR",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "CEFR",
+          "isMandatory": false,
+          "fixability": "easy",
+          "fixHint": "Take or retake an approved English test",
+          "fixMonths": 2,
+          "label": "English language (either English or German qualifies)"
+        },
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "USD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more savings or open a blocked account",
+          "fixMonths": 6,
+          "label": "Proof of funds"
+        }
+      ],
+      "pointsFactors": [
+        {
+          "factor": "degree.recognized_DE",
+          "variant": "default",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        },
+        {
+          "factor": "work.years_skilled",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        },
+        {
+          "factor": "german.level.CEFR",
+          "variant": "default",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        },
+        {
+          "factor": "english.level.CEFR",
+          "variant": "default",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        },
+        {
+          "factor": "age",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        },
+        {
+          "factor": "work.years_in_country.DE",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY"
+        }
+      ]
+    }
+  ]
+}

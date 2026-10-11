@@ -1,0 +1,119 @@
+{
+  "groups": [
+    {
+      "test": "ielts",
+      "targetScale": "CLB",
+      "verifiedAt": null,
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-requirements/language-testing.html",
+      "levels": [
+        {
+          "targetLevel": "4",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "5",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "6",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "7",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "8",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "9",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "10",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        }
+      ]
+    },
+    {
+      "test": "ielts",
+      "targetScale": "CEFR",
+      "verifiedAt": null,
+      "sourceUrl": "https://ielts.org/organisations/ielts-for-organisations/compare-ielts/ielts-and-the-cefr",
+      "levels": [
+        {
+          "targetLevel": "B1",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "B2",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "C1",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        },
+        {
+          "targetLevel": "C2",
+          "minScores": {
+            "listening": "TODO_VERIFY",
+            "reading": "TODO_VERIFY",
+            "writing": "TODO_VERIFY",
+            "speaking": "TODO_VERIFY"
+          }
+        }
+      ]
+    }
+  ]
+}

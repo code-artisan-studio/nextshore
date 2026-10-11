@@ -1,0 +1,283 @@
+{
+  "country": {
+    "code": "CA",
+    "name": "Canada",
+    "occupationSystem": "NOC",
+    "languageScale": "CLB"
+  },
+  "pathways": [
+    {
+      "slug": "ca-study-permit",
+      "name": "Study permit",
+      "type": "study",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Study at a designated learning institution in Canada.",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit.html",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "ca-pgwp",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "USD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more savings or add a financial sponsor",
+          "fixMonths": 6,
+          "label": "Proof of funds for tuition and living costs"
+        }
+      ]
+    },
+    {
+      "slug": "ca-pgwp",
+      "name": "Post-graduation work permit (PGWP)",
+      "type": "post_study_work",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Open work permit for graduates of eligible Canadian programs.",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "ca-express-entry",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "english.level.CLB",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "CLB",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Take or retake an approved English test",
+          "fixMonths": 2,
+          "label": "Minimum English level"
+        }
+      ]
+    },
+    {
+      "slug": "ca-express-entry",
+      "name": "Express Entry (Federal Skilled Worker)",
+      "type": "pr",
+      "audience": [
+        "developer",
+        "student"
+      ],
+      "isPointsBased": true,
+      "summary": "Points-ranked route to permanent residence for skilled workers.",
+      "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": "TODO_VERIFY",
+      "cutoffAsOf": "TODO_VERIFY",
+      "nextPathwaySlug": null,
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "english.level.CLB",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "CLB",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Retake IELTS or CELPIP",
+          "fixMonths": 2,
+          "label": "Minimum English level in all four skills",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html"
+        },
+        {
+          "field": "work.years_skilled",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "years",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Gain more skilled work experience",
+          "fixMonths": 12,
+          "label": "Continuous skilled work experience",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html"
+        },
+        {
+          "field": "education.level",
+          "operator": "in",
+          "value": "TODO_VERIFY",
+          "unit": null,
+          "isMandatory": true,
+          "fixability": "hard",
+          "fixHint": "Complete a recognised qualification",
+          "fixMonths": 24,
+          "label": "Minimum education level",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html"
+        },
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "USD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more settlement funds",
+          "fixMonths": 6,
+          "label": "Settlement funds",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html"
+        }
+      ],
+      "pointsFactors": [
+        {
+          "factor": "age",
+          "variant": "single",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "education.level",
+          "variant": "single",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "english.level.CLB",
+          "variant": "single",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "single",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "single",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "relative_in.CA",
+          "variant": "single",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "age",
+          "variant": "with_spouse",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "education.level",
+          "variant": "with_spouse",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "english.level.CLB",
+          "variant": "with_spouse",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "work.years_in_country.CA",
+          "variant": "with_spouse",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "french.level.CLB",
+          "variant": "with_spouse",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "relative_in.CA",
+          "variant": "with_spouse",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "spouse.education.level",
+          "variant": "with_spouse",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        },
+        {
+          "factor": "spouse.english.level.CLB",
+          "variant": "with_spouse",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html"
+        }
+      ],
+      "occupations": [
+        {
+          "code": "21211",
+          "title": "Data scientists",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "21231",
+          "title": "Software engineers and designers",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "21232",
+          "title": "Software developers and programmers",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "21234",
+          "title": "Web developers and programmers",
+          "isEligible": "TODO_VERIFY"
+        }
+      ]
+    }
+  ]
+}

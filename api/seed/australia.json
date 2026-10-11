@@ -1,0 +1,215 @@
+{
+  "country": {
+    "code": "AU",
+    "name": "Australia",
+    "occupationSystem": "ANZSCO",
+    "languageScale": "IELTS"
+  },
+  "pathways": [
+    {
+      "slug": "au-student-500",
+      "name": "Student visa (subclass 500)",
+      "type": "study",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Study full-time at a registered Australian institution.",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "au-485",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "funds.amount_usd",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "USD",
+          "isMandatory": true,
+          "fixability": "medium",
+          "fixHint": "Show more savings or add a financial sponsor",
+          "fixMonths": 6,
+          "label": "Evidence of funds"
+        },
+        {
+          "field": "english.level.IELTS",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "IELTS",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Take or retake an approved English test",
+          "fixMonths": 2,
+          "label": "Minimum English test score"
+        }
+      ]
+    },
+    {
+      "slug": "au-485",
+      "name": "Temporary Graduate visa (subclass 485)",
+      "type": "post_study_work",
+      "audience": [
+        "student"
+      ],
+      "isPointsBased": false,
+      "summary": "Temporary visa to live and work in Australia after completing study there.",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485",
+      "verifiedAt": null,
+      "passMark": null,
+      "cutoff": null,
+      "cutoffAsOf": null,
+      "nextPathwaySlug": "au-189",
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "age",
+          "operator": "lte",
+          "value": "TODO_VERIFY",
+          "unit": "years",
+          "isMandatory": true,
+          "fixability": "impossible",
+          "fixHint": "Age limits cannot be changed",
+          "fixMonths": null,
+          "label": "Maximum age at application"
+        },
+        {
+          "field": "english.level.IELTS",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "IELTS",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Take or retake an approved English test",
+          "fixMonths": 2,
+          "label": "Minimum English test score"
+        }
+      ]
+    },
+    {
+      "slug": "au-189",
+      "name": "Skilled Independent visa (subclass 189)",
+      "type": "pr",
+      "audience": [
+        "developer",
+        "student"
+      ],
+      "isPointsBased": true,
+      "summary": "Points-tested permanent visa for invited skilled workers.",
+      "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189",
+      "verifiedAt": null,
+      "passMark": "TODO_VERIFY",
+      "cutoff": "TODO_VERIFY",
+      "cutoffAsOf": "TODO_VERIFY",
+      "nextPathwaySlug": null,
+      "typicalDurationMonths": "TODO_VERIFY",
+      "requirements": [
+        {
+          "field": "age",
+          "operator": "lt",
+          "value": "TODO_VERIFY",
+          "unit": "years",
+          "isMandatory": true,
+          "fixability": "impossible",
+          "fixHint": "Age limits cannot be changed",
+          "fixMonths": null,
+          "label": "Age when invited to apply"
+        },
+        {
+          "field": "english.level.IELTS",
+          "operator": "gte",
+          "value": "TODO_VERIFY",
+          "unit": "IELTS",
+          "isMandatory": true,
+          "fixability": "easy",
+          "fixHint": "Retake IELTS or PTE",
+          "fixMonths": 2,
+          "label": "Competent English"
+        }
+      ],
+      "pointsFactors": [
+        {
+          "factor": "age",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        },
+        {
+          "factor": "english.level.IELTS",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        },
+        {
+          "factor": "work.years_skilled",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        },
+        {
+          "factor": "work.years_in_country.AU",
+          "variant": "default",
+          "min": "TODO_VERIFY",
+          "max": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        },
+        {
+          "factor": "education.level",
+          "variant": "default",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        },
+        {
+          "factor": "marital_status",
+          "variant": "default",
+          "matchValue": "TODO_VERIFY",
+          "points": "TODO_VERIFY",
+          "maxPointsForFactor": "TODO_VERIFY",
+          "sourceUrl": "https://immi.homeaffairs.gov.au/help-support/departmental-forms/online-forms/points-calculator"
+        }
+      ],
+      "occupations": [
+        {
+          "code": "261111",
+          "title": "ICT Business Analyst",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "261112",
+          "title": "Systems Analyst",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "261311",
+          "title": "Analyst Programmer",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "261312",
+          "title": "Developer Programmer",
+          "isEligible": "TODO_VERIFY"
+        },
+        {
+          "code": "261313",
+          "title": "Software Engineer",
+          "isEligible": "TODO_VERIFY"
+        }
+      ]
+    }
+  ]
+}
