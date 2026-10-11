@@ -24,7 +24,7 @@
 3. Load published `RuleSnapshot` via `IRuleRepository` (singleton in-memory cache, no expiry; invalidated on publish). Only published pathways and published child rows are included; a chain stops at an unpublished pathway.
 4. Engine evaluates every pathway → `PathwayResult[]`, plus pathway chains.
 5. Persist `Assessment` (profile JSON, results JSON, rule version, `expires_at = now + 30d`).
-6. Return `{ id, results }`.
+6. Return `201 { id, ruleVersion, expiresAt, results, chains }`. `GET` serves the stored results unchanged.
 
 ### 3. Summary — `GET /api/v1/assessments/{id}/summary`
 - Lazily generated with Claude Sonnet from the **engine output only** (results JSON + profile), cached on the assessment row.
@@ -86,6 +86,6 @@ nextshore/
 | CORS | Allow web origin(s) from config only |
 | Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
 | Health | `GET /api/v1/health` (DB check) |
-| Cleanup | Hosted service deletes assessments past `expires_at` daily |
+| Cleanup | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval |
 | Types | OpenAPI → `openapi-typescript` → `web/src/api/schema.ts` |
 | CI | GitHub Actions: build + test on PR; deploy on main (Railway, Vercel) |

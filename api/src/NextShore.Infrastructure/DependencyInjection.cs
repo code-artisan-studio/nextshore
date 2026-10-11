@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NextShore.Application.Abstractions;
+using NextShore.Infrastructure.Assessments;
 using NextShore.Infrastructure.Persistence;
 using NextShore.Infrastructure.Rules;
 using NextShore.Infrastructure.Seed;
@@ -25,6 +26,8 @@ public static class DependencyInjection
 
         services.AddHealthChecks().AddDbContextCheck<NextShoreDbContext>(DatabaseHealthCheck);
         services.AddScoped<SeedLoader>();
+        services.AddScoped<IAssessmentStore, AssessmentStore>();
+        services.AddHostedService<AssessmentCleanupService>();
         services.AddSingleton<IRuleSnapshotSource, DbRuleSnapshotSource>();
         services.AddSingleton<IRuleRepository, CachedRuleRepository>();
 

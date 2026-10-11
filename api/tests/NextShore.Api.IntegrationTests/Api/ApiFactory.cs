@@ -11,7 +11,7 @@ namespace NextShore.Api.IntegrationTests.Api;
 
 /// <summary>
 /// The real API with a fixed rule snapshot (verified seed rules by default), a clock fixed at 2026-10-10,
-/// the golden-test exchange rates and no database.
+/// the golden-test exchange rates and an in-memory assessment store instead of the database.
 /// </summary>
 public class ApiFactory : WebApplicationFactory<Program>
 {
@@ -23,6 +23,8 @@ public class ApiFactory : WebApplicationFactory<Program>
 
     public FakeTimeProvider Clock { get; } = new(new DateTimeOffset(2026, 10, 10, 9, 0, 0, TimeSpan.Zero));
 
+    public InMemoryAssessmentStore Assessments { get; } = new();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseSetting("ConnectionStrings:Db", UnreachableDb);
@@ -33,6 +35,7 @@ public class ApiFactory : WebApplicationFactory<Program>
         {
             services.AddSingleton<IRuleRepository>(new StaticRuleRepository(Snapshot));
             services.AddSingleton<TimeProvider>(Clock);
+            services.AddSingleton<IAssessmentStore>(Assessments);
             ConfigureServices(services);
         });
     }

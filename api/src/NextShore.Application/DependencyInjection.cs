@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using NextShore.Application.Assessments;
 using NextShore.Application.Countries;
 using NextShore.Application.Engine;
 using NextShore.Application.Evaluations;
@@ -28,6 +29,8 @@ public static class DependencyInjection
         services.AddScoped<ListCountriesHandler>();
         services.AddScoped<SearchOccupationsHandler>();
         services.AddScoped<EvaluateHandler>();
+        services.AddScoped<CreateAssessmentHandler>();
+        services.AddScoped<GetAssessmentHandler>();
         return services;
     }
 }

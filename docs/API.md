@@ -38,7 +38,7 @@ Body: `CandidateProfile`
   "degreeRecognizedDE": true
 }
 ```
-- 201 → `{ id, ruleVersion, results: PathwayResult[], chains: PathwayChain[] }`
+- 201 → `{ id, ruleVersion, expiresAt, results: PathwayResult[], chains: PathwayChain[] }`, `Location: /api/v1/assessments/{id}`. Stores only the submitted profile and the results; deleted after `Assessments:LifetimeDays` (30).
 - 400 validation errors
 
 **CandidateProfile fields** (enum-like values are lowercase strings; countries are ISO alpha-2 keys)
@@ -66,7 +66,7 @@ Validation errors are keyed by camelCase JSON path, e.g. `english.scores.listeni
 **PathwayChain**: `{ countryCode, totalMonths | null, steps: [{ pathwaySlug, type, grade, readinessScore, durationMonths, isProjected }] }`
 
 ### GET `/assessments/{id}`
-200 → same as POST response · 404 not found/expired
+200 → same as POST response, exactly as stored (not re-evaluated against newer rules) · 404 not found/expired (ProblemDetails)
 
 ### GET `/assessments/{id}/summary`
 200 → `{ summary: string, generatedAt }` (generated once, cached) · 404 · 502

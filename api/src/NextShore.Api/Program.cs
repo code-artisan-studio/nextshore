@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
 using NextShore.Application;
+using NextShore.Application.Assessments;
 using NextShore.Application.Engine;
 using NextShore.Infrastructure;
 using NextShore.Infrastructure.Seed;
@@ -30,6 +31,10 @@ builder.Services.AddOptions<EngineSettings>()
     .Bind(builder.Configuration.GetSection(EngineSettings.Section))
     .Validate(s => s.ExchangeRates.Count > 0 && s.ExchangeRates.Values.All(r => r > 0),
         "Engine:ExchangeRates needs a positive rate (units per 1 USD) for each currency the rules use.")
+    .ValidateOnStart();
+builder.Services.AddOptions<AssessmentSettings>()
+    .Bind(builder.Configuration.GetSection(AssessmentSettings.Section))
+    .Validate(s => s.LifetimeDays > 0 && s.CleanupInterval > TimeSpan.Zero, "Assessments:LifetimeDays and CleanupInterval must be positive.")
     .ValidateOnStart();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebCors(builder.Configuration);
@@ -79,5 +84,6 @@ var api = app.MapGroup("/api/v1");
 api.MapHealthEndpoints();
 api.MapRulesEndpoints();
 api.MapEvaluationsEndpoints();
+api.MapAssessmentsEndpoints();
 
 app.Run();
