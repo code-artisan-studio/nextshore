@@ -87,7 +87,7 @@ No name, email or contact info is stored.
 | key | type | source |
 |---|---|---|
 | `goal` | `study` · `work` · `pr` | form |
-| `audience` | `student` · `developer` | derived from goal + experience |
+| `audience` | `student` · `developer` | derived: `student` if goal = study or `work.years_skilled` < 1, else `developer` |
 | `age` | int | form (DOB → age) |
 | `citizenship` | ISO2 | form |
 | `education.level` | `secondary` · `diploma` · `bachelors` · `masters` · `phd` | resume |
@@ -99,6 +99,7 @@ No name, email or contact info is stored.
 | `english.test` | `ielts` · `pte` · `toefl` · `none` | form |
 | `english.test_variant` | `academic` · `general` | form (IELTS Academic / General Training; PTE Academic / Core) |
 | `english.scores` | `{listening,reading,writing,speaking}` | form |
+| `english.score.{listening,reading,writing,speaking}` | raw test score per skill | computed |
 | `english.level.{CLB,CEFR,IELTS}` | lowest level reached across all four skills | computed |
 | `english.level.{CLB,CEFR,IELTS}.{listening,reading,writing,speaking}` | level per skill | computed |
 | `french.level.CLB` | int | form (optional) |
