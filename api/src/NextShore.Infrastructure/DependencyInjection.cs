@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using NextShore.Application.Abstractions;
 using NextShore.Infrastructure.Persistence;
+using NextShore.Infrastructure.Rules;
 using NextShore.Infrastructure.Seed;
 
 namespace NextShore.Infrastructure;
@@ -23,6 +25,8 @@ public static class DependencyInjection
 
         services.AddHealthChecks().AddDbContextCheck<NextShoreDbContext>(DatabaseHealthCheck);
         services.AddScoped<SeedLoader>();
+        services.AddSingleton<IRuleSnapshotSource, DbRuleSnapshotSource>();
+        services.AddSingleton<IRuleRepository, CachedRuleRepository>();
 
         return services;
     }

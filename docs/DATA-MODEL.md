@@ -38,7 +38,7 @@ Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_l
 | source_url | text | |
 | verified_at | date null | see *Unverified values* |
 | unverified_fields | text[] | |
-| rule_version | int | bumped on publish |
+| rule_version | int | on publish set to max(published `rule_version`) + 1, so the max is the global rules version stored on assessments |
 
 ### requirements
 | column | type | notes |

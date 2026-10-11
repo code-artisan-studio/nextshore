@@ -21,7 +21,7 @@
 ### 2. Assess — `POST /api/v1/assessments`
 1. Validate `CandidateProfile` (FluentValidation).
 2. Normalise: age from DOB, English score → each country's scale via `language_score_mappings`, total skilled work years.
-3. Load published `RuleSnapshot` (in-memory cache).
+3. Load published `RuleSnapshot` via `IRuleRepository` (singleton in-memory cache, no expiry; invalidated on publish). Only published pathways and published child rows are included; a chain stops at an unpublished pathway.
 4. Engine evaluates every pathway → `PathwayResult[]`, plus pathway chains.
 5. Persist `Assessment` (profile JSON, results JSON, rule version, `expires_at = now + 30d`).
 6. Return `{ id, results }`.
@@ -35,7 +35,7 @@
 
 ### 5. Admin publish
 - Admin edits create/modify rows with `status = draft`.
-- `POST /admin/pathways/{id}/publish` → drafts become `published`, `rule_version` increments, audit rows written, `RuleSnapshot` cache invalidated.
+- `POST /admin/pathways/{id}/publish` → refused while `PublishGuard` reports blockers; otherwise drafts become `published`, `rule_version` = max published version + 1, audit rows written, `IRuleRepository.Invalidate()` called.
 
 ## Eligibility engine (`NextShore.Domain`)
 ```

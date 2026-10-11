@@ -14,7 +14,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T07 Seed loader: reads `api/seed/*.json`, upserts by slug, loads drafts; publish blocked if `TODO_VERIFY` present.
 - [x] T08 Seed files skeleton for 10 pathways (`VISA-RULES-SPEC.md` §8) with `TODO_VERIFY` placeholders + source URLs.
 - [ ] T09 **Manual:** verify and fill all seed values from official sources; set `verified_at`. ✅ values from `RULES-DATA.md` filled 2026-10-10; ⚠️ and missing values still `TODO_VERIFY`.
-- [ ] T10 `RuleSnapshot` repository with in-memory cache + invalidation.
+- [x] T10 `RuleSnapshot` repository with in-memory cache + invalidation.
 
 ## M2 · Engine (Domain, TDD)
 - [ ] T11 `ProfileNormalizer` (age, language mappings by test + variant incl. per-skill levels, whole years, funds USD → requirement currency) + tests.
