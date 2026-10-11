@@ -11,10 +11,10 @@ Base: `/api/v1`. JSON, camelCase. Errors: RFC 7807 ProblemDetails with `type`, `
 - Never stores the file or text.
 
 ### GET `/countries`
-200 → `[{ code, name, pathways: [{ slug, name, type, isPointsBased, summary }] }]`
+200 → `[{ code, name, pathways: [{ slug, name, type, isPointsBased, summary }] }]` — published pathways only; enum values are snake_case (`post_study_work`).
 
 ### GET `/occupations?q=dev&system=NOC`
-200 → `[{ system, code, title }]` (max 20, published only)
+200 → `[{ system, code, title }]` (max 20, published only). `q` (optional) matches a code prefix or, case-insensitively, the title; code matches rank first. `system` (optional) filters `NOC` · `ISCO` · `ANZSCO`. Lists published entries of any eligibility — eligibility shows in results.
 
 ### POST `/assessments`
 Body: `CandidateProfile`

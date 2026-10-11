@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
+using NextShore.Application;
 using NextShore.Infrastructure;
 using NextShore.Infrastructure.Seed;
 using Serilog;
@@ -23,6 +24,7 @@ builder.Services.AddOpenApi(options => options.AddDocumentTransformer((document,
     return Task.CompletedTask;
 }));
 builder.Services.AddHealthChecks();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
@@ -69,5 +71,6 @@ if (app.Environment.IsDevelopment())
 
 var api = app.MapGroup("/api/v1");
 api.MapHealthEndpoints();
+api.MapRulesEndpoints();
 
 app.Run();
