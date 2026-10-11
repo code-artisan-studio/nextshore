@@ -1,4 +1,3 @@
-using System.Text;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace NextShore.Infrastructure.Persistence.Converters;
@@ -9,25 +8,8 @@ public sealed class SnakeCaseEnumConverter<TEnum>() : ValueConverter<TEnum, stri
     value => FromDb[value])
     where TEnum : struct, Enum
 {
-    private static readonly Dictionary<TEnum, string> ToDb =
-        Enum.GetValues<TEnum>().ToDictionary(value => value, value => ToSnakeCase(value.ToString()));
+    private static readonly IReadOnlyDictionary<TEnum, string> ToDb = SnakeCase.EnumNames<TEnum>();
 
     private static readonly Dictionary<string, TEnum> FromDb =
         ToDb.ToDictionary(pair => pair.Value, pair => pair.Key);
-
-    internal static string ToSnakeCase(string name)
-    {
-        var builder = new StringBuilder(name.Length + 4);
-        for (var i = 0; i < name.Length; i++)
-        {
-            if (i > 0 && char.IsUpper(name[i]))
-            {
-                builder.Append('_');
-            }
-
-            builder.Append(char.ToLowerInvariant(name[i]));
-        }
-
-        return builder.ToString();
-    }
 }

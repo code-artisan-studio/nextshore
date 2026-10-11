@@ -61,18 +61,44 @@ Same engine with an overridden profile. Allowed slider fields: `english.scores` 
       "cutoffAsOf": "TODO_VERIFY",
       "nextPathwaySlug": null,
       "typicalDurationMonths": "TODO_VERIFY",
+      "summary": "Points-ranked route to permanent residence for skilled workers.",
       "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html",
+      "verifiedAt": null,
       "requirements": [
         { "field": "english.level.CLB", "operator": "gte", "value": "TODO_VERIFY", "unit": "CLB", "isMandatory": true, "fixability": "easy", "fixHint": "Retake IELTS/CELPIP", "fixMonths": 2, "label": "Minimum English level" },
         { "field": "work.years_skilled", "operator": "gte", "value": "TODO_VERIFY", "unit": "years", "isMandatory": true, "fixability": "medium", "fixHint": "Gain more skilled experience", "fixMonths": 12, "label": "Skilled work experience" }
       ],
       "pointsFactors": [
         { "factor": "age", "variant": "single", "min": 20, "max": 29, "points": "TODO_VERIFY" }
+      ],
+      "occupations": [
+        { "code": "21231", "title": "Software engineers and designers", "isEligible": "TODO_VERIFY" }
       ]
     }
   ]
 }
 ```
+
+**Field rules**
+- Visa values that may be `"TODO_VERIFY"`: pathway `passMark`, `cutoff`, `cutoffAsOf`, `typicalDurationMonths`; requirement `value` (also inside arrays); points-factor `min`, `max`, `matchValue`, `points`, `maxPointsForFactor`; occupation `isEligible`; language-mapping `minScores.*`. They load as null and are listed in the row's `unverified_fields`.
+- `sourceUrl` / `verifiedAt` (`yyyy-MM-dd`) on a requirement, points factor or occupation are optional and default to the pathway's.
+- Unknown properties, unknown enum values, wrong types and missing required properties fail the whole load with the file and JSON path.
+
+**`language-mappings.json`**: one group per test → scale, with minimum score per skill for each level:
+```json
+{
+  "groups": [
+    {
+      "test": "ielts", "targetScale": "CLB", "sourceUrl": "https://…", "verifiedAt": null,
+      "levels": [
+        { "targetLevel": "7", "minScores": { "listening": "TODO_VERIFY", "reading": "TODO_VERIFY", "writing": "TODO_VERIFY", "speaking": "TODO_VERIFY" } }
+      ]
+    }
+  ]
+}
+```
+
+**Loading**: `dotnet run --project src/NextShore.Api -- seed [dir]` (defaults to `api/seed/`). Runs in one transaction; everything lands as `draft`. Countries upsert by `code`, pathways by `slug`, mappings by (test, skill, scale, level). A draft pathway's requirements, points factors and occupations are replaced from the file; published rows are never touched. Publishing (admin, T34) is refused while any row of the pathway has `unverified_fields` or no `verified_at` (`PublishGuard` in Domain).
 
 ## 8. Pathways to seed (POC)
 | Slug | Type | Points? | Chain next | Official source (start here) |

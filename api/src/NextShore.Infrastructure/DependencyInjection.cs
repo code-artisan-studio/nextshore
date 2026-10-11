@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NextShore.Infrastructure.Persistence;
+using NextShore.Infrastructure.Seed;
 
 namespace NextShore.Infrastructure;
 
@@ -21,6 +22,7 @@ public static class DependencyInjection
             .UseSnakeCaseNamingConvention());
 
         services.AddHealthChecks().AddDbContextCheck<NextShoreDbContext>(DatabaseHealthCheck);
+        services.AddScoped<SeedLoader>();
 
         return services;
     }

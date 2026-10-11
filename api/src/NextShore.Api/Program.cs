@@ -2,9 +2,13 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
 using NextShore.Infrastructure;
+using NextShore.Infrastructure.Seed;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+// `dotnet run --project src/NextShore.Api -- seed [dir]` loads api/seed/*.json as drafts, then exits.
+var seedMode = args is ["seed", ..];
+
+var builder = WebApplication.CreateBuilder(seedMode ? [] : args);
 
 builder.Services.AddSerilog((services, logger) => logger
     .ReadFrom.Configuration(builder.Configuration)
@@ -32,6 +36,24 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 var app = builder.Build();
+
+if (seedMode)
+{
+    var directory = Path.GetFullPath(args.ElementAtOrDefault(1)
+        ?? Path.Combine(app.Environment.ContentRootPath, "..", "..", "seed"));
+    await using var scope = app.Services.CreateAsyncScope();
+    try
+    {
+        await scope.ServiceProvider.GetRequiredService<SeedLoader>().LoadAsync(directory);
+    }
+    catch (SeedException ex)
+    {
+        app.Logger.LogError("Seed failed, nothing was written: {Message}", ex.Message);
+        Environment.ExitCode = 1;
+    }
+
+    return;
+}
 
 app.UseForwardedHeaders();
 app.UseExceptionHandler();
