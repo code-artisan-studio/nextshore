@@ -85,5 +85,6 @@ api.MapHealthEndpoints();
 api.MapRulesEndpoints();
 api.MapEvaluationsEndpoints();
 api.MapAssessmentsEndpoints();
+api.MapResumesEndpoints();
 
 app.Run();

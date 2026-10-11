@@ -4,12 +4,22 @@ public enum ErrorKind
 {
     Validation,
     NotFound,
+
+    /// <summary>The input was valid but could not be processed (422).</summary>
+    Unprocessable,
+
+    /// <summary>A dependency such as the AI provider failed (502).</summary>
+    Upstream,
 }
 
 /// <param name="Details">Validation errors by field path, e.g. <c>english.scores.listening</c>.</param>
 public sealed record Error(ErrorKind Kind, string Message, IReadOnlyDictionary<string, string[]>? Details = null)
 {
     public static Error NotFound(string message) => new(ErrorKind.NotFound, message);
+
+    public static Error Unprocessable(string message) => new(ErrorKind.Unprocessable, message);
+
+    public static Error Upstream(string message) => new(ErrorKind.Upstream, message);
 
     public static Error Validation(IReadOnlyDictionary<string, string[]> details) =>
         new(ErrorKind.Validation, "One or more fields are invalid.", details);

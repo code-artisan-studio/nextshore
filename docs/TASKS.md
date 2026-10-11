@@ -30,7 +30,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T19 `POST /evaluations` + validator.
 - [x] T20 `POST /assessments`, `GET /assessments/{id}`; expiry cleanup hosted service.
 - [x] T21 Claude client (Infrastructure): typed options, retry, timeouts.
-- [ ] T22 `POST /resumes/parse`: magic-byte validation, DOCX text extraction, structured output (`ExtractedProfile` schema), occupation code validation. No persistence/logging of content.
+- [x] T22 `POST /resumes/parse`: magic-byte validation, DOCX text extraction, structured output (`ExtractedProfile` schema), occupation code validation. No persistence/logging of content.
 - [ ] T23 `GET /assessments/{id}/summary` with caching + guardrail prompt.
 - [ ] T24 Integration tests (Testcontainers Postgres; Claude mocked).
 

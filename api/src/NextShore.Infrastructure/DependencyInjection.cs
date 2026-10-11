@@ -37,6 +37,7 @@ public static class DependencyInjection
                 "Anthropic: models must be set, timeouts positive and MaxRetries >= 0.")
             .ValidateOnStart();
         services.AddSingleton<ClaudeClient>();
+        services.AddScoped<IResumeParser, ClaudeResumeParser>();
         services.AddHostedService<AssessmentCleanupService>();
         if (string.Equals(config["Rules:Source"], SeedPreviewRules, StringComparison.OrdinalIgnoreCase))
         {

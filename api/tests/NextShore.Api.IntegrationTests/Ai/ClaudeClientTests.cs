@@ -19,36 +19,13 @@ public sealed class ClaudeClientTests
          "usage":{"input_tokens":1,"output_tokens":1}}
         """;
 
-    /// <summary>Answers each request with the next queued response (the last one repeats) and records requests.</summary>
-    private sealed class FakeClaude(params Func<CancellationToken, Task<HttpResponseMessage>>[] responses) : HttpMessageHandler
-    {
-        public List<(string Body, string? ApiKey)> Requests { get; } = [];
+    private static readonly Func<CancellationToken, Task<HttpResponseMessage>> Ok = FakeClaude.Reply(OkMessage);
+    private static readonly Func<CancellationToken, Task<HttpResponseMessage>> Hang = FakeClaude.Hang;
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            Requests.Add((await request.Content!.ReadAsStringAsync(cancellationToken),
-                request.Headers.TryGetValues("x-api-key", out var key) ? key.Single() : null));
-            return await responses[Math.Min(Requests.Count, responses.Length) - 1](cancellationToken);
-        }
-    }
+    private static Func<CancellationToken, Task<HttpResponseMessage>> Status(HttpStatusCode status, string body) =>
+        FakeClaude.Status(status, body);
 
-    private static Func<CancellationToken, Task<HttpResponseMessage>> Status(HttpStatusCode status, string body = "{}") => _ =>
-    {
-        var response = new HttpResponseMessage(status) { Content = new StringContent(body, Encoding.UTF8, "application/json") };
-        response.Headers.Add("retry-after-ms", "10");
-        return Task.FromResult(response);
-    };
-
-    private static readonly Func<CancellationToken, Task<HttpResponseMessage>> Ok = Status(HttpStatusCode.OK, OkMessage);
-
-    private static readonly Func<CancellationToken, Task<HttpResponseMessage>> Hang = async ct =>
-    {
-        await Task.Delay(Timeout.Infinite, ct);
-        throw new UnreachableException();
-    };
-
-    private static string Error(string type) =>
-        JsonSerializer.Serialize(new { type = "error", error = new { type, message = "test" } });
+    private static string Error(string type) => FakeClaude.Error(type);
 
     private static ClaudeClient Create(FakeClaude fake, Action<AnthropicSettings>? configure = null)
     {

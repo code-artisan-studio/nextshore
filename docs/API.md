@@ -6,9 +6,9 @@ Base: `/api/v1`. JSON, camelCase. Errors: RFC 7807 ProblemDetails with `type`, `
 
 ### POST `/resumes/parse`
 `multipart/form-data`: `file` (PDF/DOCX ≤ 5 MB), `consent=true`
-- 200 → `ExtractedProfile` (see `DATA-MODEL.md`)
-- 400 invalid type/size/consent · 422 unreadable resume · 429 rate limit (10/IP/day) · 502 AI provider error
-- Never stores the file or text.
+- 200 → `ExtractedProfile` (see `DATA-MODEL.md`); `occupationSuggestions` keep only codes published in the rules; confidences clamped to 0–1
+- 400 `errors.consent` / `errors.file` (missing, > 5 MB, not PDF/DOCX — detected from the content, not the file name) · 413 request body over ~5.5 MB · 422 unreadable resume (DOCX without text, or the model declined) · 429 rate limit (10/IP/day) · 502 AI provider error (incl. no API key configured)
+- Never stores or logs the file or its text.
 
 ### GET `/countries`
 200 → `[{ code, name, pathways: [{ slug, name, type, isPointsBased, summary }] }]` — published pathways only; enum values are snake_case (`post_study_work`).

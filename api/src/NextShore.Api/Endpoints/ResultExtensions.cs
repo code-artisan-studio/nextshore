@@ -10,6 +10,10 @@ public static class ResultExtensions
         ErrorKind.Validation => TypedResults.ValidationProblem(
             error.Details!.ToDictionary(kv => kv.Key, kv => kv.Value), title: error.Message),
         ErrorKind.NotFound => TypedResults.Problem(statusCode: StatusCodes.Status404NotFound, title: "Not found", detail: error.Message),
+        ErrorKind.Unprocessable => TypedResults.Problem(
+            statusCode: StatusCodes.Status422UnprocessableEntity, title: "Could not process", detail: error.Message),
+        ErrorKind.Upstream => TypedResults.Problem(
+            statusCode: StatusCodes.Status502BadGateway, title: "Upstream service failed", detail: error.Message),
         _ => TypedResults.Problem(statusCode: StatusCodes.Status500InternalServerError),
     };
 }

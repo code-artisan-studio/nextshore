@@ -8,6 +8,7 @@ using NextShore.Application.Engine;
 using NextShore.Application.Evaluations;
 using NextShore.Application.Occupations;
 using NextShore.Application.Profiles;
+using NextShore.Application.Resumes;
 
 namespace NextShore.Application;
 
@@ -31,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<EvaluateHandler>();
         services.AddScoped<CreateAssessmentHandler>();
         services.AddScoped<GetAssessmentHandler>();
+        services.AddScoped<ParseResumeHandler>();
         return services;
     }
 }
