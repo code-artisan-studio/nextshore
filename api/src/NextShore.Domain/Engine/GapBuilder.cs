@@ -28,20 +28,13 @@ public static class GapBuilder
     public const int MaxPointsGaps = 3;
     public const string PointsField = "points";
 
-    private sealed record Evaluation(IReadOnlyList<RequirementOutcome> Requirements, PointsBreakdown? Points, GradeResult Grade);
-
     public static IReadOnlyList<Gap> Build(
         PathwayRule pathway, NormalizedProfile profile, ExchangeRates rates, GraderOptions options)
     {
-        Evaluation Evaluate(NormalizedProfile p)
-        {
-            var requirements = RequirementChecker.CheckAll(pathway, p, rates);
-            var points = PointsCalculator.Calculate(pathway, p);
-            return new Evaluation(requirements, points, Grader.Evaluate(requirements, points, options));
-        }
+        PathwayEvaluation Evaluate(NormalizedProfile p) => PathwayEvaluator.Evaluate(pathway, p, rates, options);
 
         var current = Evaluate(profile);
-        int Impact(Evaluation after) => (after.Points?.Total ?? 0) - (current.Points?.Total ?? 0);
+        int Impact(PathwayEvaluation after) => (after.Points?.Total ?? 0) - (current.Points?.Total ?? 0);
 
         var gaps = new List<Gap>();
         foreach (var (rule, outcome) in pathway.Requirements.Zip(current.Requirements).Where(x => x.Second.IsMandatory && !x.Second.Met))
@@ -79,7 +72,7 @@ public static class GapBuilder
     /// <summary>For each improvable factor, the next bracket or level that scores more, as a simulated gap.</summary>
     private static IEnumerable<Gap> PointsImprovements(
         PathwayRule pathway, NormalizedProfile profile, PointsBreakdown points,
-        Func<NormalizedProfile, Evaluation> evaluate, Func<Evaluation, int> impact)
+        Func<NormalizedProfile, PathwayEvaluation> evaluate, Func<PathwayEvaluation, int> impact)
     {
         var rows = pathway.PointsFactors.Where(r => r.Variant == points.Variant).ToList();
         foreach (var factor in points.Breakdown)

@@ -72,9 +72,13 @@ internal static class TestRules
         int? passMark = null,
         int? cutoff = null,
         IReadOnlyList<RequirementRule>? requirements = null,
-        string slug = "xx-test") =>
-        new(slug, "XX", "Test pathway", PathwayType.Pr, [Audience.Developer], factors is { Count: > 0 }, passMark,
-            cutoff, null, null, null, "Test", 1, Source, requirements ?? [], factors ?? [], []);
+        string slug = "xx-test",
+        PathwayType type = PathwayType.Pr,
+        string country = "XX",
+        string? next = null,
+        int? durationMonths = null) =>
+        new(slug, country, "Test pathway", type, [Audience.Developer], factors is { Count: > 0 }, passMark,
+            cutoff, null, next, durationMonths, "Test", 1, Source, requirements ?? [], factors ?? [], []);
 
     public static RequirementRule Requirement(
         string field,

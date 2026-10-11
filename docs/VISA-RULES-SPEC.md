@@ -54,7 +54,12 @@ Thresholds (2 gaps, 85%) live in config `Engine:NearEligibleMaxGaps` and `Engine
 ## 5. Pathway chains
 - Built by following `next_pathway_id` from each study pathway.
 - Chain shows each step's grade and `typical_duration_months`; total years = sum.
-- Steps after the current one are evaluated on a **projected profile** (e.g. after study: `education.level` = degree studied, `work.years_in_country` += post-study work duration). Projections are labelled "projected" in the UI.
+- Steps after the current one are evaluated on a **projected profile**, labelled "projected" in the UI. Projections depend only on pathway type and country code:
+  - after a `study` step: `education.level` moves up one level (bachelors → masters; phd stays), and `degree.recognized_{country}` = true;
+  - after a `post_study_work` step: its duration in years is added to `work.years_in_country.{country}` and `work.years_skilled`;
+  - `age` = starting age + whole years elapsed before the step.
+- A step with unknown `typical_duration_months` makes the chain total unknown and stops the time-based projections (age, work) for later steps; education and degree projections still apply.
+- A chain ends at a pathway that is missing from the snapshot (unpublished) and never repeats a pathway.
 
 ## 6. What-if
 Same engine with an overridden profile. Allowed slider fields: `english.scores` (overall), `work.years_skilled`, `job_offer.*`, `german.level.CEFR`, `french.level.CLB`, `funds.amount_usd`.
