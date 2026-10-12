@@ -37,7 +37,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 ## M4 · Web
 - [x] T25 `npm run gen:api` (openapi-typescript) + TanStack Query hooks.
 - [x] T26 Landing page.
-- [ ] T27 Upload page (dropzone, consent, loading states, manual skip).
+- [x] T27 Upload page (dropzone, consent, loading states, manual skip).
 - [ ] T28 Profile stepper (5 steps, Zod schemas, prefill, low-confidence tags, occupation type-ahead).
 - [ ] T29 Results page: header, PathwayCard list, filters, AI summary panel.
 - [ ] T30 ChainTimeline section.
