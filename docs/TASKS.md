@@ -35,7 +35,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T24 Integration tests (Testcontainers Postgres; Claude mocked).
 
 ## M4 · Web
-- [ ] T25 `npm run gen:api` (openapi-typescript) + TanStack Query hooks.
+- [x] T25 `npm run gen:api` (openapi-typescript) + TanStack Query hooks.
 - [ ] T26 Landing page.
 - [ ] T27 Upload page (dropzone, consent, loading states, manual skip).
 - [ ] T28 Profile stepper (5 steps, Zod schemas, prefill, low-confidence tags, occupation type-ahead).

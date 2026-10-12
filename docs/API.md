@@ -1,6 +1,6 @@
 # NextShore — API
 
-Base: `/api/v1`. JSON, camelCase. Errors: RFC 7807 ProblemDetails with `type`, `title`, `status`, `detail`, `errors` (validation).
+Base: `/api/v1`. JSON, camelCase; numbers must be JSON numbers (`"5"` is rejected). Errors: RFC 7807 ProblemDetails with `type`, `title`, `status`, `detail`, `errors` (validation).
 
 ## Public
 

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.HttpOverrides;
 using NextShore.Api.Endpoints;
 using NextShore.Api.Setup;
@@ -19,6 +20,9 @@ builder.Services.AddSerilog((services, logger) => logger
     .Enrich.FromLogContext());
 
 builder.Services.AddProblemDetails();
+// Numbers are JSON numbers only: the web default also reads "5" as 5, which types every number in the OpenAPI
+// spec (and the generated web client) as `number | string`.
+builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.NumberHandling = JsonNumberHandling.Strict);
 builder.Services.AddOpenApi(options => options.AddDocumentTransformer((document, _, _) =>
 {
     document.Info.Title = "NextShore API";
