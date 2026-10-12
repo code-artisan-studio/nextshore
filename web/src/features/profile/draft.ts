@@ -2,14 +2,21 @@ import { useSyncExternalStore } from "react"
 
 import type { ExtractedProfile } from "@/api/types"
 
+import type { ProfileFormValues } from "./schema"
+
 /**
- * What the user brings into `/profile`: the profile extracted from their resume (or nothing, for manual entry).
- * Kept in sessionStorage so a refresh doesn't lose it; it never leaves this browser tab and is cleared when the
- * tab closes. The resume file and its text are never kept, here or on the server.
+ * What the user brings into and types on `/profile`: the profile extracted from their resume (or nothing, for
+ * manual entry), then the form as they fill it in. Kept in sessionStorage so a refresh doesn't lose it; it never
+ * leaves this browser tab and is cleared when the tab closes. The resume file and its text are never kept, here or
+ * on the server.
  */
 export interface ProfileDraft {
   source: "resume" | "manual"
   extracted: ExtractedProfile | null
+  values?: ProfileFormValues
+  step?: number
+  /** Resume-filled fields the user has changed since. */
+  edited?: string[]
 }
 
 const key = "nextshore.profileDraft"
@@ -34,6 +41,15 @@ export function setProfileDraft(draft: ProfileDraft | null) {
     // Storage blocked or full: the draft still lives in memory for this page load.
   }
   listeners.forEach((listener) => listener())
+}
+
+/** Merges `patch` into the current draft (starting a manual one if there is none). */
+export function updateProfileDraft(patch: Partial<ProfileDraft>) {
+  setProfileDraft({ source: "manual", extracted: null, ...current, ...patch })
+}
+
+export function getProfileDraft() {
+  return current
 }
 
 function subscribe(listener: () => void) {

@@ -60,6 +60,9 @@ Drag-and-drop zone (PDF/DOCX, 5 MB), consent checkbox, "Analyse resume" button. 
 - Step 4 **Languages**: English test + variant (IELTS Academic / General Training, PTE Academic / Core) + 4 scores, or "Not taken yet"; optional German/French level. Hint: Canada accepts General Training only.
 - Step 5 **Extras**: funds, job offer, relatives; student-only GPA + tuition budget.
 - Progress bar, back/next, summary before submit. React Hook Form + Zod; state kept across steps.
+- Resume-filled fields carry a mist "From your resume" tag (coral "Check this" below confidence 0.7); the tag goes once the user edits the field.
+- Occupation type-ahead per system (NOC · ISCO · ANZSCO) over published codes, with the resume's other suggestions as shortcuts; a code that isn't listed can still be entered as typed.
+- The draft (extracted profile, answers, step) lives in `sessionStorage` for the tab only, so a refresh resumes where the user was. It is never sent anywhere until submit, and the resume file and text are never kept.
 
 ### Results (`/results/:id`)
 - **Header**: profile snapshot chips; best match ("Germany · EU Blue Card · Readiness 92").
