@@ -50,6 +50,6 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [ ] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
 
 ## M6 · Ship & demo
-- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch. Set the Railway health check path to `/api/v1/health` (consider moving it to root `/health`).
+- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch. Set the Railway health check path to `/api/v1/health` (consider moving it to root `/health`). Set `Cors__Origins` on Railway to the Vercel URL(s), comma-separated (no default outside Development).
 - [ ] T37 Prepare 3 demo resumes (student, developer, senior developer) — fictional data.
 - [ ] T38 Run PRD success criteria checklist; fix gaps.

@@ -83,7 +83,7 @@ nextshore/
 | Rate limiting | ASP.NET rate limiter, per client IP (via `X-Forwarded-For` from Railway's proxy): `/resumes/parse` 10/IP/day; `/evaluations` 60/IP/min. In-memory, single instance — counters reset on restart |
 | Errors | RFC 7807 ProblemDetails everywhere |
 | Logging | Serilog → console (Railway). Never log resume content or profile PII |
-| CORS | Allow web origin(s) from config only |
+| CORS | Allow web origin(s) from config only (`Cors:Origins`, comma-separated). `http://localhost:5173` is in `appsettings.Development.json`; every other environment allows none until `Cors__Origins` is set, and startup logs a warning while it is missing |
 | Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Anthropic__ParseTimeout`, `Anthropic__SummaryTimeout`, `Anthropic__MaxRetries`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
 | Health | `GET /api/v1/health` (DB check) |
 | Cleanup | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval |

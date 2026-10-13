@@ -72,6 +72,7 @@ if (seedMode)
     return;
 }
 
+app.WarnIfNoOrigins();
 app.UseForwardedHeaders();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
