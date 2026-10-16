@@ -70,7 +70,7 @@ Drag-and-drop zone (PDF/DOCX, 5 MB), consent checkbox, "Analyse resume" button. 
 - **Filters**: country, grade.
 - **PathwayCard** list ranked by score.
 - **Pathway chains** section (students): horizontal timeline per country — step → step → step with grade badges and total years; projected steps dashed. Shown above the pathway cards; stacks vertically on mobile. A step with no set length shows "Length of your course" (study) or "Permanent" (PR), and the total becomes "Your course + about N years".
-- **What-if drawer**: sliders (English overall, years experience, job offer toggle, German level); changed cards pulse coral briefly when grade changes.
+- **What-if drawer**: sliders (English overall, years experience, job offer toggle, German level); changed cards pulse coral briefly when grade changes. Non-modal right drawer so the cards stay visible; English overall sets all four skills to one score (no test yet → IELTS General Training); job offer is a toggle per country. Calls `POST /evaluations` 400 ms after the last change; a coral "What-if view" banner and "Was …" lines on changed cards make clear the saved results are untouched, and the drawer lists grade/score changes (for phones, where it covers the page). Needs the answers from this tab's draft, so a shared link shows a note instead of the button.
 - "Copy link" to share results (expires in 30 days).
 - Disclaimer.
 

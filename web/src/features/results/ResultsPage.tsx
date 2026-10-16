@@ -1,10 +1,14 @@
+import { useMemo, useState } from "react"
+import { SlidersHorizontal } from "lucide-react"
 import { Link, useParams, useSearchParams } from "react-router"
 
 import { ApiError } from "@/api/client"
-import { useAssessment } from "@/api/hooks"
+import { useAssessment, useEvaluation } from "@/api/hooks"
 import type { PathwayResult } from "@/api/types"
 import { Button } from "@/components/ui/button"
 import { useAssessmentProfile } from "@/features/profile/draft"
+import { toCandidateProfile } from "@/features/profile/toCandidateProfile"
+import { useDebounced } from "@/lib/useDebounced"
 
 import { ChainsSection } from "./components/ChainTimeline"
 import { CopyLinkButton } from "./components/CopyLinkButton"
@@ -14,7 +18,9 @@ import { PathwayCard } from "./components/PathwayCard"
 import { ProfileChips } from "./components/ProfileChips"
 import { ResultsFilters } from "./components/ResultsFilters"
 import { SummaryPanel } from "./components/SummaryPanel"
+import { WhatIfPanel } from "./components/WhatIfPanel"
 import { countryOf, matchesFilters, type Filters } from "./format"
+import { applyWhatIf, hasChanges, type WhatIf } from "./whatIf"
 
 export function ResultsPage() {
   const { id = "" } = useParams()
@@ -23,12 +29,24 @@ export function ResultsPage() {
   const [params, setParams] = useSearchParams()
   const filters: Filters = { country: params.get("country") ?? "", grade: params.get("grade") ?? "" }
 
+  // What-if: the submitted answers (this tab only) with the panel's changes, evaluated 400 ms after the last change.
+  const [whatIfOpen, setWhatIfOpen] = useState(false)
+  const [whatIf, setWhatIf] = useState<WhatIf>({})
+  const base = useMemo(() => (profile ? toCandidateProfile(profile) : null), [profile])
+  const whatIfActive = base !== null && hasChanges(whatIf)
+  const whatIfProfile = useMemo(() => (base && whatIfActive ? applyWhatIf(base, whatIf) : null), [base, whatIf, whatIfActive])
+  const evaluation = useEvaluation(useDebounced(whatIfProfile, 400))
+
   if (assessment.isPending) return <ResultsSkeleton />
   if (assessment.isError) return <ResultsError notFound={assessment.error instanceof ApiError && assessment.error.status === 404} />
 
-  const { results, chains, expiresAt } = assessment.data
-  const best = results[0] as PathwayResult | undefined
+  const { expiresAt } = assessment.data
+  const saved = assessment.data.results
+  const live = whatIfActive && evaluation.data ? evaluation.data : assessment.data
+  const { results, chains } = live
+  const best = saved[0] as PathwayResult | undefined
   const shown = results.filter((r) => matchesFilters(r, filters))
+  const savedGrade = (slug: string) => saved.find((r) => r.pathwaySlug === slug)?.grade
 
   const setFilters = (next: Filters) =>
     setParams(
@@ -74,22 +92,54 @@ export function ResultsPage() {
       <ChainsSection chains={chains} results={results} hrefFor={(slug) => `/results/${id}/${slug}`} />
 
       <section aria-labelledby="pathways-heading" className="flex flex-col gap-5">
-        <div className="flex flex-col gap-1">
-          <h2 id="pathways-heading" className="text-2xl">
-            Pathways ranked by readiness
-          </h2>
-          <p className="text-sm">
-            Readiness shows how closely you meet each pathway's published requirements today. It isn't a prediction of
-            any decision.
-          </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-1">
+            <h2 id="pathways-heading" className="text-2xl">
+              Pathways ranked by readiness
+            </h2>
+            <p className="text-sm">
+              Readiness shows how closely you meet each pathway's published requirements today. It isn't a prediction
+              of any decision.
+            </p>
+          </div>
+          {base ? (
+            <Button size="lg" className="h-10 shrink-0 px-4" onClick={() => setWhatIfOpen(true)}>
+              <SlidersHorizontal data-icon="inline-start" />
+              Try what-if
+            </Button>
+          ) : (
+            <p className="max-w-56 shrink-0 text-xs">What-if works in the browser tab where these results were created.</p>
+          )}
         </div>
+
+        {whatIfActive && (
+          <div className="flex flex-col gap-2 rounded-card bg-coral-soft px-4 py-3 text-coral-ink sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm">
+              <span className="font-medium">What-if view.</span> These results use your changes; your saved results
+              and link haven't changed.
+            </p>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm" onClick={() => setWhatIfOpen(true)}>
+                Edit
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => setWhatIf({})}>
+                Reset
+              </Button>
+            </div>
+          </div>
+        )}
 
         <ResultsFilters results={results} filters={filters} onChange={setFilters} />
 
         {shown.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2">
             {shown.map((result) => (
-              <PathwayCard key={result.pathwaySlug} result={result} href={`/results/${id}/${result.pathwaySlug}`} />
+              <PathwayCard
+                key={result.pathwaySlug}
+                result={result}
+                href={`/results/${id}/${result.pathwaySlug}`}
+                savedGrade={whatIfActive ? savedGrade(result.pathwaySlug) : undefined}
+              />
             ))}
           </div>
         ) : (
@@ -102,6 +152,18 @@ export function ResultsPage() {
         )}
       </section>
 
+      {base && (
+        <WhatIfPanel
+          open={whatIfOpen}
+          onOpenChange={setWhatIfOpen}
+          base={base}
+          whatIf={whatIf}
+          onChange={setWhatIf}
+          saved={saved}
+          live={results}
+          updating={whatIfActive && evaluation.isFetching}
+        />
+      )}
     </div>
   )
 }

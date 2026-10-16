@@ -41,7 +41,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T28 Profile stepper (5 steps, Zod schemas, prefill, low-confidence tags, occupation type-ahead).
 - [x] T29 Results page: header, PathwayCard list, filters, AI summary panel.
 - [x] T30 ChainTimeline section.
-- [ ] T31 WhatIfPanel with debounced `/evaluations`.
+- [x] T31 WhatIfPanel with debounced `/evaluations`.
 - [ ] T32 Pathway detail page (checklist, points table, gaps, sources).
 
 ## M5 · Admin
