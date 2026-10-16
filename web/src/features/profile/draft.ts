@@ -17,6 +17,8 @@ export interface ProfileDraft {
   step?: number
   /** Resume-filled fields the user has changed since. */
   edited?: string[]
+  /** The assessment these answers produced, so its results page can show them and run what-ifs. */
+  assessmentId?: string
 }
 
 const key = "nextshore.profileDraft"
@@ -59,4 +61,13 @@ function subscribe(listener: () => void) {
 
 export function useProfileDraft(): ProfileDraft | null {
   return useSyncExternalStore(subscribe, () => current)
+}
+
+/**
+ * The answers behind assessment `id`, if this tab submitted them. The API doesn't return the profile with a stored
+ * assessment (a shared link shouldn't reveal date of birth or citizenship), so a shared link has none.
+ */
+export function useAssessmentProfile(id: string): ProfileFormValues | null {
+  const draft = useProfileDraft()
+  return draft?.assessmentId === id && draft.values ? draft.values : null
 }

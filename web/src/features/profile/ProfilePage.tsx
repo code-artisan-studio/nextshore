@@ -107,7 +107,10 @@ export function ProfilePage() {
   const submit = form.handleSubmit(
     (values) =>
       create.mutate(toCandidateProfile(values), {
-        onSuccess: (assessment) => navigate(`/results/${assessment.id}`),
+        onSuccess: (assessment) => {
+          updateProfileDraft({ assessmentId: assessment.id })
+          navigate(`/results/${assessment.id}`)
+        },
         onError: (error) => {
           if (!(error instanceof ApiError)) return
           for (const [key, messages] of Object.entries(error.errors)) {

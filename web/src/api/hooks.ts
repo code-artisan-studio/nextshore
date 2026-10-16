@@ -1,4 +1,4 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { apiFetch, jsonBody } from "./client"
 import type {
@@ -59,8 +59,11 @@ export function useParseResume() {
 
 /** Evaluates and stores a profile; the response id is the shareable results link. */
 export function useCreateAssessment() {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (profile: CandidateProfile) => apiFetch<Assessment>("/assessments", jsonBody(profile)),
+    // The stored assessment never changes, so the results page can start from this response.
+    onSuccess: (assessment) => queryClient.setQueryData(queryKeys.assessment(assessment.id), assessment),
   })
 }
 

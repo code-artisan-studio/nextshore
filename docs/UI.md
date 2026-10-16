@@ -65,7 +65,7 @@ Drag-and-drop zone (PDF/DOCX, 5 MB), consent checkbox, "Analyse resume" button. 
 - The draft (extracted profile, answers, step) lives in `sessionStorage` for the tab only, so a refresh resumes where the user was. It is never sent anywhere until submit, and the resume file and text are never kept.
 
 ### Results (`/results/:id`)
-- **Header**: profile snapshot chips; best match ("Germany · EU Blue Card · Readiness 92").
+- **Header**: profile snapshot chips; best match ("Germany · EU Blue Card · Readiness 92"). Chips come from the answers in this tab's draft; a shared link shows no chips because the API doesn't return the profile (no date of birth or citizenship in a link).
 - **AI summary** panel (mist background), loads after cards with a skeleton.
 - **Filters**: country, grade.
 - **PathwayCard** list ranked by score.
@@ -86,7 +86,7 @@ Pathway list with status + stale flags → pathway editor with tabs: Details · 
 | `GradeBadge` | `eligible` / `near_eligible` / `not_eligible` → label "Eligible" / "Near-eligible" / "Not eligible" |
 | `ReadinessBar` | teal fill on mist track, label "Readiness 74 / 100" |
 | `PathwayCard` | country flag, name, GradeBadge, ReadinessBar, top 2 GapChips, "See full breakdown" |
-| `GapChip` | coral-soft bg, coral-ink text: "IELTS 6.5 → 7.0 · +24 pts" |
+| `GapChip` | coral-soft bg, coral-ink text: "IELTS 6.5 → 7.0 · +24 pts", prefixed with the gap label ("English: IELTS 6 → IELTS 7 · +10 pts"); labels over 32 characters fall back to the field label (full text in the tooltip and detail page) |
 | `ChainTimeline` | steps with badges, durations, total |
 | `WhatIfPanel` | sliders, debounced `/evaluations` call |
 | `SourceLink` | label + verified date + stale warning |
