@@ -74,4 +74,21 @@ public sealed class PlatformTests(WebApplicationFactory<Program> factory)
 
         Assert.Equal(allowed, response.Headers.Contains("Access-Control-Allow-Origin"));
     }
+
+    [Fact]
+    public async Task Cors_allows_no_origin_outside_development_until_configured()
+    {
+        // The localhost dev origin comes from appsettings.Development.json only.
+        var client = factory.WithWebHostBuilder(builder => builder
+                .UseEnvironment("Production")
+                .UseSetting("ConnectionStrings:Db", UnreachableDb))
+            .CreateClient();
+        using var request = new HttpRequestMessage(HttpMethod.Options, "/api/v1/health");
+        request.Headers.Add("Origin", "http://localhost:5173");
+        request.Headers.Add("Access-Control-Request-Method", "GET");
+
+        var response = await client.SendAsync(request);
+
+        Assert.False(response.Headers.Contains("Access-Control-Allow-Origin"));
+    }
 }

@@ -35,14 +35,14 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T24 Integration tests (Testcontainers Postgres; Claude mocked).
 
 ## M4 · Web
-- [ ] T25 `npm run gen:api` (openapi-typescript) + TanStack Query hooks.
-- [ ] T26 Landing page.
-- [ ] T27 Upload page (dropzone, consent, loading states, manual skip).
-- [ ] T28 Profile stepper (5 steps, Zod schemas, prefill, low-confidence tags, occupation type-ahead).
-- [ ] T29 Results page: header, PathwayCard list, filters, AI summary panel.
-- [ ] T30 ChainTimeline section.
-- [ ] T31 WhatIfPanel with debounced `/evaluations`.
-- [ ] T32 Pathway detail page (checklist, points table, gaps, sources).
+- [x] T25 `npm run gen:api` (openapi-typescript) + TanStack Query hooks.
+- [x] T26 Landing page.
+- [x] T27 Upload page (dropzone, consent, loading states, manual skip).
+- [x] T28 Profile stepper (5 steps, Zod schemas, prefill, low-confidence tags, occupation type-ahead).
+- [x] T29 Results page: header, PathwayCard list, filters, AI summary panel.
+- [x] T30 ChainTimeline section.
+- [x] T31 WhatIfPanel with debounced `/evaluations`.
+- [x] T32 Pathway detail page (checklist, points table, gaps, sources).
 
 ## M5 · Admin
 - [ ] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
@@ -50,6 +50,6 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [ ] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
 
 ## M6 · Ship & demo
-- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch. Set the Railway health check path to `/api/v1/health` (consider moving it to root `/health`).
+- [ ] T36 Deploy API to Railway, web to Vercel, env vars, Neon prod branch. Set the Railway health check path to `/api/v1/health` (consider moving it to root `/health`). Set `Cors__Origins` on Railway to the Vercel URL(s), comma-separated (no default outside Development).
 - [ ] T37 Prepare 3 demo resumes (student, developer, senior developer) — fictional data.
 - [ ] T38 Run PRD success criteria checklist; fix gaps.

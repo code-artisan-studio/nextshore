@@ -55,6 +55,21 @@
   --radius: 0.625rem;
 }
 
+/* What-if: a card whose grade just changed gets a brief coral ring (docs/UI.md). */
+@theme {
+  --animate-coral-pulse: coral-pulse 1.4s ease-out 1 both;
+
+  @keyframes coral-pulse {
+    0%,
+    35% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
