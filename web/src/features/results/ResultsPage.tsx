@@ -6,6 +6,7 @@ import type { PathwayResult } from "@/api/types"
 import { Button } from "@/components/ui/button"
 import { useAssessmentProfile } from "@/features/profile/draft"
 
+import { ChainsSection } from "./components/ChainTimeline"
 import { CopyLinkButton } from "./components/CopyLinkButton"
 import { CountryFlag } from "./components/CountryFlag"
 import { GradeBadge } from "./components/GradeBadge"
@@ -25,7 +26,7 @@ export function ResultsPage() {
   if (assessment.isPending) return <ResultsSkeleton />
   if (assessment.isError) return <ResultsError notFound={assessment.error instanceof ApiError && assessment.error.status === 404} />
 
-  const { results, expiresAt } = assessment.data
+  const { results, chains, expiresAt } = assessment.data
   const best = results[0] as PathwayResult | undefined
   const shown = results.filter((r) => matchesFilters(r, filters))
 
@@ -69,6 +70,8 @@ export function ResultsPage() {
       </header>
 
       <SummaryPanel assessmentId={id} />
+
+      <ChainsSection chains={chains} results={results} hrefFor={(slug) => `/results/${id}/${slug}`} />
 
       <section aria-labelledby="pathways-heading" className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">

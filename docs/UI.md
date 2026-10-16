@@ -69,7 +69,7 @@ Drag-and-drop zone (PDF/DOCX, 5 MB), consent checkbox, "Analyse resume" button. 
 - **AI summary** panel (mist background), loads after cards with a skeleton.
 - **Filters**: country, grade.
 - **PathwayCard** list ranked by score.
-- **Pathway chains** section (students): horizontal timeline per country — step → step → step with grade badges and total years; projected steps dashed.
+- **Pathway chains** section (students): horizontal timeline per country — step → step → step with grade badges and total years; projected steps dashed. Shown above the pathway cards; stacks vertically on mobile. A step with no set length shows "Length of your course" (study) or "Permanent" (PR), and the total becomes "Your course + about N years".
 - **What-if drawer**: sliders (English overall, years experience, job offer toggle, German level); changed cards pulse coral briefly when grade changes.
 - "Copy link" to share results (expires in 30 days).
 - Disclaimer.
