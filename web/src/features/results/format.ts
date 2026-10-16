@@ -75,8 +75,9 @@ const valueLabels: Record<string, string> = {
   married: "Married",
 }
 
-/** Engine values are already readable ("CLB 8", "USD 20,000") apart from a few enums. */
-export const formatValue = (value: string) => valueLabels[value] ?? value
+/** Engine values are already readable ("CLB 8", "USD 20,000") apart from a few enums, also inside lists ("one of …"). */
+export const formatValue = (value: string) =>
+  value.replace(/\b(secondary|diploma|bachelors|masters|phd|single|married)\b/g, (word) => valueLabels[word])
 
 /** Requirement labels can be a full rule ("Minimum gross annual salary (general threshold; …)"); chips use the field. */
 export const shortGapLabel = (gap: Gap) => (gap.label.length <= 32 ? gap.label : factorLabel(gap.field))

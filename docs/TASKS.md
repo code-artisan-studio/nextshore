@@ -42,7 +42,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T29 Results page: header, PathwayCard list, filters, AI summary panel.
 - [x] T30 ChainTimeline section.
 - [x] T31 WhatIfPanel with debounced `/evaluations`.
-- [ ] T32 Pathway detail page (checklist, points table, gaps, sources).
+- [x] T32 Pathway detail page (checklist, points table, gaps, sources).
 
 ## M5 · Admin
 - [ ] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
