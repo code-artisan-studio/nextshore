@@ -20,4 +20,9 @@ public class PointsFactor : SourcedRuleEntity
 
     public int? Points { get; set; }
     public int? MaxPointsForFactor { get; set; }
+
+    /// <summary>
+    /// Set on an admin draft copy: the published row this draft will replace on publish (see docs/ARCHITECTURE.md §5).
+    /// </summary>
+    public Guid? ReplacesId { get; set; }
 }

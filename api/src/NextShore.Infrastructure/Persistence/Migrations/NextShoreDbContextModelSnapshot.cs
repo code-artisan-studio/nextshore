@@ -222,6 +222,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("pathway_id");
 
+                    b.Property<Guid?>("ReplacesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("replaces_id");
+
                     b.Property<string>("SourceUrl")
                         .IsRequired()
                         .HasColumnType("text")
@@ -308,6 +312,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("pass_mark");
 
+                    b.Property<Guid?>("ReplacesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("replaces_id");
+
                     b.Property<int>("RuleVersion")
                         .HasColumnType("integer")
                         .HasColumnName("rule_version");
@@ -363,9 +371,15 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                     b.HasIndex("NextPathwayId")
                         .HasDatabaseName("ix_pathways_next_pathway_id");
 
+                    b.HasIndex("ReplacesId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_pathways_replaces_id")
+                        .HasFilter("replaces_id IS NOT NULL");
+
                     b.HasIndex("Slug")
                         .IsUnique()
-                        .HasDatabaseName("ix_pathways_slug");
+                        .HasDatabaseName("ix_pathways_slug")
+                        .HasFilter("replaces_id IS NULL");
 
                     b.HasIndex("Status")
                         .HasDatabaseName("ix_pathways_status");
@@ -412,6 +426,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                     b.Property<int?>("Points")
                         .HasColumnType("integer")
                         .HasColumnName("points");
+
+                    b.Property<Guid?>("ReplacesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("replaces_id");
 
                     b.Property<string>("SourceUrl")
                         .IsRequired()
@@ -501,6 +519,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("pathway_id");
 
+                    b.Property<Guid?>("ReplacesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("replaces_id");
+
                     b.Property<string>("SourceUrl")
                         .IsRequired()
                         .HasColumnType("text")
@@ -582,6 +604,10 @@ namespace NextShore.Infrastructure.Persistence.Migrations
                         .HasColumnType("jsonb")
                         .HasColumnName("old_value");
 
+                    b.Property<Guid?>("PathwayId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("pathway_id");
+
                     b.HasKey("Id")
                         .HasName("pk_rule_audit_log");
 
@@ -590,6 +616,9 @@ namespace NextShore.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("Entity", "EntityId")
                         .HasDatabaseName("ix_rule_audit_log_entity_entity_id");
+
+                    b.HasIndex("PathwayId", "At")
+                        .HasDatabaseName("ix_rule_audit_log_pathway_id_at");
 
                     b.ToTable("rule_audit_log", (string)null);
                 });

@@ -10,6 +10,9 @@ public enum ErrorKind
 
     /// <summary>A dependency such as the AI provider failed (502).</summary>
     Upstream,
+
+    /// <summary>The request conflicts with the current state, e.g. publishing an unverified rule (409).</summary>
+    Conflict,
 }
 
 /// <param name="Details">Validation errors by field path, e.g. <c>english.scores.listening</c>.</param>
@@ -20,6 +23,9 @@ public sealed record Error(ErrorKind Kind, string Message, IReadOnlyDictionary<s
     public static Error Unprocessable(string message) => new(ErrorKind.Unprocessable, message);
 
     public static Error Upstream(string message) => new(ErrorKind.Upstream, message);
+
+    public static Error Conflict(string message, IReadOnlyDictionary<string, string[]>? details = null) =>
+        new(ErrorKind.Conflict, message, details);
 
     public static Error Validation(IReadOnlyDictionary<string, string[]> details) =>
         new(ErrorKind.Validation, "One or more fields are invalid.", details);

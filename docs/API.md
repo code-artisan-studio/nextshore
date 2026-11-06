@@ -89,13 +89,18 @@ Body: `CandidateProfile` → 200 `{ results, chains }`. Not persisted, no AI. Ra
 | PUT/DELETE | `/admin/requirements/{id}` | |
 | GET/POST | `/admin/pathways/{id}/points-factors` | |
 | PUT/DELETE | `/admin/points-factors/{id}` | |
-| GET/POST | `/admin/pathways/{id}/occupations` | bulk CSV import via POST |
+| GET/POST | `/admin/pathways/{id}/occupations` | POST = CSV import (`Content-Type: text/csv`, ≤ 1 MB, ≤ 2000 rows), upsert by code. Header `code,title,is_eligible[,source_url,verified_at]`; empty `source_url` = the pathway's; bad lines → 400 keyed `line N` |
 | DELETE | `/admin/occupations/{id}` | |
-| POST | `/admin/pathways/{id}/publish` | 409 if any `TODO_VERIFY` remains |
-| GET | `/admin/rules/stale?days=90` | |
-| GET | `/admin/audit?entity=&from=` | paged |
+| DELETE | `/admin/pathways/{id}/draft` | discard a published pathway's unpublished changes (409 if none) |
+| POST | `/admin/pathways/{id}/publish` | → `{ id, slug, ruleVersion }`. 409 if any row has `TODO_VERIFY` / no `verified_at` (ProblemDetails `errors` keyed `entity: label`), or nothing to publish |
+| GET | `/admin/language-mappings` | `{ published, draftReady, draftBlocked }` |
+| POST | `/admin/language-mappings/publish` | publishes every verified draft mapping (the engine needs them to read English scores) |
+| GET | `/admin/rules/stale?days=90` | published rows (and mappings) verified more than `days` ago; default `Engine:StaleAfterDays` |
+| GET | `/admin/audit?entity=&pathwayId=&from=&page=&pageSize=` | newest first; `entity` = table name; `pageSize` ≤ 200 → `{ items, page, pageSize, total }` |
 
 All admin writes create `draft` rows and audit entries. 401 unauthenticated · 403 not admin.
+
+**Drafts.** A never-published pathway is its own draft. The first write to a published pathway creates a draft copy of its whole tree; the live rules stay unchanged until publish. `GET /admin/pathways/{id}` and every write return the *working view* (`AdminPathwayResponse`): the draft when one exists, with `hasDraft`, `publishBlockers` and per-row `status`/`stale`. Ids of live rows keep working for writes (they resolve to their draft counterpart). The pathway `id` never changes; child ids change on publish. Request bodies take enum text (`gte`, `easy`, `with_spouse`, `post_study_work`) and `unverifiedFields` as column names (pathway: `pass_mark`, `cutoff`, `cutoff_as_of`, `typical_duration_months`; requirement: `value`; points factor: `min`, `max`, `match_value`, `points`, `max_points_for_factor`); an unverified field must be empty.
 
 Auth: `Authorization: Bearer <Clerk session token>`. The API validates signature and issuer against `Clerk__Authority` (JWKS from its discovery document), rejects a token whose `azp` is not in `Cors__Origins`, and the `admin` policy requires the custom claim `role` = `admin` (exact match). Clerk session token template: `{ "role": "{{user.public_metadata.role}}" }`.
 

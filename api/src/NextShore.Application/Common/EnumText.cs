@@ -22,4 +22,25 @@ public static class EnumText
 
         return builder.ToString();
     }
+
+    /// <summary>Parses the API text of an enum value (exact snake_case match).</summary>
+    public static bool TryParse<TEnum>(string? text, out TEnum value)
+        where TEnum : struct, Enum
+    {
+        foreach (var candidate in Enum.GetValues<TEnum>())
+        {
+            if (Of(candidate) == text)
+            {
+                value = candidate;
+                return true;
+            }
+        }
+
+        value = default;
+        return false;
+    }
+
+    public static IEnumerable<string> All<TEnum>()
+        where TEnum : struct, Enum =>
+        Enum.GetValues<TEnum>().Select(Of);
 }

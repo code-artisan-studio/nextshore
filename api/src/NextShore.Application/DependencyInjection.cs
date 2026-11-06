@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using NextShore.Application.Admin;
 using NextShore.Application.Assessments;
 using NextShore.Application.Countries;
 using NextShore.Application.Engine;
@@ -26,6 +27,9 @@ public static class DependencyInjection
 
         services.TryAddSingleton(TimeProvider.System);
         services.AddScoped<IValidator<CandidateProfileRequest>, CandidateProfileValidator>();
+        services.AddScoped<IValidator<PathwayUpdateRequest>, PathwayUpdateValidator>();
+        services.AddScoped<IValidator<RequirementRequest>, RequirementValidator>();
+        services.AddScoped<IValidator<PointsFactorRequest>, PointsFactorValidator>();
         services.AddScoped<EngineRunner>();
         services.AddScoped<ListCountriesHandler>();
         services.AddScoped<SearchOccupationsHandler>();

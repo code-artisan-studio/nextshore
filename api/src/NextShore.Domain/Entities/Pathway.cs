@@ -27,6 +27,11 @@ public class Pathway : SourcedRuleEntity
     public int? TypicalDurationMonths { get; set; }
     public required string Summary { get; set; }
 
+    /// <summary>
+    /// Set on an admin draft copy: the published row this draft will replace on publish (see docs/ARCHITECTURE.md §5).
+    /// </summary>
+    public Guid? ReplacesId { get; set; }
+
     /// <summary>Bumped on publish.</summary>
     public int RuleVersion { get; set; }
 

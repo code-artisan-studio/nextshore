@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using NextShore.Application.Abstractions;
+using NextShore.Application.Admin;
+using NextShore.Infrastructure.Admin;
 using NextShore.Infrastructure.Ai;
 using NextShore.Infrastructure.Assessments;
 using NextShore.Infrastructure.Persistence;
@@ -30,6 +32,7 @@ public static class DependencyInjection
         services.AddHealthChecks().AddDbContextCheck<NextShoreDbContext>(DatabaseHealthCheck);
         services.AddScoped<SeedLoader>();
         services.AddScoped<IAssessmentStore, AssessmentStore>();
+        services.AddScoped<IRuleAdmin, RuleAdmin>();
         services.AddOptions<AnthropicSettings>()
             .Bind(config.GetSection(AnthropicSettings.Section))
             .Validate(s => !string.IsNullOrWhiteSpace(s.ParseModel) && !string.IsNullOrWhiteSpace(s.SummaryModel)

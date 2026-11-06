@@ -41,8 +41,9 @@
 
 ### 5. Admin publish
 
-- Admin edits create/modify rows with `status = draft`.
-- `POST /admin/pathways/{id}/publish` → refused while `PublishGuard` reports blockers; otherwise drafts become `published`, `rule_version` = max published version + 1, audit rows written, `IRuleRepository.Invalidate()` called.
+- Admin edits create/modify rows with `status = draft`. A never-published pathway is edited in place. The first write to a published pathway copies its whole tree (pathway + requirements + points factors + occupations) as drafts with `replaces_id` → the row copied; later writes go to the copy, so live rules never change before publish.
+- `POST /admin/pathways/{id}/publish` → refused while `PublishGuard` reports blockers; otherwise, in one transaction: the draft's pathway fields are copied onto the live pathway row (its id is stable), the live children are deleted, the draft children are re-parented onto it as `published`, the copy is dropped, `rule_version` = max published version + 1. The result must load through `RuleSnapshotMapper` or the transaction rolls back (409). One `publish` audit row holds the before/after tree; `IRuleRepository.Invalidate()` is called.
+- Every write is audited (`create`/`update`/`delete` with old/new row JSON, `actor` = Clerk user id, `pathway_id` for the History tab). Language mappings have no editor; `POST /admin/language-mappings/publish` publishes the verified ones.
 
 ## Eligibility engine (`NextShore.Domain`)
 
