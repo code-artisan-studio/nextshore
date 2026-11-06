@@ -1,17 +1,20 @@
 # NextShore — Architecture
 
 ## System overview
+
 ```
-[React SPA · Vercel] ──HTTPS──► [.NET 10 API · Railway] ──► [Neon Postgres]
+[React SPA · Vercel] ──HTTPS──► [.NET 10 API · Render] ──► [Neon Postgres]
         │                              │
    Clerk (admin login)                 └──► Claude API (Haiku: parse · Sonnet: summary)
 ```
+
 - The API is the only component that talks to Claude or the database.
 - Clerk issues JWTs for admins only; public endpoints are anonymous.
 
 ## Core flows
 
 ### 1. Parse resume — `POST /api/v1/resumes/parse`
+
 1. Validate: ≤ 5 MB, PDF or DOCX by **magic bytes** (`%PDF` / `PK\x03\x04` + `word/document.xml`), consent flag = true.
 2. PDF → sent to Claude Haiku as a `document` content block. DOCX → text extracted with `DocumentFormat.OpenXml`, sent as text.
 3. Claude returns structured output (`output_config.format`) whose JSON schema = `ExtractedProfile` (see `DATA-MODEL.md`). Each field has `confidence` (0–1).
@@ -19,6 +22,7 @@
 5. Return `ExtractedProfile`. **The file and raw text are discarded** — never logged or stored.
 
 ### 2. Assess — `POST /api/v1/assessments`
+
 1. Validate `CandidateProfile` (FluentValidation).
 2. Normalise: age from DOB, English score → each country's scale via `language_score_mappings`, total skilled work years.
 3. Load published `RuleSnapshot` via `IRuleRepository` (singleton in-memory cache, no expiry; invalidated on publish). Only published pathways and published child rows are included; a chain stops at an unpublished pathway.
@@ -27,17 +31,21 @@
 6. Return `201 { id, ruleVersion, expiresAt, results, chains }`. `GET` serves the stored results unchanged.
 
 ### 3. Summary — `GET /api/v1/assessments/{id}/summary`
+
 - Lazily generated with Claude Sonnet from the **engine output only** (results JSON + profile), cached on the assessment row.
 - Prompt instructs: explain grades and top gaps; never add requirements not in the input; never estimate approval odds.
 
 ### 4. What-if — `POST /api/v1/evaluations`
+
 - Same engine as assess, no persistence, no AI. Target p95 < 150 ms. Frontend debounces 300 ms.
 
 ### 5. Admin publish
+
 - Admin edits create/modify rows with `status = draft`.
 - `POST /admin/pathways/{id}/publish` → refused while `PublishGuard` reports blockers; otherwise drafts become `published`, `rule_version` = max published version + 1, audit rows written, `IRuleRepository.Invalidate()` called.
 
 ## Eligibility engine (`NextShore.Domain`)
+
 ```
 EligibilityEngine
  ├─ ProfileNormalizer      → NormalizedProfile (flat dictionary of field keys → values)
@@ -47,10 +55,12 @@ EligibilityEngine
  ├─ GapBuilder             → Gap[] sorted by impact ÷ effort
  └─ ChainBuilder           → PathwayChain[] via pathways.next_pathway_id
 ```
+
 - Pure functions, no I/O. Inputs: `NormalizedProfile` + `RuleSnapshot`. Output: `PathwayResult[]`.
 - No country-specific code — everything is data. Rules spec: `VISA-RULES-SPEC.md`.
 
 ## Folder structure
+
 ```
 nextshore/
 ├─ CLAUDE.md
@@ -78,15 +88,16 @@ nextshore/
 ```
 
 ## Cross-cutting
-| Concern | Decision |
-|---|---|
-| Rate limiting | ASP.NET rate limiter, per client IP (via `X-Forwarded-For` from Railway's proxy): `/resumes/parse` 10/IP/day; `/evaluations` 60/IP/min. In-memory, single instance — counters reset on restart |
-| Errors | RFC 7807 ProblemDetails everywhere |
-| Logging | Serilog → console (Railway). Never log resume content or profile PII |
-| CORS | Allow web origin(s) from config only (`Cors:Origins`, comma-separated). `http://localhost:5173` is in `appsettings.Development.json`; every other environment allows none until `Cors__Origins` is set, and startup logs a warning while it is missing |
-| Config | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Anthropic__ParseTimeout`, `Anthropic__SummaryTimeout`, `Anthropic__MaxRetries`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
-| Health | `GET /api/v1/health` (DB check) |
-| Cleanup | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval |
-| Dev rules preview | `Rules__Source=seed-preview` (Development only; startup fails elsewhere) serves verified `api/seed` rows as if published, so the web app has data before admin publish (M5). Default `database` = published rows only |
-| Types | `npm run gen:api` reads the dev API's `/openapi/v1.json` (API running; `API_URL` overrides `http://localhost:5111`) → `openapi-typescript` → `web/src/api/schema.d.ts` (committed). `api/types.ts` narrows enum-like strings; `api/hooks.ts` wraps every endpoint in a TanStack Query hook; the web reads the API origin from `VITE_API_URL` |
-| CI | GitHub Actions: build + test on PR; deploy on main (Railway, Vercel) |
+
+| Concern           | Decision                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Rate limiting     | ASP.NET rate limiter, per client IP (via `X-Forwarded-For` from Render's proxy): `/resumes/parse` 10/IP/day; `/evaluations` 60/IP/min. In-memory, single instance — counters reset on restart                                                                                                                                                                                                                                        |
+| Errors            | RFC 7807 ProblemDetails everywhere                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Logging           | Serilog → console (Render). Never log resume content or profile PII                                                                                                                                                                                                                                                                                                                                                                  |
+| CORS              | Allow web origin(s) from config only (`Cors:Origins`, comma-separated). `http://localhost:5173` is in `appsettings.Development.json`; every other environment allows none until `Cors__Origins` is set, and startup logs a warning while it is missing                                                                                                                                                                               |
+| Config            | Env vars: `ConnectionStrings__Db`, `Anthropic__ApiKey`, `Anthropic__ParseModel`, `Anthropic__SummaryModel`, `Anthropic__ParseTimeout`, `Anthropic__SummaryTimeout`, `Anthropic__MaxRetries`, `Clerk__Authority`, `Cors__Origins` (comma-separated), `Engine__NearEligibleMaxGaps`, `Engine__NearEligiblePointsRatio`, `Engine__StaleAfterDays`, `Engine__ExchangeRates__{CAD,EUR,AUD}` (units per 1 USD; startup fails without them) |
+| Health            | `GET /api/v1/health` (DB check)                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Cleanup           | `AssessmentCleanupService` deletes assessments past `expires_at` at startup and every `Assessments:CleanupInterval` (1 day); failures are logged and retried next interval                                                                                                                                                                                                                                                           |
+| Dev rules preview | `Rules__Source=seed-preview` (Development only; startup fails elsewhere) serves verified `api/seed` rows as if published, so the web app has data before admin publish (M5). Default `database` = published rows only                                                                                                                                                                                                                |
+| Types             | `npm run gen:api` reads the dev API's `/openapi/v1.json` (API running; `API_URL` overrides `http://localhost:5111`) → `openapi-typescript` → `web/src/api/schema.d.ts` (committed). `api/types.ts` narrows enum-like strings; `api/hooks.ts` wraps every endpoint in a TanStack Query hook; the web reads the API origin from `VITE_API_URL`                                                                                         |
+| CI                | GitHub Actions: build + test on PR; deploy on main (Railway, Vercel)                                                                                                                                                                                                                                                                                                                                                                 |

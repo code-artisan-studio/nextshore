@@ -1,0 +1,26 @@
+# Render Blueprint — NextShore API. Values are set in the Render dashboard (sync: false); see docs/DEPLOY.md.
+services:
+  - type: web
+    name: nextshore-api
+    runtime: docker
+    rootDir: api
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: ConnectionStrings__Db
+        sync: false
+      - key: Anthropic__ApiKey
+        sync: false
+      - key: Clerk__Authority
+        sync: false
+      - key: Cors__Origins
+        sync: false
+      - key: Engine__ExchangeRates__CAD
+        sync: false
+      - key: Engine__ExchangeRates__EUR
+        sync: false
+      - key: Engine__ExchangeRates__AUD
+        sync: false
