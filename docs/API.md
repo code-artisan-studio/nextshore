@@ -82,6 +82,7 @@ Body: `CandidateProfile` → 200 `{ results, chains }`. Not persisted, no AI. Ra
 ## Admin (`/admin`, Clerk JWT with claim `role=admin`)
 | Method | Route | Notes |
 |---|---|---|
+| GET | `/admin/me` | signed-in admin `{ userId, role }`; checks token + role |
 | GET | `/admin/pathways` | incl. drafts, stale flags |
 | GET/PUT | `/admin/pathways/{id}` | edit pathway fields |
 | GET/POST | `/admin/pathways/{id}/requirements` | |
@@ -95,6 +96,8 @@ Body: `CandidateProfile` → 200 `{ results, chains }`. Not persisted, no AI. Ra
 | GET | `/admin/audit?entity=&from=` | paged |
 
 All admin writes create `draft` rows and audit entries. 401 unauthenticated · 403 not admin.
+
+Auth: `Authorization: Bearer <Clerk session token>`. The API validates signature and issuer against `Clerk__Authority` (JWKS from its discovery document), rejects a token whose `azp` is not in `Cors__Origins`, and the `admin` policy requires the custom claim `role` = `admin` (exact match). Clerk session token template: `{ "role": "{{user.public_metadata.role}}" }`.
 
 ## Claude integration (Infrastructure)
 All calls go through `ClaudeClient` (official `Anthropic` C# SDK). The API key is read only from `Anthropic__ApiKey`.

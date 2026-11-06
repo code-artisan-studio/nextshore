@@ -45,7 +45,7 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T32 Pathway detail page (checklist, points table, gaps, sources).
 
 ## M5 · Admin
-- [ ] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
+- [x] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
 - [ ] T34 Admin API endpoints + audit logging.
 - [ ] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
 

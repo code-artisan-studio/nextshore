@@ -54,7 +54,8 @@ The keys marked required are declared in `render.yaml` with `sync: false`, so Re
    Applies EF migrations, then loads `api/seed/*.json` as **drafts**. Needs `dotnet tool install --global dotnet-ef`.
 3. **Render**: New → Blueprint → this repo. Fill the prompted env vars (`Cors__Origins` can wait for step 4). Health check: `/api/v1/health` (also checks the DB).
 4. **Vercel**: import the repo, root directory `web`, framework Vite. Set `VITE_API_URL` to the Render URL and the Clerk key. Then set `Cors__Origins` on Render to the Vercel URL(s).
-5. **Publish rules**: sign in at `/admin` with an admin-role Clerk user and publish the seeded drafts — the public API serves published rules only.
+5. **Clerk**: Sessions → Customize session token → `{ "role": "{{user.public_metadata.role}}" }`. On each admin user set public metadata `{ "role": "admin" }`. Add the Vercel domain to the Clerk instance's allowed origins (production instance).
+6. **Publish rules**: sign in at `/admin` with an admin-role Clerk user and publish the seeded drafts — the public API serves published rules only.
 
 ## Later deploys
 
