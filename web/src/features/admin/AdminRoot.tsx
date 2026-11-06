@@ -1,9 +1,13 @@
 import { ClerkProvider, SignIn, SignOutButton, useAuth } from "@clerk/react"
+import { Route, Routes } from "react-router"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 
-import { AdminHome } from "./AdminHome"
+import { AdminLayout } from "./AdminLayout"
+import { PathwayEditorPage } from "./PathwayEditorPage"
+import { PathwayListPage } from "./PathwayListPage"
+import { StaleRulesPage } from "./StaleRulesPage"
 
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -53,5 +57,14 @@ function AdminGate() {
     )
   }
 
-  return <AdminHome />
+  return (
+    <Routes>
+      <Route element={<AdminLayout />}>
+        <Route index element={<PathwayListPage />} />
+        <Route path="pathways/:id" element={<PathwayEditorPage />} />
+        <Route path="stale" element={<StaleRulesPage />} />
+        <Route path="*" element={<p className="text-sm">Not found.</p>} />
+      </Route>
+    </Routes>
+  )
 }
