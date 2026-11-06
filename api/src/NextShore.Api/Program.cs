@@ -44,7 +44,7 @@ builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
 
-// Railway terminates TLS at its proxy; trust the single hop it adds so rate limits key on the client IP.
+// Render terminates TLS at its proxy; trust the single hop it adds so rate limits key on the client IP.
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;

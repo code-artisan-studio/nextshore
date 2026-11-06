@@ -9,7 +9,7 @@ appsettings.*.local.json
 appsettings.Development.json
 secrets.json
 .vercel/
-.railway/
+.render/
 
 # ===== OS / editors =====
 .DS_Store

@@ -14,10 +14,11 @@ Phase 1 = POC: 3 countries (Canada, Germany, Australia), 10 pathways, no user ac
 | `docs/API.md` | Endpoints, request/response shapes, errors |
 | `docs/UI.md` | Brand tokens, pages, components, copy |
 | `docs/TASKS.md` | Ordered build checklist — work top to bottom |
+| `docs/DEPLOY.md` | Hosting, env vars, migrate/seed, first deploy |
 
 ## Stack
 - **web/**: React 19, Vite, TypeScript (strict), Tailwind v4, shadcn/ui, TanStack Query, React Hook Form + Zod, React Router. Deploy: Vercel.
-- **api/**: .NET 10 Web API (minimal APIs), Clean Architecture, EF Core + Npgsql, FluentValidation, Serilog, xUnit. Deploy: Railway.
+- **api/**: .NET 10 Web API (minimal APIs), Clean Architecture, EF Core + Npgsql, FluentValidation, Serilog, xUnit. Deploy: Render (Docker).
 - **DB**: Neon Postgres.
 - **AI**: Claude API — Haiku for resume extraction, Sonnet for result summaries.
 - **Auth**: Clerk (admin role only).
