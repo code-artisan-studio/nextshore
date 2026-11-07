@@ -45,9 +45,9 @@ Work top to bottom. One task per change. Tick when tests/lint pass.
 - [x] T32 Pathway detail page (checklist, points table, gaps, sources).
 
 ## M5 · Admin
-- [ ] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
-- [ ] T34 Admin API endpoints + audit logging.
-- [ ] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
+- [x] T33 Clerk setup (web + API JWT validation, `role=admin` policy).
+- [x] T34 Admin API endpoints + audit logging.
+- [x] T35 Admin UI: pathway list, editor tabs, publish, stale view, history.
 
 ## M6 · Ship & demo
 - [ ] T36 Deploy API to Render (Docker), web to Vercel, env vars, Neon prod branch. Set the Render health check path to `/api/v1/health` (consider moving it to root `/health`). Set `Cors__Origins` on Render to the Vercel URL(s), comma-separated (no default outside Development).

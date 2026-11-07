@@ -24,7 +24,7 @@ Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_l
 |---|---|---|
 | id | uuid | |
 | country_id | uuid FK | |
-| slug | text unique | `ca-express-entry` |
+| slug | text | `ca-express-entry`; unique among live rows (`replaces_id` null) |
 | name | text | |
 | type | enum | `study` · `post_study_work` · `work` · `pr` |
 | audience | enum[] | `student`, `developer` |
@@ -39,6 +39,7 @@ Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_l
 | verified_at | date null | see *Unverified values* |
 | unverified_fields | text[] | |
 | rule_version | int | on publish set to max(published `rule_version`) + 1, so the max is the global rules version stored on assessments |
+| replaces_id | uuid null | admin draft copy of the live pathway with this id (at most one, unique); null on live rows |
 
 ### requirements
 | column | type | notes |
@@ -75,8 +76,10 @@ Sourced rule tables (`pathways`, `requirements`, `points_factors`, `occupation_l
 ### language_score_mappings
 `id, test (ielts|pte|toefl), test_variant (academic|general) null, skill (listening|reading|writing|speaking), min_score numeric null, target_scale (CLB|CEFR|IELTS), target_level text, source_url, verified_at, unverified_fields` — `test_variant` null = any variant. Canada's CLB mappings are `general` only (IELTS General Training, PTE Core).
 
+`requirements`, `points_factors` and `occupation_lists` also carry `replaces_id uuid null`: in an admin draft copy, the live row the draft row copies (cleared on publish).
+
 ### rule_audit_log
-`id, entity text, entity_id uuid, action (create|update|delete|publish), old_value jsonb, new_value jsonb, actor text, at timestamptz`
+`id, entity text, entity_id uuid, pathway_id uuid null, action (create|update|delete|publish), old_value jsonb, new_value jsonb, actor text, at timestamptz` — `entity` is the table name; `pathway_id` is the live pathway's id; index on `(pathway_id, at)`
 
 ## Assessment table
 ### assessments

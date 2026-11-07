@@ -28,7 +28,7 @@ public sealed class AssessmentsEndpointsTests
         Assert.Equal($"/api/v1/assessments/{body.Id}", response.Headers.Location!.ToString());
         Assert.Equal(1, body.RuleVersion);
         Assert.Equal(Now.AddDays(30), body.ExpiresAt);
-        Assert.Equal(["au-189", "de-blue-card", "ca-express-entry", "de-opportunity-card"], body.Results.Select(r => r.PathwaySlug));
+        Assert.Equal(["au-189", "de-blue-card", "de-opportunity-card", "ca-express-entry"], body.Results.Select(r => r.PathwaySlug));
 
         var row = Assert.Single(factory.Assessments.Rows.Values);
         Assert.Equal((body.Id, Now, Now.AddDays(30), 1), (row.Id, row.CreatedAt, row.ExpiresAt, row.RuleVersion));

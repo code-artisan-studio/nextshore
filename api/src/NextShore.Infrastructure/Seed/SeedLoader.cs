@@ -115,7 +115,7 @@ public sealed class SeedLoader(NextShoreDbContext db, ILogger<SeedLoader> logger
             .Include(p => p.PointsFactors)
             .Include(p => p.Occupations)
             .AsSplitQuery()
-            .SingleOrDefaultAsync(p => p.Slug == seed.Slug, ct);
+            .SingleOrDefaultAsync(p => p.Slug == seed.Slug && p.ReplacesId == null, ct);
 
         if (existing is null)
         {
@@ -167,7 +167,7 @@ public sealed class SeedLoader(NextShoreDbContext db, ILogger<SeedLoader> logger
             }
 
             pathway.NextPathway = bySlug.GetValueOrDefault(nextSlug)
-                ?? await db.Pathways.SingleOrDefaultAsync(p => p.Slug == nextSlug, ct)
+                ?? await db.Pathways.SingleOrDefaultAsync(p => p.Slug == nextSlug && p.ReplacesId == null, ct)
                 ?? throw new SeedException($"{pathway.Slug}: nextPathwaySlug '{nextSlug}' does not exist.");
         }
     }

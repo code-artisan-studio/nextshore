@@ -13,5 +13,6 @@ internal sealed class RuleAuditLogEntryConfiguration : IEntityTypeConfiguration<
         builder.Property(e => e.NewValue).HasColumnType("jsonb");
         builder.HasIndex(e => new { e.Entity, e.EntityId });
         builder.HasIndex(e => e.At);
+        builder.HasIndex(e => new { e.PathwayId, e.At });
     }
 }

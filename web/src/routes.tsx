@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
       { path: "profile", element: <ProfilePage /> },
       { path: "results/:id", element: <ResultsPage /> },
       { path: "results/:id/:pathwaySlug", element: <PathwayDetailPage /> },
+      {
+        path: "admin/*",
+        lazy: () => import("@/features/admin/AdminRoot").then((m) => ({ Component: m.AdminRoot })),
+      },
     ],
   },
 ])

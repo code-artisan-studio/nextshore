@@ -11,7 +11,9 @@ internal sealed class PathwayConfiguration : IEntityTypeConfiguration<Pathway>
     public void Configure(EntityTypeBuilder<Pathway> builder)
     {
         builder.ConfigureSourcedRule();
-        builder.HasIndex(p => p.Slug).IsUnique();
+        // One live row per slug, plus at most one admin draft copy of it.
+        builder.HasIndex(p => p.Slug).IsUnique().HasFilter("replaces_id IS NULL");
+        builder.HasIndex(p => p.ReplacesId).IsUnique().HasFilter("replaces_id IS NOT NULL");
 
         builder.PrimitiveCollection(p => p.Audience)
             .HasColumnType("text[]")

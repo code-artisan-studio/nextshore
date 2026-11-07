@@ -21,4 +21,9 @@ public class Requirement : SourcedRuleEntity
     public required string FixHint { get; set; }
     public int? FixMonths { get; set; }
     public required string Label { get; set; }
+
+    /// <summary>
+    /// Set on an admin draft copy: the published row this draft will replace on publish (see docs/ARCHITECTURE.md §5).
+    /// </summary>
+    public Guid? ReplacesId { get; set; }
 }

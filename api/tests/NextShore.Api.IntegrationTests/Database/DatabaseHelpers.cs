@@ -15,7 +15,7 @@ internal static class DatabaseHelpers
     }
 
     /// <summary>
-    /// Stand-in for admin publish (T34): publishes the pathways and their verified rows, and every verified
+    /// Fixture shortcut (not admin publish, which refuses a pathway with any unverified row): publishes the pathways and their verified rows, and every verified
     /// language mapping.
     /// </summary>
     public static async Task PublishAsync(string connectionString, params string[] slugs)

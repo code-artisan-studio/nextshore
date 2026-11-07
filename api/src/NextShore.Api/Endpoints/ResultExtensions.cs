@@ -12,6 +12,9 @@ public static class ResultExtensions
         ErrorKind.NotFound => TypedResults.Problem(statusCode: StatusCodes.Status404NotFound, title: "Not found", detail: error.Message),
         ErrorKind.Unprocessable => TypedResults.Problem(
             statusCode: StatusCodes.Status422UnprocessableEntity, title: "Could not process", detail: error.Message),
+        ErrorKind.Conflict => TypedResults.Problem(
+            statusCode: StatusCodes.Status409Conflict, title: "Conflict", detail: error.Message,
+            extensions: error.Details is null ? null : new Dictionary<string, object?> { ["errors"] = error.Details }),
         ErrorKind.Upstream => TypedResults.Problem(
             statusCode: StatusCodes.Status502BadGateway, title: "Upstream service failed", detail: error.Message),
         _ => TypedResults.Problem(statusCode: StatusCodes.Status500InternalServerError),

@@ -27,7 +27,7 @@ public static class CorsSetup
         }
     }
 
-    private static string[] Origins(IConfiguration config) =>
+    public static string[] Origins(IConfiguration config) =>
         (config["Cors:Origins"] ?? string.Empty)
             .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 }

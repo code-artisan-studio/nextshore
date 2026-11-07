@@ -11,7 +11,7 @@ namespace NextShore.Api.IntegrationTests.Database;
 /// </summary>
 public sealed class PostgresFixture : IAsyncLifetime
 {
-    private readonly PostgreSqlContainer _container = new PostgreSqlBuilder("postgres:17-alpine").Build();
+    private readonly PostgreSqlContainer _container = new PostgreSqlBuilder("postgres:18-alpine").Build();
 
     public Task InitializeAsync() => _container.StartAsync();
 

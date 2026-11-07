@@ -43,6 +43,7 @@ builder.Services.AddOptions<AssessmentSettings>()
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddWebCors(builder.Configuration);
 builder.Services.AddNextShoreRateLimiting();
+builder.Services.AddClerkAuth(builder.Configuration);
 
 // Render terminates TLS at its proxy; trust the single hop it adds so rate limits key on the client IP.
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -73,12 +74,15 @@ if (seedMode)
 }
 
 app.WarnIfNoOrigins();
+app.WarnIfNoClerkAuthority();
 app.UseForwardedHeaders();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 app.UseSerilogRequestLogging();
 app.UseCors(CorsSetup.PolicyName);
 app.UseRateLimiter();
+app.UseAuthentication();
+app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {
@@ -91,5 +95,6 @@ api.MapRulesEndpoints();
 api.MapEvaluationsEndpoints();
 api.MapAssessmentsEndpoints();
 api.MapResumesEndpoints();
+api.MapAdminEndpoints();
 
 app.Run();

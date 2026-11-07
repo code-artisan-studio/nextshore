@@ -20,15 +20,15 @@ public sealed class EvaluationsEndpointsTests(ApiFactory factory) : IClassFixtur
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var body = (await response.Content.ReadFromJsonAsync<EvaluationResponse>())!;
         Assert.Equal(
-            [("au-189", "eligible", 100), ("de-blue-card", "eligible", 100), ("ca-express-entry", "not_eligible", 88),
-             ("de-opportunity-card", "not_eligible", 87)],
+            [("au-189", "eligible", 100), ("de-blue-card", "eligible", 100), ("de-opportunity-card", "eligible", 100),
+             ("ca-express-entry", "not_eligible", 88)],
             body.Results.Select(r => (r.PathwaySlug, r.Grade, r.ReadinessScore)));
         Assert.Empty(body.Chains);
 
         var au189 = body.Results[0];
         Assert.Equal("Skilled Independent visa (subclass 189)", au189.PathwayName);
         Assert.Equal(("default", 75, 65, "pass_mark"), (au189.Points!.Variant, au189.Points.Total, au189.Points.Target, au189.Points.TargetKind));
-        var expressEntry = body.Results[2];
+        var expressEntry = body.Results.Single(r => r.PathwaySlug == "ca-express-entry");
         Assert.Equal(("single", 357, "cutoff"), (expressEntry.Points!.Variant, expressEntry.Points.Total, expressEntry.Points.TargetKind));
         Assert.NotEmpty(expressEntry.Gaps);
         Assert.All(expressEntry.Sources, s => Assert.StartsWith("https://", s.Url));
@@ -43,7 +43,7 @@ public sealed class EvaluationsEndpointsTests(ApiFactory factory) : IClassFixtur
         var canada = body.Chains[0];
         Assert.Equal(["study", "post_study_work", "pr"], canada.Steps.Select(s => s.Type));
         Assert.Equal([false, true, true], canada.Steps.Select(s => s.IsProjected));
-        Assert.Null(canada.TotalMonths);
+        Assert.Equal(24 + 36 + 6, canada.TotalMonths); // study permit (product default) + PGWP + Express Entry
     }
 
     [Fact]

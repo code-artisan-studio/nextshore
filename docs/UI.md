@@ -79,6 +79,11 @@ Requirements checklist (✓/✗ with current vs target), points breakdown table 
 
 ### Admin
 Pathway list with status + stale flags → pathway editor with tabs: Details · Requirements · Points · Occupations · History. "Publish" button disabled-with-reason while `TODO_VERIFY` remains.
+- `/admin` is lazy-loaded with Clerk (sign-in, then a `role = admin` check; other accounts see "No admin access"). Without `VITE_CLERK_PUBLISHABLE_KEY` it says sign-in isn't set up.
+- **List** (`/admin`): name, country, status (Draft · Published · Unpublished changes), live version, verified date, stale count and "N to verify". Below it, language score mappings with "Publish N mappings" (results need published mappings to read English scores).
+- **Editor** (`/admin/pathways/:id`): header with status and stale flag; publish bar with "Publish" (disabled, reason shown beside it: values still TODO_VERIFY, or no unpublished changes), "Discard changes" for a published pathway's draft, and the blocker list. Edits save to the draft; results use the live version until publish.
+- Rows open in a right sheet (Requirements, Points). Every row form has Source: URL, "Verified on" with a "Today" button, and TODO_VERIFY checkboxes; entering a value clears its mark on save. Occupations: paste or pick a CSV (upsert by code); bad lines are listed and nothing is saved. History: audit entries newest first with changed fields (before → after), actor and time, paged.
+- **Stale rules** (`/admin/stale`): published rows verified more than 90 days ago, oldest first, linked to their pathway.
 
 ## Components
 | Component | Notes |

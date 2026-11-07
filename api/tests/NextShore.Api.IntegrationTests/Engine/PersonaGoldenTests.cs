@@ -41,12 +41,12 @@ public class PersonaGoldenTests
             ca-study-permit       eligible      100  -
             de-student-visa       eligible      100  -
             au-189                not_eligible   91  50/65
+            de-opportunity-card   not_eligible   73  2/6
             ca-express-entry      not_eligible   71  338/518
-            de-opportunity-card   not_eligible   60  0/6
             de-blue-card          not_eligible   40  -
             de-post-study         near_eligible  40  -
-            chain CA: ca-study-permit eligible 100 → ca-pgwp eligible 100* → ca-express-entry not_eligible 92* · total ?
-            chain DE: de-student-visa eligible 100 → de-post-study eligible 100* → de-blue-card near_eligible 60* · total ?
+            chain CA: ca-study-permit eligible 100 → ca-pgwp eligible 100* → ca-express-entry not_eligible 92* · total 66
+            chain DE: de-student-visa eligible 100 → de-post-study eligible 100* → de-blue-card near_eligible 60* · total 69
             """);
     }
 
@@ -73,8 +73,8 @@ public class PersonaGoldenTests
         AssertGolden(developer, """
             au-189                eligible      100  75/65
             de-blue-card          eligible      100  -
+            de-opportunity-card   eligible      100  6/6
             ca-express-entry      not_eligible   88  357/518
-            de-opportunity-card   not_eligible   87  4/6
             """);
     }
 
@@ -100,7 +100,7 @@ public class PersonaGoldenTests
         AssertGolden(senior, """
             au-189                eligible      100  65/65
             ca-express-entry      not_eligible   87  344/518
-            de-opportunity-card   not_eligible   80  3/6
+            de-opportunity-card   not_eligible   87  4/6
             de-blue-card          near_eligible  60  -
             """);
     }
