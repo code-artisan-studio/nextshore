@@ -66,3 +66,19 @@ The keys marked required are declared in `render.yaml` with `sync: false`, so Re
 
 - Free Render instances sleep when idle: first request after a sleep is slow, and the in-memory rate-limit counters and assessment cleanup timer reset.
 - Rate limiting keys on `X-Forwarded-For` (one trusted hop). After the first deploy, confirm in the logs that the logged client IP is the caller's, not a Render proxy address.
+
+## Migrations: AdminDrafts → AdminDraftCopies
+
+`20261020025218_AdminDrafts` came from an earlier M5 design and is applied on the Neon branches, so it stays in the repo. `AdminDraftCopies` upgrades from it to the draft-copy design. It drops the self-referencing `replaces_id` foreign keys (their `ON DELETE CASCADE` would delete drafts during publish), the `delete_on_publish` columns, `language_score_mappings.replaces_id` and unused indexes, and recreates `ix_pathways_replaces_id` (unique, partial) and `ix_occupation_lists_pathway_id_code` (unique, unfiltered).
+
+Its first statement is a guard. If any rule table still holds rows from the old design (`replaces_id` set, `delete_on_publish` true or `status = 'archived'`), the migration raises an error naming the tables and changes nothing. Check first (read-only):
+
+```sql
+SELECT 'pathways', count(*) FROM pathways WHERE replaces_id IS NOT NULL OR delete_on_publish OR status = 'archived'
+UNION ALL SELECT 'requirements', count(*) FROM requirements WHERE replaces_id IS NOT NULL OR delete_on_publish OR status = 'archived'
+UNION ALL SELECT 'points_factors', count(*) FROM points_factors WHERE replaces_id IS NOT NULL OR delete_on_publish OR status = 'archived'
+UNION ALL SELECT 'occupation_lists', count(*) FROM occupation_lists WHERE replaces_id IS NOT NULL OR delete_on_publish OR status = 'archived'
+UNION ALL SELECT 'language_score_mappings', count(*) FROM language_score_mappings WHERE replaces_id IS NOT NULL OR delete_on_publish OR status = 'archived';
+```
+
+Every count must be 0. Otherwise those rows are unpublished admin drafts from the old design: decide per row whether to discard them, then re-run.

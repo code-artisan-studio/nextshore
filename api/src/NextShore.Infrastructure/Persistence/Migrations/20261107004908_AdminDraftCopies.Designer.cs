@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NextShore.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(NextShoreDbContext))]
-    [Migration("20261106032406_AdminDraftCopies")]
+    [Migration("20261107004908_AdminDraftCopies")]
     partial class AdminDraftCopies
     {
         /// <inheritdoc />
