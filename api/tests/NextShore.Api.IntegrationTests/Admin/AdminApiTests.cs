@@ -70,21 +70,22 @@ public sealed class AdminApiTests(PostgresFixture postgres)
         Assert.Equal(10, list!.Count);
         Assert.All(list, p => Assert.Equal(("draft", false, 0), (p.Status, p.HasDraft, p.RuleVersion)));
         Assert.Equal(0, list.Single(p => p.Slug == Pgwp).PublishBlockers);
-        Assert.Equal(1, list.Single(p => p.Slug == "ca-study-permit").PublishBlockers);
+        Assert.Equal(0, list.Single(p => p.Slug == "ca-study-permit").PublishBlockers);
+        Assert.True(list.Single(p => p.Slug == "au-189").PublishBlockers > 0);
     }
 
     [Fact]
     public async Task Publish_is_409_with_the_blockers_while_a_row_is_unverified()
     {
         using var ctx = await StartAsync();
-        var studyPermit = await FindAsync(ctx.Admin, "ca-study-permit");
+        var blocked = await FindAsync(ctx.Admin, "au-189");
 
-        var response = await ctx.Admin.PostAsync($"/api/v1/admin/pathways/{studyPermit.Id}/publish", null);
+        var response = await ctx.Admin.PostAsync($"/api/v1/admin/pathways/{blocked.Id}/publish", null);
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         var problem = await response.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.Single(problem.GetProperty("errors").EnumerateObject());
-        Assert.Equal("draft", (await FindAsync(ctx.Admin, "ca-study-permit")).Status);
+        Assert.Equal(blocked.PublishBlockers, problem.GetProperty("errors").EnumerateObject().Sum(e => e.Value.GetArrayLength()));
+        Assert.Equal("draft", (await FindAsync(ctx.Admin, "au-189")).Status);
     }
 
     [Fact]
@@ -170,16 +171,22 @@ public sealed class AdminApiTests(PostgresFixture postgres)
     }
 
     [Fact]
-    public async Task Verifying_the_last_unverified_value_unblocks_publish()
+    public async Task Marking_a_value_unverified_blocks_publish_until_it_is_filled_again()
     {
         using var ctx = await StartAsync();
+        ctx.Factory.Clock.Advance(TimeSpan.FromDays(30)); // the seed row was verified 2026-11-06, after the factory's default date
         var p = await GetAsync(ctx.Admin, (await FindAsync(ctx.Admin, "ca-study-permit")).Id);
-        var blocker = Assert.Single(p.PublishBlockers);
-        Assert.Equal(("pathway", "TODO_VERIFY: typical_duration_months"), (blocker.Entity, blocker.Reason)); // seed state
+        PathwayUpdateRequest With(int? months, string[] unverified) => new(p.Name, p.Type, p.Audience, p.IsPointsBased,
+            p.PassMark, p.Cutoff, p.CutoffAsOf, p.NextPathwayId, months, p.Summary, p.SourceUrl, p.VerifiedAt, unverified);
 
-        var request = new PathwayUpdateRequest(p.Name, p.Type, p.Audience, p.IsPointsBased, p.PassMark, p.Cutoff, p.CutoffAsOf,
-            p.NextPathwayId, TypicalDurationMonths: 24, p.Summary, p.SourceUrl, p.VerifiedAt, UnverifiedFields: []);
-        var verified = await OkAsync<AdminPathwayResponse>(await ctx.Admin.PutAsJsonAsync($"/api/v1/admin/pathways/{p.Id}", request));
+        var unverified = await OkAsync<AdminPathwayResponse>(await ctx.Admin.PutAsJsonAsync(
+            $"/api/v1/admin/pathways/{p.Id}", With(null, ["typical_duration_months"])));
+        var blocker = Assert.Single(unverified.PublishBlockers);
+        Assert.Equal(("pathway", "TODO_VERIFY: typical_duration_months"), (blocker.Entity, blocker.Reason));
+        Assert.Equal(HttpStatusCode.Conflict, (await ctx.Admin.PostAsync($"/api/v1/admin/pathways/{p.Id}/publish", null)).StatusCode);
+
+        var verified = await OkAsync<AdminPathwayResponse>(await ctx.Admin.PutAsJsonAsync(
+            $"/api/v1/admin/pathways/{p.Id}", With(24, [])));
 
         Assert.Empty(verified.PublishBlockers);
         await PublishAsync(ctx.Admin, p.Id);

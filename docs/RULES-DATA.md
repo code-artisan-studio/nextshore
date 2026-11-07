@@ -17,6 +17,7 @@ Legend: ✅ confirmed on official page · ⚠️ secondary source / needs human 
 | Funds by family size (2/3/4/5/6/7, +each extra)                           | 29,192 / 35,888 / 43,572 / 49,419 / 55,736 / 62,054 / +6,318 | ✅            | same                                                                                                                                                                     |
 | Effective                                                                 | Applications on/after 2026-09-01 (previously 22,895)         | ✅            | same                                                                                                                                                                     |
 | Admission                                                                 | Letter of acceptance from a DLI                              | ✅ (standard) | same section                                                                                                                                                             |
+| Typical duration (chain timeline)                                         | **24 months** — product default (typical 2-yr master's), not an official value | product | set 2026-11-06 |
 
 ### ca-pgwp — Post-Graduation Work Permit
 
@@ -87,6 +88,8 @@ Additional (max 600): sibling in Canada 15 · French NCLC 7+ & English ≤ CLB 4
 
 ➡️ **Seed:** `cutoff = 518`, `cutoff_as_of = 2026-09-29` (latest CEC draw). See note N1.
 
+➡️ **Seed (2026-11-06):** profile level `diploma` uses the CRS **one-year** credential row: education with spouse **84** / single **90**, spouse education **6** ([CRS criteria](https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html)). A two-year diploma (98 / 91 / 7) is under-scored until the profile distinguishes it. `typical_duration_months = 6` (invitation → PR, product estimate).
+
 ---
 
 ## 🇩🇪 Germany
@@ -100,6 +103,7 @@ Additional (max 600): sibling in Canada 15 · French NCLC 7+ & English ≤ CLB 4
 | Language for degree study | Generally **C1** (German or English, per programme)         | ✅     | same                                                                                                       |
 | APS certificate           | Required for Indian credentials (exemptions exist)          | ✅     | same                                                                                                       |
 | Health insurance          | Required from arrival                                       | ✅     | same                                                                                                       |
+| Typical duration (chain timeline) | **24 months** — product default (typical 2-yr master's), not an official value | product | set 2026-11-06 |
 
 ### de-post-study — Job-seeker permit after German degree
 
@@ -119,6 +123,8 @@ Additional (max 600): sibling in Canada 15 · French NCLC 7+ & English ≤ CLB 4
 | Degree                                                      | German or comparable foreign degree (check anabin)            | ✅     | make-it-in-germany                                                                                   |
 | Job offer                                                   | ≥ 6 months, matching qualification                            | ✅     | make-it-in-germany                                                                                   |
 | German language                                             | Not required                                                  | ✅     | make-it-in-germany                                                                                   |
+| IT occupations ISCO 2511 / 2512 / 2513 / 2514 / 2519         | Eligible (`is_eligible = true`)                               | ✅ 2026-11-06 | [service.berlin.de — Blaue Karte EU](https://service.berlin.de/dienstleistung/324659/) |
+| Typical duration (chain timeline)                           | **27 months** (Blue Card → settlement permit; 21 with German B1) | 2026-11-06 | product value |
 
 ### de-opportunity-card — Chancenkarte
 
@@ -138,7 +144,7 @@ Points ([make-it-in-germany — Opportunity Card](https://www.make-it-in-germany
 | Work experience: ≥ 2 yrs in last 5 / ≥ 5 yrs in last 7 | 2 / 3 |
 | German A2 / B1 / B2+ | 1 / 2 / 3 |
 | English C1+ (or native) | +1 |
-| Age ≤ 35 / 35–40 | 2 / 1 |
+| Age under 35 / 35–39 (seed brackets 18–34 / 35–39, set 2026-11-06) | 2 / 1 |
 | ≥ 6 months legal stay in Germany in last 5 yrs | 1 |
 | Partner also eligible and applying | 1 |
 

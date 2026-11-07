@@ -16,12 +16,12 @@
       "isPointsBased": false,
       "summary": "Study at a German university with an admission letter and proof of funds.",
       "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/studying",
-      "verifiedAt": "2026-10-10",
+      "verifiedAt": "2026-11-06",
       "passMark": null,
       "cutoff": null,
       "cutoffAsOf": null,
       "nextPathwaySlug": "de-post-study",
-      "typicalDurationMonths": "TODO_VERIFY",
+      "typicalDurationMonths": 24,
       "requirements": [
         {
           "field": "funds.amount_usd",
@@ -81,12 +81,12 @@
       "isPointsBased": false,
       "summary": "Residence permit for university graduates with a qualifying job offer in Germany.",
       "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-      "verifiedAt": "2026-10-10",
+      "verifiedAt": "2026-11-06",
       "passMark": null,
       "cutoff": null,
       "cutoffAsOf": null,
       "nextPathwaySlug": null,
-      "typicalDurationMonths": "TODO_VERIFY",
+      "typicalDurationMonths": 27,
       "requirements": [
         {
           "field": "degree.recognized_DE",
@@ -132,37 +132,37 @@
         {
           "code": "2511",
           "title": "Systems analysts",
-          "isEligible": "TODO_VERIFY",
-          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-          "verifiedAt": null
+          "isEligible": true,
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-11-06"
         },
         {
           "code": "2512",
           "title": "Software developers",
-          "isEligible": "TODO_VERIFY",
-          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-          "verifiedAt": null
+          "isEligible": true,
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-11-06"
         },
         {
           "code": "2513",
           "title": "Web and multimedia developers",
-          "isEligible": "TODO_VERIFY",
-          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-          "verifiedAt": null
+          "isEligible": true,
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-11-06"
         },
         {
           "code": "2514",
           "title": "Applications programmers",
-          "isEligible": "TODO_VERIFY",
-          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-          "verifiedAt": null
+          "isEligible": true,
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-11-06"
         },
         {
           "code": "2519",
           "title": "Software and applications developers and analysts not elsewhere classified",
-          "isEligible": "TODO_VERIFY",
-          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
-          "verifiedAt": null
+          "isEligible": true,
+          "sourceUrl": "https://service.berlin.de/dienstleistung/324659/",
+          "verifiedAt": "2026-11-06"
         }
       ]
     },
@@ -328,22 +328,22 @@
         {
           "factor": "age",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
+          "min": 18,
+          "max": 34,
           "points": 2,
           "maxPointsForFactor": null,
           "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
-          "verifiedAt": "2026-10-10"
+          "verifiedAt": "2026-11-06"
         },
         {
           "factor": "age",
           "variant": "default",
-          "min": "TODO_VERIFY",
-          "max": "TODO_VERIFY",
+          "min": 35,
+          "max": 39,
           "points": 1,
           "maxPointsForFactor": null,
           "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/job-search-opportunity-card",
-          "verifiedAt": "2026-10-10"
+          "verifiedAt": "2026-11-06"
         }
       ]
     }
